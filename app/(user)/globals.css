@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.category_container {
+  display: flex;
+  justify-content: space-between;
+}
+.category_icon {
+  margin-right: 15px;
+  visibility: hidden;
+}
+.category_container:hover .category_icon {
+  visibility: visible;
+}
+.main-bg {
+  background-image: url("https://bdtickets.com/images/banner/banner-bg-sm.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 83vh;
+  mix-blend-mode: normal;
+}
+.main-bg::before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #1c1c1c;
+  opacity: 0.4;
+  z-index: -1;
+}

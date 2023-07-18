@@ -14,7 +14,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ href, label }) => {
   const { classes, theme } = navbarStyles();
 
   const active = href === segment;
-  console.log("active", active);
+
   return (
     <Link className={classes.link} href={href}>
       <Box style={{ display: "flex", alignItems: "center", gap: "7px" }}>

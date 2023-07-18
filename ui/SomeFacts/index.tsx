@@ -7,6 +7,7 @@ import CountUp from "react-countup";
 
 const SomeFacts: React.FC<SomeFactsProps> = ({ data, title }) => {
   const { classes, theme } = factsStyles();
+  console.log("");
   return (
     <Box
       sx={(theme) => ({

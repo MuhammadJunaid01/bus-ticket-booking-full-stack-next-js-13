@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "AR poribohon | Home Page",
     template: `%s | E-TICKET`,
   },
-  description: "This is the description of  E Shop Web",
+  description: "This is  of  AR poribohon",
   verification: {
     google: "google-site-verification=878787878",
   },

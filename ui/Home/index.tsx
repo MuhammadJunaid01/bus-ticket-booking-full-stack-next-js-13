@@ -1,7 +1,8 @@
 import React from "react";
 
 import { Container } from "@mantine/core";
-import { Header, Navbar } from "@/ui";
+import { Header, Navbar, SomeFacts } from "@/ui";
+import { someFactsData } from "@/libs/data";
 // import {} ''
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
           title="More Routes, More Tickets"
           sub_title="No 1 online Ticketing Platform"
         />
+        <SomeFacts title={"SOME FACTS"} data={someFactsData} />
       </Container>
     </div>
   );

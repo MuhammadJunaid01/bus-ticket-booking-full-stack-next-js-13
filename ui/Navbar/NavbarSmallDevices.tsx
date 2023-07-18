@@ -28,7 +28,7 @@ const NavbarSmallDevices: React.FC<NavbarSmallDevicesProps> = ({
   const { classes, theme } = navbarStyles();
 
   return (
-    <div>
+    <Box>
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
@@ -55,7 +55,7 @@ const NavbarSmallDevices: React.FC<NavbarSmallDevicesProps> = ({
           />
         </ScrollArea>
       </Drawer>
-    </div>
+    </Box>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   IconNotification,
 } from "@tabler/icons-react";
 import { Types } from "mongoose";
+import { StaticImageData } from "next/image";
 type IconType =
   | typeof IconEye
   | typeof IconCode
@@ -50,4 +51,9 @@ export type navlinkDataType = {
 };
 export type PopularBusRouteDataType = {
   name: string;
+};
+export type FactsDataTypes = {
+  icon: StaticImageData;
+  dataNumber: number;
+  desc: string;
 };

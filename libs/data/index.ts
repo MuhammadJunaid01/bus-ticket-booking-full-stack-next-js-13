@@ -1,3 +1,6 @@
+import TICKETS from "@/public/ticket-icon-2.png";
+import HAPPYCUSTOMER from "@/public/man-icon.png";
+import ROUTES from "@/public/bd-icon.png";
 import {
   IconBook,
   IconChartPie3,
@@ -8,10 +11,12 @@ import {
 } from "@tabler/icons-react";
 import {
   BusMockDataType,
+  FactsDataTypes,
   MockDataType,
   PopularBusRouteDataType,
   navlinkDataType,
 } from "../types";
+import { SomeFactsProps } from "../interfaces";
 
 export const mockdata: BusMockDataType[] = [
   {
@@ -107,3 +112,21 @@ export const busRouteData: PopularBusRouteDataType[] = popularBusRouteData.map(
     name: route,
   })
 );
+
+export const someFactsData: FactsDataTypes[] = [
+  {
+    icon: TICKETS,
+    dataNumber: 75000,
+    desc: "TICKETS AVAILABLE PER DAY",
+  },
+  {
+    icon: HAPPYCUSTOMER,
+    dataNumber: 100000,
+    desc: "HAPPY CUSTOMERS",
+  },
+  {
+    icon: ROUTES,
+    dataNumber: 60,
+    desc: "ROUTE COVERED",
+  },
+];

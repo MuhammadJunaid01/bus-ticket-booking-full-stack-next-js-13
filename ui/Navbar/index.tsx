@@ -15,7 +15,7 @@ import {
   ScrollArea,
   rem,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useWindowScroll } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
 import Links from "./Links";
 import DarkAndLightMode from "./DarkAndLightMode";
@@ -29,11 +29,19 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
   const { classes, theme } = navbarStyles();
   const router = useRouter();
   const links = Links({ data: mockdata });
+  const [scroll, scrollTo] = useWindowScroll();
+
   return (
     <Box>
       <Header
+        style={
+          scroll.y >= 120
+            ? { position: "fixed", top: "0px", backgroundColor: "#5B2192" }
+            : {}
+        }
         sx={(theme) => ({
           // border: `2px solid red`,
+          position: scroll.y >= 120 ? "fixed" : "relative",
           backgroundColor: `${isHomePage && "transparent"}`,
           borderBottom: `${isHomePage && "none"}`,
         })}
@@ -72,47 +80,6 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
           />
         </Group>
       </Header>
-
-      {/* <Drawer
-        opened={drawerOpened}
-        onClose={closeDrawer}
-        size="100%"
-        padding="md"
-        title="E SHOP"
-        className={classes.hiddenDesktop}
-        zIndex={1000000}
-      >
-        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
-
-          <a href="#" className={classes.link}>
-            Home
-          </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={5}>
-                busses
-              </Box>
-              <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-            </Center>
-          </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
-            Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a>
-          <DarkAndLightMode />
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
-        </ScrollArea>
-      </Drawer> */}
 
       {/* Navbar For Small Devices */}
       <NavbarSmallDevices

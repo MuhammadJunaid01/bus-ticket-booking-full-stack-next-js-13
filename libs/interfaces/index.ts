@@ -1,5 +1,7 @@
+import { StaticImageData } from "next/image";
 import {
   BusMockDataType,
+  FactsDataTypes,
   MockDataType,
   PopularBusRouteDataType,
 } from "../types";
@@ -15,4 +17,8 @@ export interface ProvidersProps {
 export interface PopularBusRouteProps {
   title: string;
   data: PopularBusRouteDataType[];
+}
+export interface SomeFactsProps {
+  title: string;
+  data: FactsDataTypes[];
 }

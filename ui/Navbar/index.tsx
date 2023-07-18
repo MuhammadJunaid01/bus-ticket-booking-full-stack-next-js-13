@@ -20,6 +20,7 @@ import { IconChevronDown } from "@tabler/icons-react";
 import Links from "./Links";
 import DarkAndLightMode from "./DarkAndLightMode";
 import NavLinks from "../Navlinks";
+import NavbarSmallDevices from "./NavbarSmallDevices";
 
 export function Navbar({ isHomePage }: { isHomePage: boolean }) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -47,7 +48,7 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
             style={{ cursor: "pointer" }}
             size={30}
           >
-            etickets
+            AR poribohon
           </Text>
 
           <Group
@@ -57,12 +58,7 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
           >
             {navlinkData.map((data, index) => {
               return (
-                <NavLinks
-                  key={index}
-                  href={data.href}
-                  label={data.label}
-                  icon={data.icon}
-                />
+                <NavLinks key={index} href={data.href} label={data.label} />
               );
             })}
 
@@ -77,7 +73,7 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
         </Group>
       </Header>
 
-      <Drawer
+      {/* <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
         size="100%"
@@ -116,7 +112,14 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
         </ScrollArea>
-      </Drawer>
+      </Drawer> */}
+
+      {/* Navbar For Small Devices */}
+      <NavbarSmallDevices
+        drawerOpened={drawerOpened}
+        closeDrawer={closeDrawer}
+        data={navlinkData}
+      />
     </Box>
   );
 }

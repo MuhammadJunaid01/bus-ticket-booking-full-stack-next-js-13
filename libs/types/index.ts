@@ -47,7 +47,6 @@ export type BusMockDataType = {
 export type navlinkDataType = {
   href: string;
   label: string;
-  icon: "BusIcon" | "LaunchIcon" | "AirIcon" | "EventIcon" | "TourIcon";
 };
 export type PopularBusRouteDataType = {
   name: string;

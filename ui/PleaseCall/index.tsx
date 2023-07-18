@@ -28,6 +28,9 @@ const PleaseCall: React.FC<PleaseCallProps> = ({
         alignItems: "center",
         // justifyContent: "space-around",
         justifyContent: "space-between",
+        [theme.fn.smallerThan("md")]: {
+          marginTop: "22px",
+        },
       })}
     >
       <Box pl={11}>
@@ -38,6 +41,9 @@ const PleaseCall: React.FC<PleaseCallProps> = ({
               theme.colorScheme === "dark" ? "black" : theme.colors.gray[8],
             fontSize: "35px",
             fontWeight: "bold",
+            [theme.fn.smallerThan("md")]: {
+              fontSize: theme.fontSizes.lg,
+            },
           })}
         >
           {title}
@@ -53,7 +59,7 @@ const PleaseCall: React.FC<PleaseCallProps> = ({
           alignItems: "center",
           gap: "11px",
           width: "50%",
-          backgroundColor: theme.colorScheme === "dark" ? "#72BF44" : "#F1F3F5",
+          backgroundColor: theme.colorScheme === "dark" ? "#a37cf0" : "#F1F3F5",
           height: "130px",
           color: theme.colorScheme === "dark" ? "white" : "black",
         })}

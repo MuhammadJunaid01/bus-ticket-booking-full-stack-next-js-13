@@ -48,30 +48,24 @@ export const mockdata: BusMockDataType[] = [
 
 export const navlinkData: navlinkDataType[] = [
   {
+    href: "home",
+    label: "Home",
+  },
+  {
+    href: "about",
+    label: "About Us",
+  },
+  {
     href: "buss",
     label: "Buss",
-    icon: "BusIcon",
-  },
-
-  {
-    href: "launch",
-    label: "LAUNCH",
-    icon: "LaunchIcon",
   },
   {
-    href: "air",
-    label: "AIR",
-    icon: "AirIcon",
+    href: "contsct",
+    label: "Contact Us",
   },
   {
-    href: "event",
-    label: "EVENT",
-    icon: "EventIcon",
-  },
-  {
-    href: "tour",
-    label: "TOUR",
-    icon: "TourIcon",
+    href: "offers",
+    label: "Offers",
   },
 ];
 export const popularBusRouteData: string[] = [

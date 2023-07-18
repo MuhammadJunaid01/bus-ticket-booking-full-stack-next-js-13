@@ -67,7 +67,7 @@ const HowBuy = () => {
       <UnstyledButton
         variant="white"
         sx={(theme) => ({
-          backgroundColor: theme.colorScheme === "dark" ? "#72BF44" : "#DEE2E6",
+          backgroundColor: theme.colorScheme === "dark" ? "#a37cf0" : "#DEE2E6",
           color: theme.colorScheme === "dark" ? "white" : "",
           padding: theme.spacing.md,
           borderRadius: theme.radius.sm,

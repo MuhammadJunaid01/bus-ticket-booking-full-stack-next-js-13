@@ -44,6 +44,10 @@ export default function CustomCalendar() {
               backgroundColor:
                 theme.colorScheme === "dark" ? "white" : theme.colors.gray[1],
               ...theme.fn.placeholderStyles(),
+              [theme.fn.smallerThan("md")]: {
+                margin: "11px 0px",
+                width: "100%",
+              },
             })}
             placeholder="JOURNEY DATE"
           />

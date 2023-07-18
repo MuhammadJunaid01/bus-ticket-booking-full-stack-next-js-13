@@ -8,9 +8,8 @@ import { AirIcon, BusIcon, EventIcon, LaunchIcon, TourIcon } from "../Icon";
 export interface NavLinksProps {
   href: string;
   label: string;
-  icon: string;
 }
-const NavLinks: React.FC<NavLinksProps> = ({ href, label, icon }) => {
+const NavLinks: React.FC<NavLinksProps> = ({ href, label }) => {
   const segment = useSelectedLayoutSegment();
   const { classes, theme } = navbarStyles();
 
@@ -19,18 +18,6 @@ const NavLinks: React.FC<NavLinksProps> = ({ href, label, icon }) => {
   return (
     <Link className={classes.link} href={href}>
       <Box style={{ display: "flex", alignItems: "center", gap: "7px" }}>
-        {icon === "BusIcon" ? (
-          <BusIcon color={""} />
-        ) : icon === "LaunchIcon" ? (
-          <LaunchIcon color={""} />
-        ) : icon === "AirIcon" ? (
-          <AirIcon color={""} />
-        ) : icon === "EventIcon" ? (
-          <EventIcon color={""} />
-        ) : (
-          <TourIcon />
-        )}
-
         {label}
       </Box>
     </Link>

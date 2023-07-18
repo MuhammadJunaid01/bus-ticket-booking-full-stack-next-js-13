@@ -10,7 +10,7 @@ with the type `Metadata`. */
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.e-ticket-web.com"),
   title: {
-    default: "E-TICKET | Home Page",
+    default: "AR poribohon | Home Page",
     template: `%s | E-TICKET`,
   },
   description: "This is the description of  E Shop Web",

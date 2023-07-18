@@ -15,9 +15,6 @@ export const sendVerificationEmail = (
   verificationToken: string,
   emailType?: string
 ) => {
-  console.log("EMAIL", email);
-  console.log("verificationToken", verificationToken);
-
   const mailOptions = {
     from: HOST_EMAIL,
     to: email,

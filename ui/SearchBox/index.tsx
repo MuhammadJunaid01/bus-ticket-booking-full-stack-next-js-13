@@ -1,5 +1,12 @@
 /* eslint-disable react/jsx-no-undef */
-import { Box, Button, Group, Indicator, Input } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  Indicator,
+  Input,
+  UnstyledButton,
+} from "@mantine/core";
 import React from "react";
 import {
   IconArrowsExchange2,
@@ -25,6 +32,7 @@ export default function SearchBox() {
             gap: "6px",
             marginTop: "25px",
           },
+          [theme.fn.smallerThan("md")]: {},
         })}
       >
         <Box style={{ position: "relative" }}>
@@ -114,26 +122,25 @@ export default function SearchBox() {
           readOnly
         />
 
-        <Button
-          variant="white"
+        <UnstyledButton
           sx={(theme) => ({
             height: "50px",
             width: "17%",
+            textAlign: "center",
+            borderRadius: theme.radius.sm,
             backgroundColor:
-              theme.colorScheme === "dark" ? "#72bf44" : theme.colors.gray[1],
+              theme.colorScheme === "dark" ? "#a37cf0" : theme.colors.gray[1],
             color: theme.colorScheme === "dark" ? "white" : "black",
+            [theme.fn.smallerThan("md")]: {
+              width: "100%",
+              textAlign: "center",
+              marginTop: "12px",
+            },
           })}
         >
           SEARCH
-        </Button>
+        </UnstyledButton>
       </Box>
     </Box>
   );
 }
-// [theme.fn.largerThan("sm")]: {
-//   backgroundColor: "#FFFFFF",
-//   height: "100px",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// },

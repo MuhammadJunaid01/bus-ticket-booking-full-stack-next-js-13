@@ -233,13 +233,6 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@mantine/carousel@^6.0.16":
-  version "6.0.16"
-  resolved "https://registry.yarnpkg.com/@mantine/carousel/-/carousel-6.0.16.tgz#66a1b39d8f90f11d52233af50229f928f2a0ab78"
-  integrity sha512-1qaAGZNRnpZ63JAnxrBoguJonc9x9i1upbhyprtUyIgd/fNbVtkSExjo2gDAYmMeG8DMSyXMmpHj5ANaml7zPQ==
-  dependencies:
-    "@mantine/utils" "6.0.16"
-
 "@mantine/core@^6.0.16":
   version "6.0.16"
   resolved "https://registry.yarnpkg.com/@mantine/core/-/core-6.0.16.tgz#bd5271ec907cf2d7df2f9b791bc5d406f75dafe1"

@@ -47,7 +47,7 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
             style={{ cursor: "pointer" }}
             size={30}
           >
-            E-TICKET
+            etickets
           </Text>
 
           <Group

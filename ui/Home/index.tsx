@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Container } from "@mantine/core";
-import { BusRoutes, Header, Navbar, SomeFacts } from "@/ui";
-import { busRouteData, someFactsData } from "@/libs/data";
+import { BusRoutes, Header, Navbar, SomeFacts, Stories } from "@/ui";
+import { busRouteData, someFactsData, storiesData } from "@/libs/data";
 
 const HomePage = () => {
   return (
@@ -15,6 +15,7 @@ const HomePage = () => {
         />
         <SomeFacts title={"SOME FACTS"} data={someFactsData} />
         <BusRoutes title={"AVAILABLE BUS ROUTES"} data={busRouteData} />
+        <Stories title="OUR FEATURED STORIES" data={storiesData} />
       </Container>
     </div>
   );

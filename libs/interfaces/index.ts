@@ -4,6 +4,7 @@ import {
   FactsDataTypes,
   MockDataType,
   PopularBusRouteDataType,
+  StoriesTypes,
 } from "../types";
 
 export interface LinksProps {
@@ -30,4 +31,8 @@ export interface BusRouteParams {
   params: {
     routeName: string;
   };
+}
+export interface StoriesProps {
+  title: string;
+  data: StoriesTypes[];
 }

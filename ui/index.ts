@@ -7,7 +7,9 @@ import PleaseCall from "./PleaseCall";
 import Profile from "./Profile";
 import SearchBox from "./SearchBox";
 import SomeFacts from "./SomeFacts";
-import BusRoutes from "./Routes";
+import BusRoutes from "./BusRoutes";
+import Stories from "./OurStories";
+
 export {
   Navbar,
   HomePage,
@@ -19,4 +21,5 @@ export {
   SomeFacts,
   Profile,
   BusRoutes,
+  Stories,
 };

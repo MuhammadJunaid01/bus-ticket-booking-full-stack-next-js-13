@@ -1,6 +1,6 @@
 import { SomeFactsProps } from "@/libs/interfaces";
 import { factsStyles } from "@/libs/styles";
-import { Box, Text } from "@mantine/core";
+import { Box, Grid, Text } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 import CountUp from "react-countup";

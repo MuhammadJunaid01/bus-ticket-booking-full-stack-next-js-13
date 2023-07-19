@@ -57,3 +57,10 @@ export type FactsDataTypes = {
   dataNumber: number;
   desc: string;
 };
+export type StoriesTypes = {
+  rating: number;
+  review: string;
+  issue: string;
+  userName: string;
+  userPic: StaticImageData | string;
+};

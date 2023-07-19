@@ -1,24 +1,31 @@
 import React from "react";
-import {
-  PaginateDataTypes,
-  PaginatePropsTypes,
-  PaginateReturnType,
-} from "../types";
 
-type UsePaginateType = (props: PaginatePropsTypes) => PaginateReturnType;
+// Define the generic types
+type PaginateDataTypes<T> = T[];
+type PaginatePropsTypes<T> = {
+  data: T[];
+  itemsPerPage: number;
+};
+type PaginateReturnType<T> = {
+  handlePageChange: (page: number) => void;
+  paginateData: PaginateDataTypes<T>;
+  totalPage: number;
+};
 
-/**
- * The `usePaginate` function is a custom hook in TypeScript React that handles pagination for a given
- * data array and number of items per page.
- * @param  - - `data`: An array of items to be paginated.
- * @returns The `usePaginate` function returns an object with the following properties:
- */
-const usePaginate: UsePaginateType = ({ data, itemsPerPage }) => {
-  const [paginateData, setPaginateData] = React.useState<PaginateDataTypes[]>(
+// Define the generic custom hook
+type UsePaginateType = <T>(
+  props: PaginatePropsTypes<T>
+) => PaginateReturnType<T>;
+
+const usePaginate: UsePaginateType = <T,>({
+  data,
+  itemsPerPage,
+}: PaginatePropsTypes<T>) => {
+  const [paginateData, setPaginateData] = React.useState<PaginateDataTypes<T>>(
     []
   );
   const [currentPage, setCurrentPage] = React.useState(1);
-  const totalPage = Math.ceil((data?.length || 0) / itemsPerPage);
+  const totalPage = Math.ceil((data.length || 0) / itemsPerPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

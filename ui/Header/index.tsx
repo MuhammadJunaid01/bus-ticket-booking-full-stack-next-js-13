@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Container, Grid, Text } from "@mantine/core";
 import { HowBuy, PleaseCall, SearchBox } from "@/ui";
-import { busRouteData, popularBusRouteData } from "@/libs/data";
 
 export interface HeaderProps {
   title: string;

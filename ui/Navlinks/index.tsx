@@ -3,7 +3,6 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { navbarStyles } from "@/libs/styles";
 import Link from "next/link";
 import { Box } from "@mantine/core";
-import { AirIcon, BusIcon, EventIcon, LaunchIcon, TourIcon } from "../Icon";
 
 export interface NavLinksProps {
   href: string;

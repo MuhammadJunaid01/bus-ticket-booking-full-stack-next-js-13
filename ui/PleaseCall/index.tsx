@@ -6,64 +6,21 @@ export interface PleaseCallProps {
   number: number;
 }
 import { IconPhoneCall } from "@tabler/icons-react";
+import { pleaseCallStyles } from "@/libs/styles";
 const PleaseCall: React.FC<PleaseCallProps> = ({
   title,
   sub_title,
   number,
 }) => {
+  const { classes } = pleaseCallStyles();
+  const { container, title: titleStyl, numberBox } = classes;
   return (
-    <Box
-      sx={(theme) => ({
-        [theme.fn.largerThan("sm")]: {
-          height: "110px",
-          width: "45%",
-          margin: "0 auto",
-          marginTop: "17px",
-          overflow: "hidden",
-        },
-        backgroundColor: theme.colorScheme === "dark" ? "white" : "#DEE2E6",
-        boxShadow: theme.shadows.xl,
-        borderRadius: theme.radius.sm,
-        display: "flex",
-        alignItems: "center",
-        // justifyContent: "space-around",
-        justifyContent: "space-between",
-        [theme.fn.smallerThan("md")]: {
-          marginTop: "22px",
-        },
-      })}
-    >
+    <Box className={container}>
       <Box pl={11}>
         <Text size={12}>{sub_title}</Text>
-        <Text
-          sx={(theme) => ({
-            color:
-              theme.colorScheme === "dark" ? "black" : theme.colors.gray[8],
-            fontSize: "35px",
-            fontWeight: "bold",
-            [theme.fn.smallerThan("md")]: {
-              fontSize: theme.fontSizes.lg,
-            },
-          })}
-        >
-          {title}
-        </Text>
+        <Text className={titleStyl}>{title}</Text>
       </Box>
-      <Box
-        sx={(theme) => ({
-          //   color: theme.colorScheme === "dark" ? "black" : "",
-          fontSize: "35px",
-          fontWeight: "bold",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "11px",
-          width: "50%",
-          backgroundColor: theme.colorScheme === "dark" ? "#a37cf0" : "#F1F3F5",
-          height: "130px",
-          color: theme.colorScheme === "dark" ? "white" : "black",
-        })}
-      >
+      <Box className={numberBox}>
         <Text
           sx={(theme) => ({
             marginRight: "11px",

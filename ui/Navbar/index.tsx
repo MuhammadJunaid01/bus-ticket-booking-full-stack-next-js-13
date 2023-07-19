@@ -8,6 +8,8 @@ import DarkAndLightMode from "./DarkAndLightMode";
 import NavLinks from "../Navlinks";
 import NavbarSmallDevices from "./NavbarSmallDevices";
 import { Profile } from "@/ui";
+import Logo from "@/public/logo.png";
+import Image from "next/image";
 export function Navbar({ isHomePage }: { isHomePage: boolean }) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -36,14 +38,22 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
         px="md"
       >
         <Group position="apart" sx={{ height: "100%" }}>
-          <Text
+          <Image
+            onClick={() => router.push("/")}
+            style={{ cursor: "pointer" }}
+            src={Logo}
+            width={100}
+            height={100}
+            alt="main-logo"
+          />
+          {/* <Text
             color="#ffffff"
             onClick={() => router.push("/")}
             style={{ cursor: "pointer" }}
             size={30}
           >
             AR poribohon
-          </Text>
+          </Text> */}
 
           <Group
             sx={{ height: "100%" }}

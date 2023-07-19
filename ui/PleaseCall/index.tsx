@@ -24,11 +24,18 @@ const PleaseCall: React.FC<PleaseCallProps> = ({
         <Text
           sx={(theme) => ({
             marginRight: "11px",
+            color: theme.colorScheme === "dark" ? "unset" : "#5B21A9",
           })}
         >
           <IconPhoneCall />
         </Text>
-        <Text>{number}</Text>
+        <Text
+          sx={(theme) => ({
+            color: theme.colorScheme === "dark" ? "unset" : "#5B21A9",
+          })}
+        >
+          {number}
+        </Text>
       </Box>
     </Box>
   );

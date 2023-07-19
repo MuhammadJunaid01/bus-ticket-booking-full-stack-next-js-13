@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.e-ticket-web.com"),
   title: {
     default: "AR poribohon | Home Page",
-    template: `%s | E-TICKET`,
+    template: `%s | AR poribohon`,
   },
-  description: "This is  of  AR poribohon",
+  description: "This is Home page of  AR poribohon",
   verification: {
     google: "google-site-verification=878787878",
   },

@@ -4,6 +4,7 @@ import HomePage from "./Home";
 import HowBuy from "./HowBuy";
 import { Navbar } from "./Navbar";
 import PleaseCall from "./PleaseCall";
+import Profile from "./Profile";
 import SearchBox from "./SearchBox";
 import SomeFacts from "./SomeFacts";
 export {
@@ -15,4 +16,5 @@ export {
   HowBuy,
   PleaseCall,
   SomeFacts,
+  Profile,
 };

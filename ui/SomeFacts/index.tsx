@@ -7,61 +7,21 @@ import CountUp from "react-countup";
 
 const SomeFacts: React.FC<SomeFactsProps> = ({ data, title }) => {
   const { classes, theme } = factsStyles();
-  console.log("");
+  const {
+    constainer,
+    title: titleStyl,
+    factsConatiner,
+    factBox,
+    counter,
+    description,
+  } = classes;
   return (
-    <Box
-      sx={(theme) => ({
-        height: "75vh",
-        width: "100%",
-
-        textAlign: "center",
-        [theme.fn.largerThan("sm")]: {
-          marginTop: "40px",
-          padding: "20px 0px",
-        },
-      })}
-    >
-      <Text
-        sx={(theme) => ({
-          fontWeight: "bold",
-          color: theme.colorScheme === "dark" ? "unset" : "#5B2192",
-          [theme.fn.largerThan("sm")]: {
-            fontSize: "44px",
-          },
-        })}
-      >
-        {title}
-      </Text>
-      <Box
-        sx={(theme) => ({
-          textAlign: "center",
-          [theme.fn.largerThan("sm")]: {
-            display: "flex",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: "90px",
-            gap: "30px",
-          },
-        })}
-      >
+    <Box className={constainer}>
+      <Text className={titleStyl}>{title}</Text>
+      <Box className={factsConatiner}>
         {data.map((data, index) => {
           return (
-            <Box
-              sx={(theme) => ({
-                width: "30%",
-                margin: "0 auto",
-                position: "relative",
-                cursor: "pointer",
-                [theme.fn.largerThan("sm")]: {
-                  backgroundColor:
-                    theme.colorScheme === "dark" ? "#A37CF0" : "",
-                  borderRadius: theme.radius.sm,
-                  paddingBottom: "11px",
-                },
-              })}
-              key={index}
-            >
+            <Box className={factBox} key={index}>
               <Box className={classes.imageBox}>
                 <Image
                   className={classes.image}
@@ -71,28 +31,10 @@ const SomeFacts: React.FC<SomeFactsProps> = ({ data, title }) => {
                   alt=""
                 />
               </Box>
-              <Text
-                sx={(theme) => ({
-                  fontWeight: "bold",
-                  [theme.fn.largerThan("sm")]: {
-                    fontSize: "22px",
-                    color: theme.colorScheme === "dark" ? "white" : "#5b2192",
-                    margin: "15px 0px",
-                  },
-                })}
-              >
+              <Text className={counter}>
                 <CountUp end={data.dataNumber} /> +
               </Text>
-              <Text
-                sx={(theme) => ({
-                  [theme.fn.largerThan("sm")]: {
-                    fontSize: "22px",
-                    color: theme.colorScheme === "dark" ? "white" : "",
-                  },
-                })}
-              >
-                {data.desc}
-              </Text>
+              <Text className={description}>{data.desc}</Text>
             </Box>
           );
         })}

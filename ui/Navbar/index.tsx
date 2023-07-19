@@ -1,27 +1,13 @@
 import { mockdata, navlinkData } from "@/libs/data";
 import { navbarStyles } from "@/libs/styles";
 import { useRouter } from "next/navigation";
-import {
-  Header,
-  Group,
-  UnstyledButton,
-  Text,
-  Divider,
-  Center,
-  Box,
-  Burger,
-  Drawer,
-  Collapse,
-  ScrollArea,
-  rem,
-} from "@mantine/core";
+import { Header, Group, Text, Box, Burger } from "@mantine/core";
 import { useDisclosure, useWindowScroll } from "@mantine/hooks";
-import { IconChevronDown } from "@tabler/icons-react";
 import Links from "./Links";
 import DarkAndLightMode from "./DarkAndLightMode";
 import NavLinks from "../Navlinks";
 import NavbarSmallDevices from "./NavbarSmallDevices";
-
+import { Profile } from "@/ui";
 export function Navbar({ isHomePage }: { isHomePage: boolean }) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -69,7 +55,10 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
                 <NavLinks key={index} href={data.href} label={data.label} />
               );
             })}
+            {/* Profile */}
+            <Profile />
 
+            {/* Dark and light Mode Indicator  */}
             <DarkAndLightMode />
           </Group>
 

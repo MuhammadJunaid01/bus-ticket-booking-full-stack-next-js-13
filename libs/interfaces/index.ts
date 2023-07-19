@@ -22,3 +22,12 @@ export interface SomeFactsProps {
   title: string;
   data: FactsDataTypes[];
 }
+export interface BusRoutesProps {
+  title: string;
+  data: string[];
+}
+export interface BusRouteParams {
+  params: {
+    routeName: string;
+  };
+}

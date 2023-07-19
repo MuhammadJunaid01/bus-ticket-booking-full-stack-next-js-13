@@ -22,6 +22,7 @@ body {
   background-attachment: fixed;
   height: 83vh;
   mix-blend-mode: normal;
+  position: relative;
 }
 .main-bg::before {
   position: absolute;

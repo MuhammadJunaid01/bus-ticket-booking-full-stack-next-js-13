@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Container } from "@mantine/core";
-import { Header, Navbar, SomeFacts } from "@/ui";
-import { someFactsData } from "@/libs/data";
-// import {} ''
+import { BusRoutes, Header, Navbar, SomeFacts } from "@/ui";
+import { busRouteData, someFactsData } from "@/libs/data";
+
 const HomePage = () => {
   return (
-    <div className="main-bg" style={{ position: "relative" }}>
+    <div className="main-bg">
       <Navbar isHomePage />
       <Container fluid>
         <Header
@@ -14,6 +14,7 @@ const HomePage = () => {
           sub_title="No 1 online Ticketing Platform"
         />
         <SomeFacts title={"SOME FACTS"} data={someFactsData} />
+        <BusRoutes title={"AVAILABLE BUS ROUTES"} data={busRouteData} />
       </Container>
     </div>
   );

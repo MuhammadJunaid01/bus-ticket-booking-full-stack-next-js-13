@@ -39,6 +39,12 @@ export const factsStyles = createStyles((theme) => ({
       borderRadius: theme.radius.sm,
       paddingBottom: "11px",
     },
+    "&:hover": {
+      boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+    },
+  },
+  lighModeShadow: {
+    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
   },
   image: {
     height: "50px",

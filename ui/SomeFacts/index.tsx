@@ -4,9 +4,17 @@ import { Box, Text } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 import CountUp from "react-countup";
+import { useMantineTheme } from "@mantine/core";
+// import cx from "classnames";
+import { useHover } from "@mantine/hooks";
 
 const SomeFacts: React.FC<SomeFactsProps> = ({ data, title }) => {
-  const { classes, theme } = factsStyles();
+  const theme = useMantineTheme();
+  const { hovered, ref } = useHover();
+
+  const isLightMode = theme.colorScheme === "light";
+
+  const { classes } = factsStyles();
   const {
     constainer,
     title: titleStyl,
@@ -14,14 +22,22 @@ const SomeFacts: React.FC<SomeFactsProps> = ({ data, title }) => {
     factBox,
     counter,
     description,
+    lighModeShadow,
   } = classes;
   return (
     <Box className={constainer}>
       <Text className={titleStyl}>{title}</Text>
-      <Box className={factsConatiner}>
+      <Box ref={ref} className={factsConatiner}>
         {data.map((data, index) => {
           return (
-            <Box className={factBox} key={index}>
+            <Box
+              className={`${factBox} ${
+                isLightMode && index === 1 && hovered === false
+                  ? lighModeShadow
+                  : ""
+              }`}
+              key={index}
+            >
               <Box className={classes.imageBox}>
                 <Image
                   className={classes.image}

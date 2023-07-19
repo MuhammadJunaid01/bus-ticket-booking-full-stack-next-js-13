@@ -73,7 +73,7 @@ export const navlinkData: navlinkDataType[] = [
     label: "Offers",
   },
 ];
-export const popularBusRouteData: string[] = [
+export const busRouteData: string[] = [
   "DHAKA-COX'S BAZAR",
   "DHAKA-KHAGRACHARI",
   "DHAKA-BANDARBAN",
@@ -107,11 +107,6 @@ export const popularBusRouteData: string[] = [
   "DHAKA-DINAJPUR",
   "DHAKA-SYLHET",
 ];
-export const busRouteData: PopularBusRouteDataType[] = popularBusRouteData.map(
-  (route) => ({
-    name: route,
-  })
-);
 
 export const someFactsData: FactsDataTypes[] = [
   {

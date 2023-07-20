@@ -7,7 +7,7 @@ const AffixScroll = () => {
 
   return (
     <div>
-      <Affix position={{ bottom: rem(20), right: rem(20) }}>
+      <Affix position={{ bottom: rem(20), left: rem(20) }}>
         <Transition transition="slide-up" mounted={scroll.y > 0}>
           {(transitionStyles) => (
             <Button

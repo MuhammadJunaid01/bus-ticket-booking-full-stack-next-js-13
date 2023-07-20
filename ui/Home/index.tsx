@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { Suspense } from "react";
 
 import { Container } from "@mantine/core";
-import { OurBusses, BusRoutes, Header, Navbar, SomeFacts, Stories } from "@/ui";
+import { OurBuses, BusRoutes, Header, Navbar, SomeFacts, Stories } from "@/ui";
 import { busRouteData, someFactsData, storiesData } from "@/libs/data";
 import { useAppDispatch } from "@/redux/hooks";
 import { BussApiResponseType } from "@/libs/types";
 import { getAllBussData } from "@/redux/features/busses";
 const url =
   process.env.NODE_ENV === "production"
-    ? "https://etickets-bd.vercel.app/"
+    ? "https://etickets-bd.vercel.app"
     : process.env.NEXT_PUBLIC_BASE_URL;
 const fetchAllBuss = async () => {
   try {
-    const res = await fetch(`${url}/api/buss`);
+    const res = await fetch(`${url}/api/buses`);
     const data: BussApiResponseType = await res.json();
     return data;
   } catch (error: any) {
@@ -50,7 +50,11 @@ const HomePage = () => {
         <SomeFacts title={"SOME FACTS"} data={someFactsData} />
         <BusRoutes title={"AVAILABLE BUS ROUTES"} data={busRouteData} />
         <Stories title="OUR FEATURED STORIES" data={storiesData} />
-        <OurBusses title="AvailableBuss" />
+        <Suspense
+          fallback={<p>waite Please! Loading buses Data from database...</p>}
+        >
+          <OurBuses title="Our Available Buss" />
+        </Suspense>
       </Container>
     </div>
   );

@@ -46,9 +46,6 @@ export interface Seat {
   passengerName: string;
   passengerId: number | null;
   isBooked: boolean;
-  route: string;
-  startTime: string;
-  reachedTime: string;
 }
 
 // Define the SeatMap type

@@ -4,6 +4,7 @@ import { navbarStyles } from "./navbarStyle";
 import { pleaseCallStyles } from "./pleaseCall.styles";
 import { busRoutesStyles } from "./busRoutes.styles";
 import { storiesStyles } from "./stories.styles";
+import { ourBusesStyles } from "./ourBuses.styles";
 export {
   navbarStyles,
   factsStyles,
@@ -11,4 +12,5 @@ export {
   pleaseCallStyles,
   busRoutesStyles,
   storiesStyles,
+  ourBusesStyles,
 };

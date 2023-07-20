@@ -5,9 +5,6 @@ interface Seat extends Document {
   passengerName: string;
   passengerId: number | null;
   isBooked: boolean;
-  route: string;
-  startTime: string;
-  reachedTime: string;
 }
 
 const seatSchema: Schema = new Schema({
@@ -15,9 +12,6 @@ const seatSchema: Schema = new Schema({
   passengerName: { type: String, default: "" },
   passengerId: { type: Number, default: null },
   isBooked: { type: Boolean, default: false },
-  route: { type: String, default: "" },
-  startTime: { type: String, default: "" },
-  reachedTime: { type: String, default: "" },
 });
 
 interface AvailableBussData extends Document {
@@ -34,7 +28,7 @@ interface AvailableBussData extends Document {
   category: "Ac" | "Non-Ac" | "Coach bus";
 }
 
-const busssesSchema: Schema = new Schema(
+const busesSchema: Schema = new Schema(
   {
     bussNumber: { type: Number, required: true },
     road: { type: String, required: true },
@@ -55,8 +49,8 @@ const busssesSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-const Busses =
-  mongoose.models.Bussses ||
-  mongoose.model<AvailableBussData>("Bussses", busssesSchema);
+const Buses =
+  mongoose.models.Buses ||
+  mongoose.model<AvailableBussData>("Buses", busesSchema);
 
-export default Busses;
+export default Buses;

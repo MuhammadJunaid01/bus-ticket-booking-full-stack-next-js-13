@@ -1,9 +1,11 @@
+import { bussData } from "@/libs/data/bus-data";
 import { connectDB } from "@/libs/db";
 import Busses from "@/libs/models/buss.models";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
   connectDB();
+
   try {
     const res = await Busses.find({});
     if (!res) {

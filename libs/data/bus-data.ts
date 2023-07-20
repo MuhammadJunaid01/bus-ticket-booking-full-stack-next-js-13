@@ -5,9 +5,6 @@ const emptySeat = {
   passengerName: "",
   passengerId: null,
   isBooked: false,
-  route: "",
-  startTime: "",
-  reachedTime: "",
 };
 const seats = {
   A: Array.from({ length: 30 }, (_, index) => ({
@@ -16,7 +13,7 @@ const seats = {
   })),
   B: Array.from({ length: 30 }, (_, index) => ({
     ...emptySeat,
-    seat: `A${index + 1}`,
+    seat: `B${index + 1}`,
   })),
   // Add other groups (B, C, etc.) with empty seats if needed
 };

@@ -1,3 +1,4 @@
+import { AvailableBussDataTypes } from "./../types/index";
 import TICKETS from "@/public/ticket-icon-2.png";
 import HAPPYCUSTOMER from "@/public/man-icon.png";
 import ROUTES from "@/public/bd-icon.png";
@@ -18,6 +19,7 @@ import {
   navlinkDataType,
 } from "../types";
 import { SomeFactsProps } from "../interfaces";
+import { seats } from "./seats";
 
 export const mockdata: BusMockDataType[] = [
   {
@@ -180,3 +182,9 @@ export const storiesData: StoriesTypes[] = [
       "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=120&q=120",
   },
 ];
+
+// seat data
+
+// A group with 3 seats
+
+// B group with 3 seats

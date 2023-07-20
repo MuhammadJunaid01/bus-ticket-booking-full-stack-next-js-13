@@ -9,6 +9,7 @@ import SearchBox from "./SearchBox";
 import SomeFacts from "./SomeFacts";
 import BusRoutes from "./BusRoutes";
 import Stories from "./OurStories";
+import AvailableBuss from "./AvailableBuss";
 
 export {
   Navbar,
@@ -22,4 +23,5 @@ export {
   Profile,
   BusRoutes,
   Stories,
+  AvailableBuss,
 };

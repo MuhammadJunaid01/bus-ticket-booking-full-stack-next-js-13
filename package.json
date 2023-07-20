@@ -43,6 +43,7 @@
     "next": "13.4.9",
     "nextjs-toploader": "^1.4.2",
     "nodemailer": "^6.9.3",
+    "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-countup": "^6.4.2",
     "react-dom": "18.2.0",

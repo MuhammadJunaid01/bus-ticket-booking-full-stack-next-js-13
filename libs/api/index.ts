@@ -1,4 +1,6 @@
 import { cache } from "react";
+import config from "@/config";
+const { url } = config;
 /* The `export const getProdcutByID` is a function that is being exported from the module. It is using
 the `cache` function from the `react` library to cache the result of the function call. */
 export const getProdcutByID = cache(async (url: string) => {
@@ -25,7 +27,7 @@ export const getProdcutByID = cache(async (url: string) => {
 export const getProducts = async () => {
   try {
     const res = await fetch(
-      "http://localhost:3000/api/products",
+      `${url.BASE_URL}/api/buss`,
 
       { cache: "force-cache" }
     );

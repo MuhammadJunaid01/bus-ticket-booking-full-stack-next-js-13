@@ -3,6 +3,8 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "@/libs/providers";
+import { BussApiResponseType } from "@/libs/types";
+import { getProducts } from "@/libs/api";
 
 const inter = Inter({ subsets: ["latin"] });
 /* The code block `export const metadata: Metadata = { ... }` is defining an object named `metadata`
@@ -18,11 +20,10 @@ export const metadata: Metadata = {
     google: "google-site-verification=878787878",
   },
 };
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
+  const bussData: Promise<BussApiResponseType> = getProducts();
+  const buss = await bussData;
+
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
@@ -32,4 +33,5 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+export default RootLayout;

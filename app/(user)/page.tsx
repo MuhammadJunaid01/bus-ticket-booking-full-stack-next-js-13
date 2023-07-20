@@ -1,6 +1,8 @@
 "use client";
+import { getProducts } from "@/libs/api";
 import { HomePage } from "@/ui";
-export default function Home() {
+import { notFound } from "next/navigation";
+const Home = () => {
   return (
     <main
       style={{
@@ -10,4 +12,5 @@ export default function Home() {
       <HomePage />
     </main>
   );
-}
+};
+export default Home;

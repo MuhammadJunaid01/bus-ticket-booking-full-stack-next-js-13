@@ -9,6 +9,7 @@ import NavLinks from "../Navlinks";
 import NavbarSmallDevices from "./NavbarSmallDevices";
 import { Profile } from "@/ui";
 import Logo from "@/public/logo.png";
+import Logo1 from "@/public/logo-3-r-bg.png";
 import Image from "next/image";
 export function Navbar({ isHomePage }: { isHomePage: boolean }) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -41,9 +42,9 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
           <Image
             onClick={() => router.push("/")}
             style={{ cursor: "pointer" }}
-            src={Logo}
-            width={100}
-            height={100}
+            src={Logo1}
+            width={160}
+            height={50}
             alt="main-logo"
           />
           {/* <Text

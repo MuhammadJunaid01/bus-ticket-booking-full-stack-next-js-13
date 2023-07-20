@@ -1,5 +1,6 @@
 import { StaticImageData } from "next/image";
 import {
+  AvailableBussDataTypes,
   BusMockDataType,
   FactsDataTypes,
   MockDataType,
@@ -35,4 +36,22 @@ export interface BusRouteParams {
 export interface StoriesProps {
   title: string;
   data: StoriesTypes[];
+}
+export interface AvailableBussProps {
+  title: string;
+  data: AvailableBussDataTypes[];
+}
+export interface Seat {
+  seat: string;
+  passengerName: string;
+  passengerId: number | null;
+  isBooked: boolean;
+  route: string;
+  startTime: string;
+  reachedTime: string;
+}
+
+// Define the SeatMap type
+export interface SeatMap {
+  [group: string]: Seat[];
 }

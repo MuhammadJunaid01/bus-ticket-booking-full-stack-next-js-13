@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Types } from "mongoose";
 import { StaticImageData } from "next/image";
+import { SeatMap } from "../interfaces";
 type IconType =
   | typeof IconEye
   | typeof IconCode
@@ -63,4 +64,29 @@ export type StoriesTypes = {
   issue: string;
   userName: string;
   userPic: StaticImageData | string;
+};
+// Define the different seat groups
+
+// Define the AvailableBussDataTypes type with seats as an array of Seat
+export type AvailableBussDataTypes = {
+  bussNumber: number;
+  road: string;
+  startTime: string;
+  reachedTime: string;
+  seats: SeatMap;
+  img: string;
+  category: "Ac" | "Non-Ac" | "Coach bus";
+};
+
+export type BussesTypes = {
+  _id: string;
+  __v: number;
+  createdAt: string;
+  updatedAt: string;
+} & AvailableBussDataTypes;
+
+export type BussApiResponseType = {
+  OK: boolean;
+  msg: string;
+  data: BussesTypes[];
 };

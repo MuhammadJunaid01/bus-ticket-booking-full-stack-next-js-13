@@ -17,10 +17,8 @@ import { useAppDispatch } from "@/redux/hooks";
 import { getAllBussData } from "@/redux/features/busses";
 export interface NavbarProps {
   isHomePage: boolean;
-  data?: BussesTypes[];
 }
-const Navbar: React.FC<NavbarProps> = ({ isHomePage, data }) => {
-  const dispatch = useAppDispatch();
+const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -28,9 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage, data }) => {
   const router = useRouter();
   const links = Links({ data: mockdata });
   const [scroll, scrollTo] = useWindowScroll();
-  React.useEffect(() => {
-    dispatch(getAllBussData(data));
-  }, [data, dispatch]);
+
   return (
     <Box>
       <Header

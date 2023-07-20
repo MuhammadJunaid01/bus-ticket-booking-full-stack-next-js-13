@@ -10,13 +10,7 @@ export const bussesSlice = createSlice({
   name: "bussesSlice",
   initialState,
   reducers: {
-    getAllBussData: (
-      state,
-      action: PayloadAction<BussesTypes[] | undefined>
-    ) => {
-      if (action.payload === undefined) {
-        return;
-      }
+    getAllBussData: (state, action: PayloadAction<BussesTypes[]>) => {
       state.data = action.payload;
     },
   },

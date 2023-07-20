@@ -21,13 +21,10 @@ export const metadata: Metadata = {
   },
 };
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  const bussData: Promise<BussApiResponseType> = getProducts();
-  const buss = await bussData;
-
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <Providers data={buss.data}>
+        <Providers>
           <main>{children}</main>
         </Providers>
       </body>

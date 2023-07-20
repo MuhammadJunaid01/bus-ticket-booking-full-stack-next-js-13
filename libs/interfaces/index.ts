@@ -15,7 +15,6 @@ export interface LinksProps {
 
 export interface ProvidersProps {
   children: React.ReactNode;
-  data: BussesTypes[];
 }
 
 export interface PopularBusRouteProps {

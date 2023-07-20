@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 import NextTopLoader from "nextjs-toploader";
 import { useAppDispatch } from "@/redux/hooks";
 
-const Providers: React.FC<ProvidersProps> = ({ children, data }) => {
+const Providers: React.FC<ProvidersProps> = ({ children }) => {
   // const dispatch = useAppDispatch();
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
@@ -42,7 +42,7 @@ const Providers: React.FC<ProvidersProps> = ({ children, data }) => {
           theme={{ colorScheme }}
         >
           <Provider store={store}>
-            {isHomePage ? null : <Navbar data={data} isHomePage={false} />}
+            {isHomePage ? null : <Navbar isHomePage={false} />}
             {children}
           </Provider>
         </MantineProvider>

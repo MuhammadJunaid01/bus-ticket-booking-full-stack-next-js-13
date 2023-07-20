@@ -7,6 +7,7 @@ declare namespace NodeJS {
     MONGODB_URI: string;
     AUTH_SECRET: string;
     BASE_URL: string;
+    NEXT_PUBLIC_BASE_URL: string;
 
     //google env
     // APP_PUBLIC_API: string;

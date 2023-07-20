@@ -7,9 +7,13 @@ import { busRouteData, someFactsData, storiesData } from "@/libs/data";
 import { useAppDispatch } from "@/redux/hooks";
 import { BussApiResponseType } from "@/libs/types";
 import { getAllBussData } from "@/redux/features/busses";
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://etickets-bd.vercel.app/"
+    : process.env.NEXT_PUBLIC_BASE_URL;
 const fetchAllBuss = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/buss");
+    const res = await fetch(`${url}/api/buss`);
     const data: BussApiResponseType = await res.json();
     return data;
   } catch (error: any) {
@@ -19,7 +23,7 @@ const fetchAllBuss = async () => {
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const [data, setData] = React.useState<BussApiResponseType | null>(null);
-
+  console.log("URL ", url);
   React.useEffect(() => {
     const fetchData = async () => {
       try {

@@ -11,7 +11,16 @@ import { Profile } from "@/ui";
 import Logo from "@/public/logo.png";
 import Logo1 from "@/public/logo-3-r-bg.png";
 import Image from "next/image";
-export function Navbar({ isHomePage }: { isHomePage: boolean }) {
+import { BussesTypes } from "@/libs/types";
+import React from "react";
+import { useAppDispatch } from "@/redux/hooks";
+import { getAllBussData } from "@/redux/features/busses";
+export interface NavbarProps {
+  isHomePage: boolean;
+  data?: BussesTypes[];
+}
+const Navbar: React.FC<NavbarProps> = ({ isHomePage, data }) => {
+  const dispatch = useAppDispatch();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -19,22 +28,25 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
   const router = useRouter();
   const links = Links({ data: mockdata });
   const [scroll, scrollTo] = useWindowScroll();
-
+  React.useEffect(() => {
+    dispatch(getAllBussData(data));
+  }, [data, dispatch]);
   return (
     <Box>
       <Header
         style={
+          /* The code `scroll.y >= 120 ? { position: "fixed", top: "0px", backgroundColor: "#5B2192" } :
+         {}` is conditionally setting the CSS styles for the `Header` component based on the value
+         of `scroll.y`. */
           scroll.y >= 120
             ? { position: "fixed", top: "0px", backgroundColor: "#5B2192" }
             : {}
         }
         sx={(theme) => ({
-          // border: `2px solid red`,
           position: scroll.y >= 120 ? "fixed" : "relative",
           backgroundColor: `${isHomePage && "transparent"}`,
           borderBottom: `${isHomePage && "none"}`,
         })}
-        // style={{ backgroundColor:  }}
         height={80}
         px="md"
       >
@@ -47,29 +59,32 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
             height={50}
             alt="main-logo"
           />
-          {/* <Text
-            color="#ffffff"
-            onClick={() => router.push("/")}
-            style={{ cursor: "pointer" }}
-            size={30}
-          >
-            AR poribohon
-          </Text> */}
 
           <Group
             sx={{ height: "100%" }}
             spacing={0}
             className={classes.hiddenMobile}
           >
+            {/* /* The code is mapping over the `navlinkData` array and rendering a `NavLinks` component
+            for each item in the array. The `NavLinks` component is passed two props: `href` and
+            `label`, which are extracted from each item in the `navlinkData` array. The `key` prop
+            is set to the `index` of each item in the array to ensure uniqueness. */}
             {navlinkData.map((data, index) => {
               return (
                 <NavLinks key={index} href={data.href} label={data.label} />
               );
             })}
-            {/* Profile */}
+
+            {/* /* The `<Profile />` component is responsible for displaying the user's profile information
+           in the navbar. It could include the user's profile picture, name, and any other relevant
+           details. */}
+
             <Profile />
 
-            {/* Dark and light Mode Indicator  */}
+            {/* /* The `<DarkAndLightMode />` component is responsible for displaying an indicator or toggle
+           button for switching between dark mode and light mode in the navbar. It allows the user
+           to change the theme of the application based on their preference. */}
+
             <DarkAndLightMode />
           </Group>
 
@@ -81,7 +96,9 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
         </Group>
       </Header>
 
-      {/* Navbar For Small Devices */}
+      {/* /* The code is rendering the `NavbarSmallDevices` component, which is responsible for displaying the
+   navigation links in a collapsible menu for small devices. */}
+
       <NavbarSmallDevices
         drawerOpened={drawerOpened}
         closeDrawer={closeDrawer}
@@ -89,4 +106,5 @@ export function Navbar({ isHomePage }: { isHomePage: boolean }) {
       />
     </Box>
   );
-}
+};
+export default Navbar;

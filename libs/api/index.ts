@@ -1,11 +1,13 @@
 import { cache } from "react";
-import config from "@/config";
-const { url } = config;
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://etickets-bd.vercel.app/"
+    : process.env.BASE_URL;
 /* The `export const getProdcutByID` is a function that is being exported from the module. It is using
 the `cache` function from the `react` library to cache the result of the function call. */
-export const getProdcutByID = cache(async (url: string) => {
+export const getProdcutByID = cache(async (endPoint: string) => {
   try {
-    const res = await fetch(url, {
+    const res = await fetch(`${url}/$${endPoint}`, {
       next: { revalidate: 60 },
     });
 
@@ -27,7 +29,7 @@ export const getProdcutByID = cache(async (url: string) => {
 export const getProducts = async () => {
   try {
     const res = await fetch(
-      `${url.BASE_URL}/api/buss`,
+      `${url}/api/buss`,
 
       { cache: "force-cache" }
     );

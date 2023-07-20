@@ -12,8 +12,10 @@ import { useLocalStorage } from "@mantine/hooks";
 import { AffixScroll, Navbar } from "@/ui";
 import { usePathname } from "next/navigation";
 import NextTopLoader from "nextjs-toploader";
+import { useAppDispatch } from "@/redux/hooks";
 
-const Providers: React.FC<ProvidersProps> = ({ children }) => {
+const Providers: React.FC<ProvidersProps> = ({ children, data }) => {
+  // const dispatch = useAppDispatch();
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
     defaultValue: "light",
@@ -24,6 +26,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   const isHomePage = "/" === path ? true : false;
+  // console.log(data);
 
   return (
     <div>
@@ -39,7 +42,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
           theme={{ colorScheme }}
         >
           <Provider store={store}>
-            {isHomePage ? null : <Navbar isHomePage={false} />}
+            {isHomePage ? null : <Navbar data={data} isHomePage={false} />}
             {children}
           </Provider>
         </MantineProvider>

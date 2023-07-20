@@ -2,6 +2,7 @@ import { StaticImageData } from "next/image";
 import {
   AvailableBussDataTypes,
   BusMockDataType,
+  BussesTypes,
   FactsDataTypes,
   MockDataType,
   PopularBusRouteDataType,
@@ -14,6 +15,7 @@ export interface LinksProps {
 
 export interface ProvidersProps {
   children: React.ReactNode;
+  data: BussesTypes[];
 }
 
 export interface PopularBusRouteProps {
@@ -39,7 +41,6 @@ export interface StoriesProps {
 }
 export interface AvailableBussProps {
   title: string;
-  data: AvailableBussDataTypes[];
 }
 export interface Seat {
   seat: string;

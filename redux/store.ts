@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import bussesSlice from "./features/busses";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    bussData: bussesSlice,
+  },
   devTools: process.env.NODE_ENV !== "production",
 });
 export type RootState = ReturnType<typeof store.getState>;

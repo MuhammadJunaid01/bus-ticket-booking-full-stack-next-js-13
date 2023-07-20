@@ -1,7 +1,7 @@
 import { AvailableBussProps } from "@/libs/interfaces";
 import React from "react";
 
-const AvailableBuss: React.FC<AvailableBussProps> = ({ title, data }) => {
+const OurBusses: React.FC<AvailableBussProps> = ({ title }) => {
   // console.log(data);
   return (
     <div>
@@ -10,4 +10,4 @@ const AvailableBuss: React.FC<AvailableBussProps> = ({ title, data }) => {
   );
 };
 
-export default AvailableBuss;
+export default OurBusses;

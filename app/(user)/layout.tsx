@@ -27,7 +27,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <Providers>
+        <Providers data={buss.data}>
           <main>{children}</main>
         </Providers>
       </body>

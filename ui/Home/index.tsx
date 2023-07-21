@@ -5,8 +5,8 @@ import { Container } from "@mantine/core";
 import { OurBuses, BusRoutes, Header, Navbar, SomeFacts, Stories } from "@/ui";
 import { busRouteData, someFactsData, storiesData } from "@/libs/data";
 import { useAppDispatch } from "@/redux/hooks";
-import { BussApiResponseType } from "@/libs/types";
 import { getAllBussData } from "@/redux/features/busses";
+import { BusesApiResponseType } from "@/libs/types";
 const url =
   process.env.NODE_ENV === "production"
     ? "https://etickets-bd.vercel.app"
@@ -14,7 +14,7 @@ const url =
 const fetchAllBuss = async () => {
   try {
     const res = await fetch(`${url}/api/buses`);
-    const data: BussApiResponseType = await res.json();
+    const data: BusesApiResponseType = await res.json();
     return data;
   } catch (error: any) {
     throw new Error(error.message); // Rethrow the error to be handled in the useEffect
@@ -22,7 +22,7 @@ const fetchAllBuss = async () => {
 };
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const [data, setData] = React.useState<BussApiResponseType | null>(null);
+  const [data, setData] = React.useState<BusesApiResponseType | null>(null);
   console.log("URL ", url);
   React.useEffect(() => {
     const fetchData = async () => {

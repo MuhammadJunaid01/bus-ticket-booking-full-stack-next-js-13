@@ -5,9 +5,9 @@ const url =
     : process.env.BASE_URL;
 /* The `export const getProdcutByID` is a function that is being exported from the module. It is using
 the `cache` function from the `react` library to cache the result of the function call. */
-export const getProdcutByID = cache(async (endPoint: string) => {
+export const getBusByID = cache(async (endPoint: string) => {
   try {
-    const res = await fetch(`${url}/$${endPoint}`, {
+    const res = await fetch(`${url}/${endPoint}`, {
       next: { revalidate: 60 },
     });
 
@@ -26,10 +26,10 @@ export const getProdcutByID = cache(async (endPoint: string) => {
  * @returns The function `getProducts` returns a promise that resolves to the JSON data fetched from
  * the specified URL.
  */
-export const getProducts = async () => {
+export const getAllBus = async () => {
   try {
     const res = await fetch(
-      `${url}/api/buss`,
+      `${url}/api/buses`,
 
       { cache: "force-cache" }
     );

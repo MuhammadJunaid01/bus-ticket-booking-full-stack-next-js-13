@@ -85,8 +85,13 @@ export type BussesTypes = {
   updatedAt: string;
 } & AvailableBussDataTypes;
 
-export type BussApiResponseType = {
+export type BusesApiResponseType = {
   OK: boolean;
   msg: string;
   data: BussesTypes[];
+};
+export type BusApiResponseType = {
+  OK: boolean;
+  msg: string;
+  data: BussesTypes;
 };

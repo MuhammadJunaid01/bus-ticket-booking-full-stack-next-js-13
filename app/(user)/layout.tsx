@@ -3,8 +3,6 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "@/libs/providers";
-import { BussApiResponseType } from "@/libs/types";
-import { getProducts } from "@/libs/api";
 
 const inter = Inter({ subsets: ["latin"] });
 /* The code block `export const metadata: Metadata = { ... }` is defining an object named `metadata`

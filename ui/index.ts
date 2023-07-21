@@ -10,6 +10,7 @@ import SomeFacts from "./SomeFacts";
 import BusRoutes from "./BusRoutes";
 import Stories from "./OurStories";
 import OurBuses from "./OurBuses";
+import BusTable from "./Table";
 
 export {
   Navbar,
@@ -24,4 +25,5 @@ export {
   BusRoutes,
   Stories,
   OurBuses,
+  BusTable,
 };

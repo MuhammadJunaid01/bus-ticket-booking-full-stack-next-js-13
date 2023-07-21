@@ -2,10 +2,10 @@ import usePaginate from "@/libs/hooks/usePaginate";
 import { AvailableBussProps } from "@/libs/interfaces";
 import { ourBusesStyles } from "@/libs/styles";
 import { useAppSelector } from "@/redux/hooks";
-import { Box, Pagination, SimpleGrid, Text } from "@mantine/core";
+import { Box, Loader, Pagination, SimpleGrid, Text } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
-import BusTable from "./BusesTable";
+import { BusTable } from "@/ui";
 
 const OurBusses: React.FC<AvailableBussProps> = ({ title }) => {
   // console.log(data);
@@ -20,7 +20,9 @@ const OurBusses: React.FC<AvailableBussProps> = ({ title }) => {
   return (
     <Box className={container}>
       <Text className={titileStle}>{title}</Text>
-      <BusTable data={data} />
+
+      {data ? <BusTable data={data} /> : <Loader size="sm" />}
+
       {/* {paginateData.map((bus, index) => {
         return (
           <Box className={busContainer} key={index}>

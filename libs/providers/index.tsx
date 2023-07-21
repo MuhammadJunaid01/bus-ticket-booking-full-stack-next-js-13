@@ -12,7 +12,6 @@ import { useLocalStorage } from "@mantine/hooks";
 import { AffixScroll, Navbar } from "@/ui";
 import { usePathname } from "next/navigation";
 import NextTopLoader from "nextjs-toploader";
-import { useAppDispatch } from "@/redux/hooks";
 
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   // const dispatch = useAppDispatch();

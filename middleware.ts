@@ -3,8 +3,8 @@ import { NextRequest } from "next/server";
 
 const allowedOrign =
   process.env.NODE_ENV === "production"
-    ? ["https://multishop-ecommerce.vercel.app"]
-    : ["http://localhost:3000", "https://www.google.com"];
+    ? ["https://etickets-bd.vercel.app/"]
+    : ["http://localhost:3000"];
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {

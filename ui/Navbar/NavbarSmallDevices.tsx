@@ -10,8 +10,8 @@ import {
   rem,
 } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons-react";
-import { navbarStyles } from "@/libs/styles";
-import { navlinkDataType } from "@/libs/types";
+import { navbarStyles } from "@/lib/styles";
+import { navlinkDataType } from "@/lib/types";
 import NavLinks from "../Navlinks";
 export interface NavbarSmallDevicesProps {
   drawerOpened: boolean;

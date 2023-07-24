@@ -1,20 +1,19 @@
-import { mockdata, navlinkData } from "@/libs/data";
-import { navbarStyles } from "@/libs/styles";
+import { mockdata, navlinkData } from "@/lib/data";
+import { navbarStyles } from "@/lib/styles";
 import { useRouter } from "next/navigation";
 import { Header, Group, Text, Box, Burger } from "@mantine/core";
-import { useDisclosure, useWindowScroll } from "@mantine/hooks";
+import { useColorScheme, useDisclosure, useWindowScroll } from "@mantine/hooks";
 import Links from "./Links";
 import DarkAndLightMode from "./DarkAndLightMode";
 import NavLinks from "../Navlinks";
 import NavbarSmallDevices from "./NavbarSmallDevices";
 import { Profile } from "@/ui";
-import Logo from "@/public/logo.png";
+import Logo from "@/public/logo-darkmode.png";
 import Logo1 from "@/public/logo-3-r-bg.png";
 import Image from "next/image";
-import { BussesTypes } from "@/libs/types";
 import React from "react";
-import { useAppDispatch } from "@/redux/hooks";
-import { getAllBussData } from "@/redux/features/busses";
+// import { window } from "global";
+
 export interface NavbarProps {
   isHomePage: boolean;
 }
@@ -24,8 +23,15 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = navbarStyles();
   const router = useRouter();
+
+  const [themeMode, settThemeMode] = React.useState<string | null>();
   const links = Links({ data: mockdata });
   const [scroll, scrollTo] = useWindowScroll();
+  React.useEffect(() => {
+    const themeModeVal = localStorage.getItem("mantine-color-scheme");
+    console.log("themeMode", themeMode);
+    settThemeMode(themeModeVal);
+  }, [themeMode]);
 
   return (
     <Box>

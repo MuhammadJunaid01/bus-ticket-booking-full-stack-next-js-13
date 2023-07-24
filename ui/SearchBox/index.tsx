@@ -11,7 +11,7 @@ import React from "react";
 import { IconArrowsExchange2, IconMapPin } from "@tabler/icons-react";
 
 import CustomCalendar from "./Calendar";
-import { seacrhBoxStyles } from "@/libs/styles";
+import { seacrhBoxStyles } from "@/lib/styles";
 const SearchBox = () => {
   const { classes } = seacrhBoxStyles();
   const { container, inputBox, input, changeValueBtn, searchBtn } = classes;

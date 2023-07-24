@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import User, { UserTypes } from "@/libs/models/user.models";
+import User, { IUser } from "@/lib/models/user.models";
 import bcrypt from "bcryptjs";
-import { connectDB } from "@/libs/db";
+import { connectDB } from "@/lib/db";
 import { v4 as uuidv4 } from "uuid";
-import { sendVerificationEmail } from "@/libs/email";
+import { sendVerificationEmail } from "@/lib/email";
 export const GET = async (req: NextRequest) => {
   const origin = req.headers.get("origin");
   return new NextResponse(JSON.stringify({ message: "cors test" }), {
@@ -26,7 +26,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   assigning it to the `body` variable. The `UserDocument` type is used to define the structure of
   the user data. By using `await req.json()`, the code is waiting for the JSON data to be fully
   parsed before assigning it to the `body` variable. */
-  const body: UserTypes = await req.json();
+  const body: IUser = await req.json();
 
   const { name, email, password, role } = body;
   try {

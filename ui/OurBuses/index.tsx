@@ -1,6 +1,6 @@
-import usePaginate from "@/libs/hooks/usePaginate";
-import { AvailableBussProps } from "@/libs/interfaces";
-import { ourBusesStyles } from "@/libs/styles";
+import usePaginate from "@/lib/hooks/usePaginate";
+import { AvailableBussProps } from "@/lib/interfaces";
+import { ourBusesStyles } from "@/lib/styles";
 import { useAppSelector } from "@/redux/hooks";
 import { Box, Loader, Pagination, SimpleGrid, Text } from "@mantine/core";
 import Image from "next/image";

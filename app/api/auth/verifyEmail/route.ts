@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import User from "@/libs/models/user.models";
+import User from "@/lib/models/user.models";
 export const POST = async (req: NextRequest, res: NextResponse) => {
   /* The code `const body = await req.json();` is parsing the JSON data from the request body. It is
   used to extract the `email` and `verificationToken` properties from the parsed JSON data. These

@@ -1,5 +1,5 @@
-import { BusRoutesProps } from "@/libs/interfaces";
-import { busRoutesStyles } from "@/libs/styles";
+import { BusRoutesProps } from "@/lib/interfaces";
+import { busRoutesStyles } from "@/lib/styles";
 import { Box, Indicator, Text } from "@mantine/core";
 import React from "react";
 import { IconRoute2, IconRoute } from "@tabler/icons-react";

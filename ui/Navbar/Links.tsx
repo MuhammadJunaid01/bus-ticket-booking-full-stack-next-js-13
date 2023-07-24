@@ -1,5 +1,5 @@
-import { LinksProps } from "@/libs/interfaces";
-import { navbarStyles } from "@/libs/styles";
+import { LinksProps } from "@/lib/interfaces";
+import { navbarStyles } from "@/lib/styles";
 import {
   Group,
   ThemeIcon,

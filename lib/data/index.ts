@@ -64,16 +64,16 @@ export const navlinkData: navlinkDataType[] = [
     label: "About Us",
   },
   {
-    href: "buss",
-    label: "Buss",
+    href: "makeBooking",
+    label: "Make Booking",
+  },
+  {
+    href: "checkTickets",
+    label: "Check Tickets",
   },
   {
     href: "contsct",
     label: "Contact Us",
-  },
-  {
-    href: "offers",
-    label: "Offers",
   },
 ];
 export const busRouteData: string[] = [

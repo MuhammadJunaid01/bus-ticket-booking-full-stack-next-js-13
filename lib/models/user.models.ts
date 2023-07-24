@@ -1,6 +1,6 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 
-export interface UserTypes {
+export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
@@ -9,9 +9,8 @@ export interface UserTypes {
   isVerified: boolean;
   verificationToken?: string;
 }
-interface IProductDocument extends UserTypes, Document {}
-interface IProductModel extends Model<IProductDocument> {}
-const UserSchema = new Schema<UserTypes>(
+
+const UserSchema = new Schema<IUser>(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -32,4 +31,4 @@ const UserSchema = new Schema<UserTypes>(
 );
 
 export default mongoose.models.User ||
-  mongoose.model<IProductDocument, IProductModel>("User", UserSchema);
+  mongoose.model<IUser>("User", UserSchema);

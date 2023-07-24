@@ -52,3 +52,17 @@ export interface Seat {
 export interface SeatMap {
   [group: string]: Seat[];
 }
+export interface BusPageProps {
+  params: {
+    busID: string;
+  };
+}
+export interface MakeBookUiPropsTypes {
+  data: string[];
+}
+export interface RoadsPropsType {
+  title: string;
+  data: string[];
+  onClick: (page: number) => void;
+  totalPage: number;
+}

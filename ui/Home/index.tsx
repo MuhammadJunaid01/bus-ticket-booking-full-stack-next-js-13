@@ -2,11 +2,11 @@
 import React, { Suspense } from "react";
 
 import { Container } from "@mantine/core";
-import { OurBuses, BusRoutes, Header, Navbar, SomeFacts, Stories } from "@/ui";
-import { busRouteData, someFactsData, storiesData } from "@/libs/data";
+import { BusRoutes, Header, Navbar, SomeFacts, Stories } from "@/ui";
+import { busRouteData, someFactsData, storiesData } from "@/lib/data";
 import { useAppDispatch } from "@/redux/hooks";
 import { getAllBussData } from "@/redux/features/busses";
-import { BusesApiResponseType } from "@/libs/types";
+import { BusesApiResponseType } from "@/lib/types";
 const url =
   process.env.NODE_ENV === "production"
     ? "https://etickets-bd.vercel.app"
@@ -53,7 +53,7 @@ const HomePage = () => {
         <Suspense
           fallback={<p>waite Please! Loading buses Data from database...</p>}
         >
-          <OurBuses title="Our Available Buss" />
+          {/* <OurBuses title="Our Available Buss" /> */}
         </Suspense>
       </Container>
     </div>

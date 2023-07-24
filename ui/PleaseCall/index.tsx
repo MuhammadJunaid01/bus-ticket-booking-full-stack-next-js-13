@@ -6,7 +6,7 @@ export interface PleaseCallProps {
   number: number;
 }
 import { IconPhoneCall } from "@tabler/icons-react";
-import { pleaseCallStyles } from "@/libs/styles";
+import { pleaseCallStyles } from "@/lib/styles";
 const PleaseCall: React.FC<PleaseCallProps> = ({
   title,
   sub_title,

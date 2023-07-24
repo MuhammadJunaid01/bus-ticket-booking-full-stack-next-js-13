@@ -11,6 +11,7 @@ import BusRoutes from "./BusRoutes";
 import Stories from "./OurStories";
 import OurBuses from "./OurBuses";
 import BusTable from "./Table";
+import MakeBooking from "./MakeBooking";
 
 export {
   Navbar,
@@ -26,4 +27,5 @@ export {
   Stories,
   OurBuses,
   BusTable,
+  MakeBooking,
 };

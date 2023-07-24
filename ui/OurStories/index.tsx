@@ -1,6 +1,6 @@
-import usePaginate from "@/libs/hooks/usePaginate";
-import { StoriesProps } from "@/libs/interfaces";
-import { storiesStyles } from "@/libs/styles";
+import usePaginate from "@/lib/hooks/usePaginate";
+import { StoriesProps } from "@/lib/interfaces";
+import { storiesStyles } from "@/lib/styles";
 import {
   Blockquote,
   Box,

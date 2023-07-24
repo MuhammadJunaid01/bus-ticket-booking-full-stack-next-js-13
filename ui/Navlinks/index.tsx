@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { navbarStyles } from "@/libs/styles";
+import { navbarStyles } from "@/lib/styles";
 import Link from "next/link";
 import { Box } from "@mantine/core";
 

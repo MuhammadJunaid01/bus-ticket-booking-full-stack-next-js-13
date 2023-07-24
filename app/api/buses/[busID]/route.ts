@@ -1,6 +1,6 @@
-import { connectDB } from "@/libs/db";
-import { limiter } from "@/libs/limiter";
-import Buses from "@/libs/models/buss.models";
+import { connectDB } from "@/lib/db";
+import { limiter } from "@/lib/limiter";
+import Buses from "@/lib/models/buss.models";
 import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest, { params }: any) => {
   connectDB();

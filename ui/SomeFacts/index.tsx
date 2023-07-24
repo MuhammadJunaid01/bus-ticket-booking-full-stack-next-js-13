@@ -1,5 +1,5 @@
-import { SomeFactsProps } from "@/libs/interfaces";
-import { factsStyles } from "@/libs/styles";
+import { SomeFactsProps } from "@/lib/interfaces";
+import { factsStyles } from "@/lib/styles";
 import { Box, Grid, Text } from "@mantine/core";
 import Image from "next/image";
 import React from "react";

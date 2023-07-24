@@ -95,3 +95,7 @@ export type BusApiResponseType = {
   msg: string;
   data: BussesTypes;
 };
+export type busCHairDataypes = {
+  type: string;
+  gender?: string;
+};

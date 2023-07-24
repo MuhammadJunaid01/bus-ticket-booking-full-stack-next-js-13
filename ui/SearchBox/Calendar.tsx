@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { Group, Button, Menu, Input } from "@mantine/core";
 import { Calendar } from "@mantine/dates";
 import { IconCalendar } from "@tabler/icons-react";
-import { seacrhBoxStyles } from "@/libs/styles";
+import { seacrhBoxStyles } from "@/lib/styles";
 export default function CustomCalendar() {
   const [selected, setSelected] = useState<Date[]>([]);
   const [showCalendar, setShowCalendar] = useState(false);

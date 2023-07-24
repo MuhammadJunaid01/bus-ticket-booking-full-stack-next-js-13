@@ -1,0 +1,20 @@
+.container {
+  height: 85vh;
+  width: 100%;
+  overflow-x: hidden;
+  margin-top: 40px;
+  text-align: center;
+}
+/* .content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+} */
+.busImage {
+  width: 70%;
+  height: 300px;
+}
+.busCHair {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0px;
+}

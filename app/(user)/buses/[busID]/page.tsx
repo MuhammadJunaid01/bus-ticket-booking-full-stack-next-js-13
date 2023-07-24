@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: BusPageProps) {
     description: `the bus drive ${data.roadName}`,
   };
 }
-
+console.log("");
 const Product: React.FC<BusPageProps> = async ({ params }) => {
   const { busID } = params;
   const busData: Promise<BusApiResponseType> = getBusByID(

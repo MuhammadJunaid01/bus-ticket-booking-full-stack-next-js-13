@@ -1,7 +1,6 @@
-import { BusRouteParams } from "@/libs/interfaces";
-import React from "react";
+import { BusRouteParams } from "@/lib/interfaces";
 import queryString from "query-string";
-import { useSearchParams } from "next/navigation";
+import React from "react";
 
 const BusRoute: React.FC<BusRouteParams> = ({ params }) => {
   const { routeName } = params;

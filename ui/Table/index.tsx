@@ -1,13 +1,13 @@
-import { useMemo } from "react";
+import { BussesTypes } from "@/lib/types";
+import { Box, Button, Image, Menu, Text, Title } from "@mantine/core";
+import { IconDetails, IconUserCircle } from "@tabler/icons-react";
 import {
   MantineReactTable,
   useMantineReactTable,
   type MRT_ColumnDef,
 } from "mantine-react-table";
-import { Box, Button, Image, Menu, Text, Title } from "@mantine/core";
-import { IconUserCircle, IconSend, IconDetails } from "@tabler/icons-react";
-import { BussesTypes } from "@/libs/types";
 import Link from "next/link";
+import { useMemo } from "react";
 
 const BusTable = ({ data }: { data: BussesTypes[] }) => {
   const columns = useMemo<MRT_ColumnDef<BussesTypes>[]>(

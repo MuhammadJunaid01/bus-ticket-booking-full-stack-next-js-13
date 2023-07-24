@@ -1,6 +1,6 @@
-import React from "react";
-import { Box, Container, Grid, Text } from "@mantine/core";
 import { HowBuy, PleaseCall, SearchBox } from "@/ui";
+import { Box, Grid, Text } from "@mantine/core";
+import React from "react";
 
 export interface HeaderProps {
   title: string;

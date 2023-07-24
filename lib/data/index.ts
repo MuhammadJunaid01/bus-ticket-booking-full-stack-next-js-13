@@ -1,25 +1,12 @@
-import { AvailableBussDataTypes } from "./../types/index";
-import TICKETS from "@/public/ticket-icon-2.png";
-import HAPPYCUSTOMER from "@/public/man-icon.png";
 import ROUTES from "@/public/bd-icon.png";
-import {
-  IconBook,
-  IconChartPie3,
-  IconCode,
-  IconCoin,
-  IconFingerprint,
-  IconNotification,
-} from "@tabler/icons-react";
+import HAPPYCUSTOMER from "@/public/man-icon.png";
+import TICKETS from "@/public/ticket-icon-2.png";
 import {
   BusMockDataType,
   FactsDataTypes,
-  MockDataType,
-  PopularBusRouteDataType,
   StoriesTypes,
   navlinkDataType,
 } from "../types";
-import { SomeFactsProps } from "../interfaces";
-import { seats } from "./seats";
 
 export const mockdata: BusMockDataType[] = [
   {

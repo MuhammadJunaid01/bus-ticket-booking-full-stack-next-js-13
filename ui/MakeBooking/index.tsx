@@ -1,41 +1,66 @@
 "use client";
+import usePaginate from "@/lib/hooks/usePaginate";
 import { MakeBookUiPropsTypes } from "@/lib/interfaces";
+import { DateType, selectDate } from "@/lib/utils";
 import {
   Box,
   Container,
   Grid,
   Input,
   Menu,
-  Select,
   Text,
-  Title,
+  UnstyledButton,
 } from "@mantine/core";
-import React from "react";
-import dayjs from "dayjs";
 import { Calendar } from "@mantine/dates";
-import CustomCalendar from "../SearchBox/Calendar";
-import { IconCalendar } from "@tabler/icons-react";
+import { IconArrowsExchange2, IconCalendar } from "@tabler/icons-react";
+import dayjs from "dayjs";
+import React from "react";
+import CustomSelect from "./CustomSelect";
 import Roads from "./Roads";
-import usePaginate from "@/lib/hooks/usePaginate";
 
 const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
-  const [searchValue, onSearchChange] = React.useState("");
-  const [selected, setSelected] = React.useState<Date[]>([]);
-  const handleSelect = (date: Date) => {
-    const isSelected = selected.some((s) => dayjs(date).isSame(s, "date"));
-    if (isSelected) {
-      setSelected((current) =>
-        current.filter((d) => !dayjs(d).isSame(date, "date"))
-      );
-    } else if (selected.length < 3) {
-      setSelected((current) => [...current, date]);
-    }
+  const [selected, setSelected] = React.useState<DateType[]>([]);
+  const [origin, setOrigin] = React.useState<string[]>([]);
+  const [dest, setDest] = React.useState<string[]>([]);
+  const [toggleOrigin, setToggleOrigin] = React.useState<boolean>(false);
+  const [originValue, setOriginValue] = React.useState<string>("");
+  const [destValue, setDestValue] = React.useState<string>("");
+  const [road, setRoad] = React.useState<string>("");
+  const maxSelection = 1;
+
+  const handleSelect = (date: DateType) => {
+    setSelected(
+      (currentSelected) =>
+        selectDate(date, currentSelected, maxSelection) as DateType[]
+    );
   };
+
   const paginate = usePaginate({
     data: data,
-    itemsPerPage: 10,
+    itemsPerPage: 9,
   });
+  React.useEffect(() => {
+    data.forEach((item) => {
+      const parts = item.split("-");
+      setOrigin((prevOrigin) => {
+        const newOriginSet = new Set([...prevOrigin, parts[0]]);
+        return Array.from(newOriginSet);
+      });
+
+      setDest((prevDest) => {
+        const newDestSet = new Set([...prevDest, parts[1]]);
+        return Array.from(newDestSet);
+      });
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   const { handlePageChange, paginateData, totalPage } = paginate;
+  const handleOriginToggle = (): void => {
+    setToggleOrigin((prev) => !prev);
+  };
+
   return (
     <Container fluid my={10}>
       <Grid justify="space-between">
@@ -68,24 +93,78 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
               />
             </Menu.Dropdown>
           </Menu>
-          <Box mb={10}>
-            <Text>Origin</Text>
-            <Input placeholder="Origin" />
+          <Box
+            mb={10}
+            sx={(theme) => ({
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+              gap: "20px",
+              position: "relative",
+            })}
+          >
+            <CustomSelect
+              value={originValue}
+              setState={setOriginValue}
+              pl="Pick Origin "
+              width="100%"
+              label="Origin"
+              data={toggleOrigin ? dest : origin.slice(0, 1)}
+            />
+            <CustomSelect
+              value={destValue}
+              setState={setDestValue}
+              pl="Pick Destination"
+              width="100%"
+              label="Destination"
+              data={toggleOrigin ? origin.slice(0, 1) : dest}
+            />
+            <UnstyledButton
+              onClick={handleOriginToggle}
+              sx={(theme) => ({
+                position: "absolute",
+                top: "21px",
+                left: "47.2%",
+                height: "36px",
+                width: "36px",
+                borderRadius: "50%",
+                backgroundColor:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.indigo[3]
+                    : theme.colors.gray[2],
+                textAlign: "center",
+                color:
+                  theme.colorScheme === "dark" ? "white" : theme.colors.gray[9],
+              })}
+            >
+              <IconArrowsExchange2 size={20} />
+            </UnstyledButton>
           </Box>
-          <Text>Destination:</Text>
-          <Input placeholder="Destination" mb={10} />
-          <Select
+
+          <CustomSelect
+            value={road}
+            setState={setRoad}
+            pl="Pick one Road"
             label="Chose Road"
-            placeholder="Pick one Road"
-            searchable
-            onSearchChange={onSearchChange}
-            searchValue={searchValue}
-            nothingFound="No options"
             data={data}
-            clearable
           />
+          <UnstyledButton
+            sx={(theme) => ({
+              width: "100%",
+              marginTop: "10px",
+              textAlign: "center",
+              backgroundColor:
+                theme.colorScheme === "dark"
+                  ? theme.colors.gray[2]
+                  : theme.colors.gray[6],
+              padding: "10px ",
+              borderRadius: theme.radius.sm,
+            })}
+          >
+            Search
+          </UnstyledButton>
         </Grid.Col>
-        <Grid.Col span={12} md={3}>
+        <Grid.Col span={12} md={6}>
           <Roads
             onClick={handlePageChange}
             totalPage={totalPage}
@@ -99,6 +178,3 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
 };
 
 export default MakeBooking;
-function useForm(arg0: { initialValues: { name: string; email: string } }) {
-  throw new Error("Function not implemented.");
-}

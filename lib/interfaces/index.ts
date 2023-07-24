@@ -1,10 +1,6 @@
-import { StaticImageData } from "next/image";
 import {
-  AvailableBussDataTypes,
   BusMockDataType,
-  BussesTypes,
   FactsDataTypes,
-  MockDataType,
   PopularBusRouteDataType,
   StoriesTypes,
 } from "../types";

@@ -20,7 +20,7 @@ const seats = {
 export const bussData: AvailableBussDataTypes[] = [
   {
     bussNumber: 1,
-    road: "DHAKA-COX'S BAZAR",
+    roadName: "DHAKA-COX'S BAZAR",
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -29,7 +29,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 1,
-    road: busRouteData[1],
+    roadName: busRouteData[1],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -38,7 +38,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 2,
-    road: busRouteData[2],
+    roadName: busRouteData[2],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -47,7 +47,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 3,
-    road: busRouteData[3],
+    roadName: busRouteData[3],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -57,7 +57,7 @@ export const bussData: AvailableBussDataTypes[] = [
   //kkk
   {
     bussNumber: 4,
-    road: busRouteData[4],
+    roadName: busRouteData[4],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -66,7 +66,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 5,
-    road: busRouteData[5],
+    roadName: busRouteData[5],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -75,7 +75,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 6,
-    road: busRouteData[6],
+    roadName: busRouteData[6],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -84,7 +84,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 7,
-    road: busRouteData[7],
+    roadName: busRouteData[7],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -93,7 +93,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 8,
-    road: busRouteData[8],
+    roadName: busRouteData[8],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -102,7 +102,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 9,
-    road: busRouteData[9],
+    roadName: busRouteData[9],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -111,7 +111,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 10,
-    road: busRouteData[10],
+    roadName: busRouteData[10],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -120,7 +120,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 11,
-    road: busRouteData[11],
+    roadName: busRouteData[11],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -131,7 +131,7 @@ export const bussData: AvailableBussDataTypes[] = [
   //11
   {
     bussNumber: 12,
-    road: busRouteData[12],
+    roadName: busRouteData[12],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -140,7 +140,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 13,
-    road: busRouteData[13],
+    roadName: busRouteData[13],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -150,7 +150,7 @@ export const bussData: AvailableBussDataTypes[] = [
   //kkk
   {
     bussNumber: 14,
-    road: busRouteData[14],
+    roadName: busRouteData[14],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -159,7 +159,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 15,
-    road: busRouteData[15],
+    roadName: busRouteData[15],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -168,7 +168,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 16,
-    road: busRouteData[16],
+    roadName: busRouteData[16],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -177,7 +177,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 17,
-    road: busRouteData[17],
+    roadName: busRouteData[17],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -186,7 +186,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 18,
-    road: busRouteData[18],
+    roadName: busRouteData[18],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -195,7 +195,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 19,
-    road: busRouteData[19],
+    roadName: busRouteData[19],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -204,7 +204,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 20,
-    road: busRouteData[20],
+    roadName: busRouteData[20],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -213,7 +213,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 21,
-    road: busRouteData[21],
+    roadName: busRouteData[21],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -224,7 +224,7 @@ export const bussData: AvailableBussDataTypes[] = [
 
   {
     bussNumber: 22,
-    road: busRouteData[22],
+    roadName: busRouteData[22],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -233,7 +233,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 23,
-    road: busRouteData[23],
+    roadName: busRouteData[23],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -243,7 +243,7 @@ export const bussData: AvailableBussDataTypes[] = [
   //kkk
   {
     bussNumber: 24,
-    road: busRouteData[24],
+    roadName: busRouteData[24],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -252,7 +252,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 25,
-    road: busRouteData[25],
+    roadName: busRouteData[25],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -261,7 +261,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 26,
-    road: busRouteData[26],
+    roadName: busRouteData[26],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -270,7 +270,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 27,
-    road: busRouteData[27],
+    roadName: busRouteData[27],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -279,7 +279,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 28,
-    road: busRouteData[28],
+    roadName: busRouteData[28],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -288,7 +288,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 29,
-    road: busRouteData[29],
+    roadName: busRouteData[29],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -297,7 +297,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 30,
-    road: busRouteData[30],
+    roadName: busRouteData[30],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,
@@ -306,7 +306,7 @@ export const bussData: AvailableBussDataTypes[] = [
   },
   {
     bussNumber: 31,
-    road: busRouteData[31],
+    roadName: busRouteData[31],
     startTime: "9:00 PM",
     reachedTime: "3:00 AM",
     seats: seats,

@@ -1,4 +1,4 @@
-import { BussesTypes } from "@/libs/types";
+import { BussesTypes } from "@/lib/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export interface Busses {
   data: BussesTypes[];

@@ -2,16 +2,15 @@ import {
   BusApiResponseType,
   BusesApiResponseType,
   busCHairDataypes,
-} from "@/libs/types";
-import React, { useEffect } from "react";
+} from "@/lib/types";
+import React from "react";
 
 import styles from "@/app/(user)/bus.module.css";
-import { notFound } from "next/navigation";
-import { getBusByID, getAllBus } from "@/libs/api";
-import { BusPageProps } from "@/libs/interfaces";
-import Image from "next/image";
-import { IconArmchair } from "@tabler/icons-react";
+import { getAllBus, getBusByID } from "@/lib/api";
+import { BusPageProps } from "@/lib/interfaces";
 import BusChairMenubar from "@/ui/busChairMenubar";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 
 const busSeatChairData: busCHairDataypes[] = [
   { type: "BOOKED", gender: "M" },

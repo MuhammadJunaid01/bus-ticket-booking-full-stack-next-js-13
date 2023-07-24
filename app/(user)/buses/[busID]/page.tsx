@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: BusPageProps) {
   }
   return {
     title: `This is Bus No: ${data.bussNumber}`,
-    description: `the bus drive ${data.road}`,
+    description: `the bus drive ${data.roadName}`,
   };
 }
 

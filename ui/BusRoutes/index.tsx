@@ -1,9 +1,9 @@
 import { BusRoutesProps } from "@/lib/interfaces";
 import { busRoutesStyles } from "@/lib/styles";
 import { Box, Indicator, Text } from "@mantine/core";
-import React from "react";
-import { IconRoute2, IconRoute } from "@tabler/icons-react";
+import { IconRoute } from "@tabler/icons-react";
 import Link from "next/link";
+import React from "react";
 const BusRoutes: React.FC<BusRoutesProps> = ({ title, data }) => {
   const { classes } = busRoutesStyles();
   const {

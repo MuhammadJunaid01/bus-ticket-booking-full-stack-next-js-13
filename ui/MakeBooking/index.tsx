@@ -1,7 +1,14 @@
 "use client";
 import usePaginate from "@/lib/hooks/usePaginate";
 import { MakeBookUiPropsTypes } from "@/lib/interfaces";
-import { DateType, selectDate } from "@/lib/utils";
+import { BussesTypes } from "@/lib/types";
+import {
+  DateType,
+  formatToDateString,
+  parseToDate,
+  searchBus,
+  selectDate,
+} from "@/lib/utils";
 import {
   Box,
   Container,
@@ -15,10 +22,11 @@ import { Calendar } from "@mantine/dates";
 import { IconArrowsExchange2, IconCalendar } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import React from "react";
+import Bus from "./Bus";
 import CustomSelect from "./CustomSelect";
 import Roads from "./Roads";
 
-const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
+const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data, buses }) => {
   const [selected, setSelected] = React.useState<DateType[]>([]);
   const [origin, setOrigin] = React.useState<string[]>([]);
   const [dest, setDest] = React.useState<string[]>([]);
@@ -26,12 +34,15 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
   const [originValue, setOriginValue] = React.useState<string>("");
   const [destValue, setDestValue] = React.useState<string>("");
   const [road, setRoad] = React.useState<string>("");
+  const [bus, setBus] = React.useState<BussesTypes | null>(null);
+  const [modalVisible, setModalVisible] = React.useState<boolean>(false);
+  // const [isSearchAble, setIsSearcheAble] = React.useState<boolean>(false);
+  const [dateStr, seDateStr] = React.useState<string>("");
   const maxSelection = 1;
 
   const handleSelect = (date: DateType) => {
-    setSelected(
-      (currentSelected) =>
-        selectDate(date, currentSelected, maxSelection) as DateType[]
+    setSelected((currentSelected) =>
+      selectDate(date, currentSelected.map(parseToDate), maxSelection)
     );
   };
 
@@ -52,21 +63,44 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
         return Array.from(newDestSet);
       });
     });
-
+    // const date = formatSelectedDates();
+    // console.log("date str", date);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-
+  const formatSelectedDates = React.useCallback(() => {
+    return selected.map((data) => formatToDateString(data));
+  }, [selected]);
   const { handlePageChange, paginateData, totalPage } = paginate;
   const handleOriginToggle = (): void => {
     setToggleOrigin((prev) => !prev);
   };
+  // console.log("selected date", selected);
+  const handleSearch = () => {
+    if (
+      road === "" ||
+      destValue === "" ||
+      originValue === "" ||
+      selected.length === 0
+    ) {
+      alert("Please fill all fields.");
+      return; // You might want to include this return statement to stop further execution after displaying the alert.
+    }
+    const bus = searchBus(buses, road);
+    const dateStr = formatSelectedDates();
+    seDateStr(dateStr[0]);
 
+    if (bus) {
+      setBus(bus);
+      setModalVisible(true); // Show the modal if the bus is found
+    }
+  };
+  console.table(buses);
   return (
     <Container fluid my={10}>
       <Grid justify="space-between">
         <Grid.Col span={12} md={6}>
           <Menu shadow="md" width={290}>
-            <Text>Origin</Text>
+            <Text>Select Date</Text>
             <Menu.Target>
               <Input
                 mb={10}
@@ -104,7 +138,7 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
             })}
           >
             <CustomSelect
-              value={originValue}
+              value={toggleOrigin ? destValue : originValue}
               setState={setOriginValue}
               pl="Pick Origin "
               width="100%"
@@ -112,7 +146,7 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
               data={toggleOrigin ? dest : origin.slice(0, 1)}
             />
             <CustomSelect
-              value={destValue}
+              value={toggleOrigin ? originValue : destValue}
               setState={setDestValue}
               pl="Pick Destination"
               width="100%"
@@ -149,6 +183,7 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
             data={data}
           />
           <UnstyledButton
+            onClick={() => handleSearch()}
             sx={(theme) => ({
               width: "100%",
               marginTop: "10px",
@@ -173,6 +208,13 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data }) => {
           />
         </Grid.Col>
       </Grid>
+      <Bus
+        opend={modalVisible}
+        closeModal={setModalVisible}
+        bus={bus}
+        dest={destValue}
+        date={dateStr}
+      />
     </Container>
   );
 };

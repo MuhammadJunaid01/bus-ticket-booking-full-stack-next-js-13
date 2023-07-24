@@ -1,9 +1,20 @@
 import dayjs from "dayjs";
+import { BussesTypes } from "../types";
 
 export type DateType = Date | string; // Customize this based on your date representation
 
-const parseToDate = (date: DateType): Date => {
+export const parseToDate = (date: DateType): Date => {
   return typeof date === "string" ? new Date(date) : date;
+};
+
+export const formatToDateString = (date: DateType): string => {
+  const parsedDate = parseToDate(date);
+  return parsedDate.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 };
 
 export const selectDate = (
@@ -27,4 +38,17 @@ export const selectDate = (
 
   // If the maximum selection is reached, return the original array
   return selected;
+};
+export const searchBus = (
+  data: BussesTypes[],
+  road: string
+): BussesTypes | null => {
+  const result = data.find((bus) => bus.roadName === road);
+  // If there's a matching result, return it
+  if (result) {
+    return result;
+  }
+
+  // If there's no matching result, return null
+  return null;
 };

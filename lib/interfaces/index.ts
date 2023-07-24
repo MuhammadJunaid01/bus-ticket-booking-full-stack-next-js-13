@@ -1,5 +1,6 @@
 import {
   BusMockDataType,
+  BussesTypes,
   FactsDataTypes,
   PopularBusRouteDataType,
   StoriesTypes,
@@ -55,6 +56,7 @@ export interface BusPageProps {
 }
 export interface MakeBookUiPropsTypes {
   data: string[];
+  buses: BussesTypes[];
 }
 export interface RoadsPropsType {
   title: string;

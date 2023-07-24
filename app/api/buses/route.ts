@@ -1,8 +1,5 @@
-import { busRouteData } from "@/lib/data";
-import { bussData } from "@/lib/data/bus-data";
 import { connectDB } from "@/lib/db";
-import Bus from "@/lib/models/buss.models";
-import Busses from "@/lib/models/buss.models";
+import { default as Bus, default as Busses } from "@/lib/models/buss.models";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {

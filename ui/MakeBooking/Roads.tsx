@@ -1,6 +1,6 @@
 import { RoadsPropsType } from "@/lib/interfaces";
 import { Box, Pagination, Text, Title } from "@mantine/core";
-import { IconRoad } from "@tabler/icons-react";
+import { IconRoute } from "@tabler/icons-react";
 import React from "react";
 const Roads: React.FC<RoadsPropsType> = ({
   title,
@@ -35,7 +35,7 @@ const Roads: React.FC<RoadsPropsType> = ({
             })}
           >
             <Text>{road}</Text>
-            <IconRoad />
+            <IconRoute />
           </Box>
         );
       })}

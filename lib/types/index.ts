@@ -1,14 +1,12 @@
-import React from "react";
 import {
-  IconEye,
+  IconBook,
+  IconChartPie3,
   IconCode,
   IconCoin,
-  IconBook,
+  IconEye,
   IconFingerprint,
-  IconChartPie3,
   IconNotification,
 } from "@tabler/icons-react";
-import { Types } from "mongoose";
 import { StaticImageData } from "next/image";
 import { SeatMap } from "../interfaces";
 type IconType =
@@ -70,7 +68,7 @@ export type StoriesTypes = {
 // Define the AvailableBussDataTypes type with seats as an array of Seat
 export type AvailableBussDataTypes = {
   bussNumber: number;
-  road: string;
+  roadName: string;
   startTime: string;
   reachedTime: string;
   seats: SeatMap;
@@ -83,6 +81,9 @@ export type BussesTypes = {
   __v: number;
   createdAt: string;
   updatedAt: string;
+  totalSeats: number;
+  availableSeats: number;
+  seatPrice: number;
 } & AvailableBussDataTypes;
 
 export type BusesApiResponseType = {

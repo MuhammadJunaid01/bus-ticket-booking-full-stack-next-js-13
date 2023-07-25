@@ -41,7 +41,7 @@ const BusTable = ({ data }: { data: BussesTypes[] }) => {
             ),
           },
           {
-            accessorKey: "road",
+            accessorKey: "roadName",
             enableClickToCopy: true,
             header: "Road",
             size: 300,
@@ -92,7 +92,7 @@ const BusTable = ({ data }: { data: BussesTypes[] }) => {
         >
           <Box>
             <Title>Road:</Title>
-            <Text>{row.original.road}</Text>
+            <Text>{row.original.roadName}</Text>
           </Box>
           <Box>
             <Title>Bus Type:</Title>

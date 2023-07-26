@@ -1,7 +1,7 @@
 import { BusRoutesProps } from "@/lib/interfaces";
 import { busRoutesStyles } from "@/lib/styles";
 import { Box, Indicator, Text } from "@mantine/core";
-import { IconRoute } from "@tabler/icons-react";
+import { IconRoute, IconArrowBigRightLines } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
 const BusRoutes: React.FC<BusRoutesProps> = ({ title, data }) => {
@@ -21,9 +21,14 @@ const BusRoutes: React.FC<BusRoutesProps> = ({ title, data }) => {
         {data.map((route, index) => {
           return (
             <Box key={index}>
-              <Link className={routeStyl} href={`/busRoutes/${route}`}>
+              <Link
+                style={{ textDecoration: "none" }}
+                className={routeStyl}
+                href={`/busRoutes/${route}`}
+              >
                 <IconRoute />
                 <Text>{route}</Text>
+                <IconArrowBigRightLines />
               </Link>
             </Box>
           );

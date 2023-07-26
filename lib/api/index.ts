@@ -1,7 +1,7 @@
 import { cache } from "react";
 const url =
   process.env.NODE_ENV === "production"
-    ? "https://etickets-bd.vercel.app/"
+    ? "https://etickets-bd.vercel.app"
     : process.env.BASE_URL;
 /* The `export const getProdcutByID` is a function that is being exported from the module. It is using
 the `cache` function from the `react` library to cache the result of the function call. */

@@ -76,6 +76,7 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data, buses }) => {
     setToggleOrigin((prev) => !prev);
   };
   // console.log("selected date", selected);
+  console.log("BUSES", buses);
   const handleSearch = () => {
     if (
       road === "" ||

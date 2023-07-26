@@ -1,23 +1,24 @@
 "use client";
+import { store } from "@/redux/store";
+import { AffixScroll, Navbar } from "@/ui";
 import {
   ColorScheme,
-  MantineProvider,
   ColorSchemeProvider,
+  MantineProvider,
 } from "@mantine/core";
-import React from "react";
-import { ProvidersProps } from "../interfaces";
-import { store } from "@/redux/store";
-import { Provider } from "react-redux";
 import { useLocalStorage } from "@mantine/hooks";
-import { AffixScroll, Navbar } from "@/ui";
+import { Notifications } from "@mantine/notifications";
 import { usePathname } from "next/navigation";
 import NextTopLoader from "nextjs-toploader";
+import React from "react";
+import { Provider } from "react-redux";
+import { ProvidersProps } from "../interfaces";
 
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   // const dispatch = useAppDispatch();
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
-    defaultValue: "light",
+    defaultValue: "dark",
     getInitialValueInEffect: true,
   });
   const path = usePathname();
@@ -42,6 +43,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
         >
           <Provider store={store}>
             {isHomePage ? null : <Navbar isHomePage={false} />}
+            <Notifications position="top-right" />
             {children}
           </Provider>
         </MantineProvider>

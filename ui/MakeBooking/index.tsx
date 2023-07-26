@@ -19,6 +19,7 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import { Calendar } from "@mantine/dates";
+import { notifications } from "@mantine/notifications";
 import { IconArrowsExchange2, IconCalendar } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import React from "react";
@@ -82,10 +83,17 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data, buses }) => {
       originValue === "" ||
       selected.length === 0
     ) {
-      alert("Please fill all fields.");
+      notifications.show({
+        title: "Please fil all feilds",
+        message: "Hey there, your code is awesome! 🤥",
+        // color: "red",
+        // sx: { backgroundColor: },
+      });
       return; // You might want to include this return statement to stop further execution after displaying the alert.
     }
+
     const bus = searchBus(buses, road);
+    // console.log("nnnnnnnnnn", bus);
     const dateStr = formatSelectedDates();
     seDateStr(dateStr[0]);
 
@@ -94,7 +102,7 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data, buses }) => {
       setModalVisible(true); // Show the modal if the bus is found
     }
   };
-  console.table(buses);
+  console.log(buses.length);
   return (
     <Container fluid my={10}>
       <Grid justify="space-between">
@@ -183,7 +191,7 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data, buses }) => {
             data={data}
           />
           <UnstyledButton
-            onClick={() => handleSearch()}
+            onClick={handleSearch}
             sx={(theme) => ({
               width: "100%",
               marginTop: "10px",
@@ -209,11 +217,13 @@ const MakeBooking: React.FC<MakeBookUiPropsTypes> = ({ data, buses }) => {
         </Grid.Col>
       </Grid>
       <Bus
+        road={road}
         opend={modalVisible}
         closeModal={setModalVisible}
         bus={bus}
         dest={destValue}
         date={dateStr}
+        origin={originValue}
       />
     </Container>
   );

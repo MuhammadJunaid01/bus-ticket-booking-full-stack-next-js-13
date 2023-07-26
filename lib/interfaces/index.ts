@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import {
   BusMockDataType,
   BussesTypes,
@@ -63,4 +64,17 @@ export interface RoadsPropsType {
   data: string[];
   onClick: (page: number) => void;
   totalPage: number;
+}
+
+//MODELS INTERFACES
+export interface ITicket extends Document {
+  seatNumber: number;
+  user: mongoose.Types.ObjectId;
+  boardingPlace: string;
+  destination: string;
+  purchaseDate: Date;
+  isPayment: boolean;
+  busNumber: number;
+  // New field for payment status with default value false
+  // Add other relevant ticket information here, such as payment status, transaction ID, etc.
 }

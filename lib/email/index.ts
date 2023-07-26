@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 export const sendVerificationEmail = (
   email: string,
   verificationToken: string,
-  emailType?: string
+  emailType: string
 ) => {
   const mailOptions = {
     from: HOST_EMAIL,

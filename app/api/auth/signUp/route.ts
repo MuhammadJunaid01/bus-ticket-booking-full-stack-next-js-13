@@ -17,6 +17,7 @@ export const GET = async (req: NextRequest) => {
 export const POST = async (req: NextRequest, res: NextResponse) => {
   //  `connectDB();` is a function that establishes a connection to the database.
   connectDB();
+
   /* `const origin = req.headers.get("origin");` is retrieving the value of the "Origin" header from
   the request. The "Origin" header specifies the URI of the resource from which the request
   originates. */
@@ -69,7 +70,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       /* The `sendVerificationEmail` function is being called with two arguments: `user.email` and
      `user.verificationToken`. This function is responsible for sending a verification email to the
      user's email address. */
-      sendVerificationEmail(user.email, user.verificationToken);
+      sendVerificationEmail(user.email, user.verificationToken, "verifyEmail");
 
       /* The code `return new NextResponse(...)` is creating a new response object to be returned by the
      server. */

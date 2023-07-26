@@ -1,3 +1,4 @@
+import Auth from "./Auth";
 import AffixScroll from "./AffixScroll";
 import Header from "./Header";
 import HomePage from "./Home";
@@ -28,4 +29,5 @@ export {
   OurBuses,
   BusTable,
   MakeBooking,
+  Auth,
 };

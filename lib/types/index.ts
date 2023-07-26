@@ -9,6 +9,7 @@ import {
 } from "@tabler/icons-react";
 import { StaticImageData } from "next/image";
 import { SeatMap } from "../interfaces";
+import { MouseEventHandler } from "react";
 type IconType =
   | typeof IconEye
   | typeof IconCode
@@ -64,7 +65,17 @@ export type StoriesTypes = {
   userPic: StaticImageData | string;
 };
 // Define the different seat groups
-
+export type AuthTypes = {
+  name?: string;
+  email: string;
+  password?: string;
+  endPoint: string;
+  role?: string;
+};
+export type SignUpProps = {
+  state: React.Dispatch<React.SetStateAction<boolean>>;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+};
 // Define the AvailableBussDataTypes type with seats as an array of Seat
 export type AvailableBussDataTypes = {
   bussNumber: number;

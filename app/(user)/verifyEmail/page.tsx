@@ -33,7 +33,7 @@ const VerifyEmailPage = () => {
     verify().then((user) => {
       if (user) {
         console.log(user);
-        redirect("/home");
+        // redirect("/home");
       }
     });
   }, [token, email]);

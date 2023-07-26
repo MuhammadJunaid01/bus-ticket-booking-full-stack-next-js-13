@@ -1,31 +1,57 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import User from "@/lib/models/user.models";
+import { NextRequest, NextResponse } from "next/server";
+import User, { IUser } from "@/lib/models/user.models";
+export const GET = async (req: NextRequest) => {
+  const origin = req.headers.get("origin");
+  return new NextResponse(JSON.stringify({ message: "cors test" }), {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": origin || "*",
+      "Content-Type": "text/plain",
+    },
+  });
+};
+export const POST = async (req: NextRequest, res: NextResponse) => {
+  // const body=await
+  const body = await req.json();
+  const { email, token } = body;
 
-export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { email, verificationToken } = req.body;
-
+  // return new NextResponse(
+  //   JSON.stringify({ message: "1111111111111Email already exists" }),
+  //   { status: 200 }
+  // );
   try {
     const user = await User.findOneAndUpdate(
-      { email, verificationToken },
+      { email, verificationToken: token },
       { $set: { isVerified: true }, $unset: { verificationToken: 1 } },
       { new: true }
     );
 
     if (user) {
-      // Save user data in cookies
-      res.setHeader(
-        "Set-Cookie",
-        `user=${JSON.stringify(user)}; Path=/; Max-Age=86400`
+      const { password, ...userWithoutPassword } = user;
+      const response = NextResponse.json(
+        {
+          ...userWithoutPassword,
+        },
+        { status: 200 }
       );
-      // Adjust the path and max age as needed
-
-      return res.status(200).json({ message: "Email verified", user });
+      response.cookies.set({
+        name: "jwt",
+        value: token,
+        httpOnly: true,
+        maxAge: 60 * 60,
+      });
+      return response;
     } else {
-      return res.status(400).json({ message: "Invalid verification token" });
+      // return res.status(400).json({ message: "Invalid verification token" });
+      return new NextResponse(
+        JSON.stringify({ message: "Invalid verification token" }),
+        { status: 400 }
+      );
     }
   } catch (error: any) {
-    return res
-      .status(500)
-      .json({ message: "Invalid verification token", error: error.message });
+    return new NextResponse(
+      JSON.stringify({ message: "Invalid verification token" }),
+      { status: 500 }
+    );
   }
 };

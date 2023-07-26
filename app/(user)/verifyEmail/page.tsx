@@ -1,5 +1,5 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { IconDatabase, IconAt } from "@tabler/icons-react";
 import { Box, Button, Card, Input, Text } from "@mantine/core";
 import React from "react";
@@ -14,7 +14,7 @@ const VerifyEmailPage = () => {
   React.useEffect(() => {
     const verify = async () => {
       const response = await fetch(
-        `${process.env.BASE_URL}/api/auth/verifyEmail`,
+        `http://localhost:3000/api/auth/verifyEmail`,
         {
           method: "POST",
           headers: {
@@ -30,8 +30,12 @@ const VerifyEmailPage = () => {
       const responseData = await response.json();
       return responseData;
     };
-    const data = verify();
-    console.log("data", data);
+    verify().then((user) => {
+      if (user) {
+        console.log(user);
+        redirect("/home");
+      }
+    });
   }, [token, email]);
   return (
     <Box

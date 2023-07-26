@@ -61,13 +61,7 @@ export const loadUi = (num: number) => {
   });
 };
 
-const handleAuth = async ({
-  name,
-  email,
-  password,
-  endPoint,
-  role,
-}: AuthTypes) => {
+const handleAuth = async ({ name, email, password, endPoint }: AuthTypes) => {
   const BASEURL =
     process.env.NODE_ENV === "production"
       ? "https://multishop-ecommerce.vercel.app"
@@ -87,7 +81,6 @@ const handleAuth = async ({
     data.name = name;
     data.email = email;
     data.password = password;
-    data.role = role;
   }
 
   try {

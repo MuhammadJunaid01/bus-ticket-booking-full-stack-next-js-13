@@ -29,7 +29,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   parsed before assigning it to the `body` variable. */
   const body: IUser = await req.json();
 
-  const { name, email, password, role } = body;
+  const { name, email, password } = body;
   try {
     /* `const existingUser = await User.findOne({ email });` is querying the database to check if there
    is already a user with the specified email address. */
@@ -60,7 +60,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       name,
       email,
       password: hashedPassword,
-      role,
       verificationToken,
     });
 

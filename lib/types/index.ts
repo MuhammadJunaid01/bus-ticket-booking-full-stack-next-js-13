@@ -70,7 +70,6 @@ export type AuthTypes = {
   email: string;
   password?: string;
   endPoint: string;
-  role?: string;
 };
 export type SignUpProps = {
   state: React.Dispatch<React.SetStateAction<boolean>>;

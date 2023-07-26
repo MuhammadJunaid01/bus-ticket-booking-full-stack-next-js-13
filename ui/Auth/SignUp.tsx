@@ -15,6 +15,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IUser } from "@/lib/models/user.models";
+import { notifications } from "@mantine/notifications";
 interface User extends IUser {
   createdAt: string;
   updatedAt: string;
@@ -24,8 +25,7 @@ interface User extends IUser {
 
 const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
   const [user, setUser] = React.useState<User | undefined>();
-  const [role, setRole] = React.useState("user");
-
+  const [loading, setLoading] = React.useState<boolean>(false);
   const form = useForm({
     initialValues: {
       name: "",
@@ -80,15 +80,22 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
       <Box mx="auto">
         <form
           onSubmit={form.onSubmit(async ({ name, email, password }) => {
+            setLoading(true);
             const response = handleAuth({
               name,
               email,
               password,
               endPoint: "signUp",
-              role,
             });
             const data = await response;
-            setUser(data.user);
+            if (data.user) {
+              notifications.show({
+                title: "successfully signUp",
+                message: "Hey there, your code is awesome! 🤥",
+              });
+              setLoading(false);
+              setUser(data.user);
+            }
           })}
         >
           <TextInput
@@ -118,7 +125,7 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
             I agree to the{" "}
             <a
               style={{ color: "#6382FE" }}
-              href="https://multishop-ecommerce-pduj.vercel.app/"
+              href="https://etickets-bd.vercel.app/"
               target="_blank"
             >
               privacy policy
@@ -126,7 +133,7 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
             and terms of{" "}
             <a
               style={{ color: "#6382FE" }}
-              href="https://multishop-ecommerce-pduj.vercel.app/"
+              href="https://etickets-bd.vercel.app/"
               target="_blank"
             >
               service
@@ -153,7 +160,13 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
               <Radio value="merchant" label="merchant" />
             </Group>
           </Radio.Group> */}
-          <Button size="lg" fullWidth type="submit" mt="sm">
+          <Button
+            size="lg"
+            fullWidth
+            type="submit"
+            mt="sm"
+            loading={loading ? true : false}
+          >
             Sign up{" "}
           </Button>
         </form>

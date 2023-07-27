@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import bussesSlice from "./features/busses";
+import bussesSlice from "./features/buses";
 
 export const store = configureStore({
   reducer: {

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { AuthTypes, BussesTypes } from "../types";
+import { AuthTypes, BusesTypes } from "../types";
 
 export type DateType = Date | string; // Customize this based on your date representation
 
@@ -40,9 +40,9 @@ export const selectDate = (
   return selected;
 };
 export const searchBus = (
-  data: BussesTypes[],
+  data: BusesTypes[],
   road: string
-): BussesTypes | null => {
+): BusesTypes | null => {
   const result = data.find((bus) => bus.roadName === road);
   // If there's a matching result, return it
 
@@ -61,45 +61,45 @@ export const loadUi = (num: number) => {
   });
 };
 
-const handleAuth = async ({ name, email, password, endPoint }: AuthTypes) => {
-  const BASEURL =
-    process.env.NODE_ENV === "production"
-      ? "https://multishop-ecommerce.vercel.app"
-      : "http://localhost:3000";
-  let data: any = {};
-  if (name === undefined) {
-    if (password === undefined) {
-      data.email = email;
-    } else {
-      data.email = email;
-      data.password = password;
-    }
-  } else if (password === undefined) {
-    data.name = name;
-    data.email = email;
-  } else {
-    data.name = name;
-    data.email = email;
-    data.password = password;
-  }
+// const handleAuth = async ({ name, email, password, endPoint }: AuthTypes) => {
+//   const BASEURL =
+//     process.env.NODE_ENV === "production"
+//       ? "https://multishop-ecommerce.vercel.app"
+//       : "http://localhost:3000";
+//   let data: any = {};
+//   if (name === undefined) {
+//     if (password === undefined) {
+//       data.email = email;
+//     } else {
+//       data.email = email;
+//       data.password = password;
+//     }
+//   } else if (password === undefined) {
+//     data.name = name;
+//     data.email = email;
+//   } else {
+//     data.name = name;
+//     data.email = email;
+//     data.password = password;
+//   }
 
-  try {
-    const response = await fetch(`${BASEURL}/api/auth/${endPoint}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      throw new Error("Sign up failed");
-    }
+//   try {
+//     const response = await fetch(`${BASEURL}/api/auth/${endPoint}`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(data),
+//     });
+//     if (!response.ok) {
+//       throw new Error("Sign up failed");
+//     }
 
-    const responseData = await response.json();
+//     const responseData = await response.json();
 
-    return responseData;
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
-export default handleAuth;
+//     return responseData;
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
+// export default handleAuth;

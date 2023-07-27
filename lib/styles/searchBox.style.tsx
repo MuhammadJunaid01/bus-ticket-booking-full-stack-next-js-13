@@ -11,6 +11,7 @@ export const seacrhBoxStyles = createStyles((theme) => ({
       justifyContent: "space-around",
       gap: "6px",
       marginTop: "25px",
+      padding: "0px 11px",
     },
     [theme.fn.smallerThan("md")]: {},
   },
@@ -21,7 +22,7 @@ export const seacrhBoxStyles = createStyles((theme) => ({
   },
   input: {
     width: "",
-    padding: "6px 0px",
+    padding: "6px 9px",
     border: `1px solid ${
       theme.colorScheme === "dark" ? theme.colors.gray[3] : theme.colors.gray[3]
     }`,
@@ -55,6 +56,11 @@ export const seacrhBoxStyles = createStyles((theme) => ({
       width: "100%",
       textAlign: "center",
       marginTop: "12px",
+    },
+    "&:hover": {
+      backgroundColor:
+        theme.colorScheme === "dark" ? "#a37cf0" : theme.colors.gray[1],
+      color: theme.colorScheme === "dark" ? "white" : "black",
     },
   },
 }));

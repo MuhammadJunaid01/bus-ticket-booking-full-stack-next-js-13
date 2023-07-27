@@ -13,6 +13,10 @@ import Stories from "./OurStories";
 import OurBuses from "./OurBuses";
 import BusTable from "./Table";
 import MakeBooking from "./MakeBooking";
+import SimpleBusTable from "./SimpleBusTable";
+import BusModal from "./BusModal";
+import BookingForm from "./BookingForm";
+import CustomSelect from "./CustomSelect";
 
 export {
   Navbar,
@@ -30,4 +34,8 @@ export {
   BusTable,
   MakeBooking,
   Auth,
+  SimpleBusTable,
+  BusModal,
+  BookingForm,
+  CustomSelect,
 };

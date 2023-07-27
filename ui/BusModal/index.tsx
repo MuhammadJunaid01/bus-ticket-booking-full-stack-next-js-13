@@ -1,29 +1,40 @@
-import { BussesTypes } from "@/lib/types";
+import { BusesTypes } from "@/lib/types";
 import { loadUi } from "@/lib/utils";
+import { SimpleBusTable } from "@/ui";
 import {
   Box,
   Button,
-  Group,
   LoadingOverlay,
   Modal,
   Stepper,
   Text,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { IconArmchair } from "@tabler/icons-react";
+import { IconArmchair, IconCircleCheck } from "@tabler/icons-react";
 import React from "react";
-import BookingForm from "./BookingForm";
-import SimpleBusTable from "./BusTable";
+import { BookingForm } from "@/ui";
+import useFormValidation from "@/lib/hooks/validateForm";
 export interface BusPropsTypes {
   opend: boolean;
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
-  bus: BussesTypes | null;
+  bus: BusesTypes | null;
   dest: string;
   date: string;
   origin: string;
   road: string;
 }
-const Bus: React.FC<BusPropsTypes> = ({
+export const initialValues = {
+  id: "",
+  name: "",
+  email: "",
+};
+
+export interface FormValues {
+  id: string;
+  name: string;
+  email: string;
+}
+const BusModal: React.FC<BusPropsTypes> = ({
   opend,
   closeModal,
   bus,
@@ -35,10 +46,13 @@ const Bus: React.FC<BusPropsTypes> = ({
   const [visible, setVisible] = React.useState<boolean>(false);
   const [isTableShow, setIsTableShow] = React.useState<boolean>(true);
   const [seatNumber, setSeatNumber] = React.useState<number[]>([]);
-  const [active, setActive] = React.useState(1);
+  const [active, setActive] = React.useState(0);
   const [name, setName] = React.useState<string>("");
   const [id, setId] = React.useState<number>(0);
   const [email, setEmail] = React.useState<string>("");
+
+  ///
+
   const nextStep = () =>
     setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () =>
@@ -46,7 +60,7 @@ const Bus: React.FC<BusPropsTypes> = ({
 
   const handleSelect = async () => {
     setVisible(true);
-    await loadUi(1000);
+    await loadUi(200);
     setVisible(false);
     setIsTableShow(false);
     nextStep();
@@ -68,13 +82,20 @@ const Bus: React.FC<BusPropsTypes> = ({
       }
     }
   };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
+  // };
+  const { formData, errors, handleChange, validateForm } =
+    useFormValidation(initialValues);
+
   // console.log(bus);
   return (
     <>
       <Modal
         opened={opend}
         onClose={() => closeModal(false)}
-        mt={33}
+        // mt={53}
         size="xl"
         centered
         // title="m,fakmfjk"
@@ -84,32 +105,6 @@ const Bus: React.FC<BusPropsTypes> = ({
         <Stepper active={active} onStepClick={setActive} breakpoint="sm">
           <Stepper.Step label="First step" description="Select Bus">
             Step 1 Select Bus
-            {/* <Table>
-              <thead>
-                <tr>
-                  <th>Route </th>
-                  <th>Destination</th>
-                  <th>Date </th>
-                  <th>Seats</th>
-                  <th>Price</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{bus?.roadName}</td>
-                  <td>{dest}</td>
-                  <td>{date}</td>
-                  <td>{bus?.totalSeats}</td>
-                  <td>{bus?.seatPrice}</td>
-                  <td>
-                    <Button onClick={handleSelect} variant="outline">
-                      Select
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
-            </Table> */}
             <SimpleBusTable
               roadName={bus?.roadName}
               dest={dest}
@@ -126,7 +121,7 @@ const Bus: React.FC<BusPropsTypes> = ({
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
                 gap: theme.spacing.lg,
-                height: "300px",
+                height: "200px",
                 overflowY: "scroll",
                 // Adjust the gap between the grid items as needed
               })}
@@ -143,18 +138,75 @@ const Bus: React.FC<BusPropsTypes> = ({
                     key={index}
                   >
                     <IconArmchair
-                      color={seatNumber.includes(index) ? "red" : "white"}
+                      color={seatNumber.includes(index) ? "#1971C2" : "white"}
                     />
-                    <Text color={seatNumber.includes(index) ? "red" : "unset"}>
+                    <Text
+                      color={seatNumber.includes(index) ? "#1971C2" : "unset"}
+                    >
                       {index}
                     </Text>
+                    {seatNumber.includes(index) ? (
+                      <IconCircleCheck color="#1971C2" />
+                    ) : null}
                   </Box>
                 );
               })}
             </Box>
+            <Box
+              style={{
+                display: "flex",
+                gap: "11px",
+                justifyContent: "center",
+                marginTop: "11px",
+              }}
+            >
+              <Button
+                onClick={() => setActive((currentStep) => currentStep + 1)}
+                disabled={seatNumber.length === 0}
+              >
+                Next
+              </Button>
+              <Button variant="default" onClick={prevStep}>
+                Back
+              </Button>
+            </Box>
           </Stepper.Step>
           <Stepper.Step label="Final step" description="fill information box">
-            <BookingForm setId={setId} setName={setName} setEmail={setEmail} />
+            <BookingForm handleChange={handleChange} />
+            <Box
+              style={{
+                display: "flex",
+                gap: "11px",
+                justifyContent: "center",
+                marginTop: "11px",
+              }}
+            >
+              <Button
+                onClick={() => {
+                  if (!validateForm()) {
+                    // Perform form submission logic here, e.g., send data to the server
+                    console.log("", errors);
+                    const { email, name, id } = errors;
+                    notifications.show({
+                      title: "Default notification",
+                      message: `${name} ${email} ${id}`,
+                    });
+                    return;
+                  }
+                  setActive((currentStep) => currentStep + 1);
+                }}
+                disabled={
+                  formData.id === "" ||
+                  formData.name === "" ||
+                  formData.email == ""
+                }
+              >
+                Next
+              </Button>
+              <Button variant="default" onClick={prevStep}>
+                Back
+              </Button>
+            </Box>
           </Stepper.Step>
           <Stepper.Completed>
             <Box
@@ -162,9 +214,9 @@ const Bus: React.FC<BusPropsTypes> = ({
                 textAlign: "center",
               })}
             >
-              <Text>ID: {id}</Text>
-              <Text>Name: {name}</Text>
-              <Text>Email: {email}</Text>
+              <Text>ID: {formData.id}</Text>
+              <Text>Name: {formData.name}</Text>
+              <Text>Email: {formData.email}</Text>
               <Text>Date: {date}</Text>
               <Text>Origin: {origin}</Text>
               <Text>Destination: {dest}</Text>
@@ -179,12 +231,12 @@ const Bus: React.FC<BusPropsTypes> = ({
           </Stepper.Completed>
         </Stepper>
 
-        <Group position="center" mt="xl">
+        {/* <Group position="center" mt="xl">
           <Button variant="default" onClick={prevStep}>
             Back
           </Button>
           <Button onClick={nextStep}>Next step</Button>
-        </Group>
+        </Group> */}
 
         {/* <Button onClick={() => closeModal(false)}>Close Modal</Button> */}
       </Modal>
@@ -192,4 +244,4 @@ const Bus: React.FC<BusPropsTypes> = ({
   );
 };
 
-export default Bus;
+export default BusModal;

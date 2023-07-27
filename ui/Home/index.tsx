@@ -3,7 +3,7 @@ import React from "react";
 
 import { busRouteData, someFactsData, storiesData } from "@/lib/data";
 import { BusesApiResponseType } from "@/lib/types";
-import { getAllBussData } from "@/redux/features/busses";
+import { getAllBussData } from "@/redux/features/buses";
 import { useAppDispatch } from "@/redux/hooks";
 import { BusRoutes, Header, Navbar, SomeFacts, Stories } from "@/ui";
 import { Container } from "@mantine/core";
@@ -23,7 +23,7 @@ const fetchAllBuss = async () => {
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const [data, setData] = React.useState<BusesApiResponseType | null>(null);
-  console.log("URL ", url);
+
   React.useEffect(() => {
     const fetchData = async () => {
       try {

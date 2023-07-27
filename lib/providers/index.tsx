@@ -43,7 +43,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
         >
           <Provider store={store}>
             {isHomePage ? null : <Navbar isHomePage={false} />}
-            <Notifications position="top-right" />
+            <Notifications position="top-center" zIndex={2077} />
             {children}
           </Provider>
         </MantineProvider>

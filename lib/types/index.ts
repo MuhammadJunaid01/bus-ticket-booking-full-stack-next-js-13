@@ -86,7 +86,7 @@ export type AvailableBussDataTypes = {
   category: "Ac" | "Non-Ac" | "Coach bus";
 };
 
-export type BussesTypes = {
+export type BusesTypes = {
   _id: string;
   __v: number;
   createdAt: string;
@@ -99,12 +99,12 @@ export type BussesTypes = {
 export type BusesApiResponseType = {
   OK: boolean;
   msg: string;
-  data: BussesTypes[];
+  data: BusesTypes[];
 };
 export type BusApiResponseType = {
   OK: boolean;
   msg: string;
-  data: BussesTypes;
+  data: BusesTypes;
 };
 export type busCHairDataypes = {
   type: string;

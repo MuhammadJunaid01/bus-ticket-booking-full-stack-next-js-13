@@ -4,24 +4,25 @@ import { Group, Button, Menu, Input } from "@mantine/core";
 import { Calendar } from "@mantine/dates";
 import { IconCalendar } from "@tabler/icons-react";
 import { seacrhBoxStyles } from "@/lib/styles";
-export default function CustomCalendar() {
-  const [selected, setSelected] = useState<Date[]>([]);
+import { DateType, selectDate, parseToDate } from "@/lib/utils";
+export interface CustomCalendarProps {
+  setSelected: React.Dispatch<React.SetStateAction<DateType[]>>;
+  selected: DateType[];
+}
+const CustomCalendar: React.FC<CustomCalendarProps> = ({
+  setSelected,
+  selected,
+}) => {
+  // const [selected, setSelected] = React.useState<DateType[]>([]);
   const [showCalendar, setShowCalendar] = useState(false);
   const { classes } = seacrhBoxStyles();
   const { input } = classes;
-  const handleSelect = (date: Date) => {
-    const isSelected = selected.some((s) => dayjs(date).isSame(s, "date"));
-    if (isSelected) {
-      setSelected((current) =>
-        current.filter((d) => !dayjs(d).isSame(date, "date"))
-      );
-    } else if (selected.length < 3) {
-      setSelected((current) => [...current, date]);
-    }
-  };
+  const maxSelection = 1;
 
-  const handleCalendarButtonClick = () => {
-    setShowCalendar(!showCalendar);
+  const handleSelect = (date: DateType) => {
+    setSelected((currentSelected) =>
+      selectDate(date, currentSelected.map(parseToDate), maxSelection)
+    );
   };
 
   return (
@@ -47,4 +48,5 @@ export default function CustomCalendar() {
       </Menu>
     </Group>
   );
-}
+};
+export default CustomCalendar;

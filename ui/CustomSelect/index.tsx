@@ -1,3 +1,4 @@
+import { seacrhBoxStyles } from "@/lib/styles";
 import { Select } from "@mantine/core";
 import React, { SetStateAction } from "react";
 export interface CustomSelectPropsTypes<T> {
@@ -7,6 +8,7 @@ export interface CustomSelectPropsTypes<T> {
   pl: string;
   setState: React.Dispatch<SetStateAction<string>>;
   value: string;
+  isHomePage: boolean;
 }
 const CustomSelect: React.FC<CustomSelectPropsTypes<string>> = ({
   data,
@@ -15,11 +17,14 @@ const CustomSelect: React.FC<CustomSelectPropsTypes<string>> = ({
   pl,
   setState,
   value,
+  isHomePage,
 }) => {
   //   const [searchValue, onSearchChange] = React.useState("");
-
+  const { classes } = seacrhBoxStyles();
+  const { input } = classes;
   return (
     <Select
+      className={isHomePage ? input : ""}
       style={{ width }}
       label={label}
       placeholder={pl}
@@ -29,6 +34,10 @@ const CustomSelect: React.FC<CustomSelectPropsTypes<string>> = ({
       nothingFound="No options"
       data={data}
       clearable
+      variant={isHomePage ? "unstyled" : "default"}
+      // sx={(theme) => ({
+      //   backgroundColor: "red",
+      // })}
     />
   );
 };

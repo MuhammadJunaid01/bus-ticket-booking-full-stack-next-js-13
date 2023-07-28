@@ -107,7 +107,6 @@ const BusModal: React.FC<BusPropsTypes> = ({
     });
   };
 
-  console.log(bus?.busNumber);
   return (
     <>
       <Modal

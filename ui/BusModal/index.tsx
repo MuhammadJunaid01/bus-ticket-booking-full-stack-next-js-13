@@ -1,6 +1,8 @@
 import { BusesTypes } from "@/lib/types";
 import { loadUi } from "@/lib/utils";
 import { SimpleBusTable } from "@/ui";
+import { useCookies } from "react-cookie";
+
 import {
   Box,
   Button,
@@ -16,7 +18,6 @@ import { BookingForm } from "@/ui";
 import useFormValidation from "@/lib/hooks/validateForm";
 import { buyTicket } from "@/lib/api";
 import { useRouter } from "next/navigation";
-
 export interface BusPropsTypes {
   opend: boolean;
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,7 +53,6 @@ const BusModal: React.FC<BusPropsTypes> = ({
   const [active, setActive] = React.useState(0);
   const router = useRouter();
   ///
-
   const nextStep = () =>
     setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () =>
@@ -82,7 +82,6 @@ const BusModal: React.FC<BusPropsTypes> = ({
       }
     }
   };
-
   const { formData, errors, handleChange, validateForm } =
     useFormValidation(initialValues);
   const handleBuyTicket = () => {
@@ -90,9 +89,13 @@ const BusModal: React.FC<BusPropsTypes> = ({
     //   router.push("/auth");
     //   return;
     // }
+    if (!bus) {
+      alert("bus not found");
+      return;
+    }
     buyTicket({
       busId: bus?._id,
-      userId: "64c1455dc150345607bdcaa5",
+      userId: "64c3d6b0826091556b9d2f27",
       destination: dest,
       boardingPlace: origin,
       date: date,
@@ -100,10 +103,11 @@ const BusModal: React.FC<BusPropsTypes> = ({
       email: "m.junaidbknjnbnhb",
       id: formData.id,
       name: formData.name,
+      busNumber: bus.busNumber,
     });
   };
 
-  // console.log(bus);
+  console.log(bus?.busNumber);
   return (
     <>
       <Modal
@@ -126,6 +130,7 @@ const BusModal: React.FC<BusPropsTypes> = ({
               totalSeats={bus?.totalSeats}
               seatPrice={bus?.seatPrice}
               handleSelect={handleSelect}
+              busType={bus?.busType}
             />
           </Stepper.Step>
           <Stepper.Step label="Second step" description="Select Seat ">
@@ -235,6 +240,8 @@ const BusModal: React.FC<BusPropsTypes> = ({
               <Text>Origin: {origin}</Text>
               <Text>Destination: {dest}</Text>
               <Text>Road: {road}</Text>
+              <Text>BusId: {bus?._id}</Text>
+              <Text>seatPrice: {bus?.seatPrice}</Text>
               <Text>BusNumber: {bus?._id}</Text>
               {seatNumber.map((seat, index) => {
                 return <Text key={index}>Seatnumber: {seat}</Text>;

@@ -3,6 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export interface Busses {
   data: BusesTypes[];
 }
+
 const initialState: Busses = {
   data: [],
 };

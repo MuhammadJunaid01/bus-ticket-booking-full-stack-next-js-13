@@ -7,6 +7,7 @@ export interface BusTableProps {
   date: string;
   totalSeats?: number;
   seatPrice?: number;
+  busType?: string;
   handleSelect: () => void;
 }
 const SimpleBusTable: React.FC<BusTableProps> = ({
@@ -16,6 +17,7 @@ const SimpleBusTable: React.FC<BusTableProps> = ({
   handleSelect,
   totalSeats,
   seatPrice,
+  busType,
 }) => {
   return (
     <div>
@@ -26,6 +28,7 @@ const SimpleBusTable: React.FC<BusTableProps> = ({
             <th>Destination</th>
             <th>Date </th>
             <th>Seats</th>
+            <th>busType</th>
             <th>Price</th>
             <th>Action</th>
           </tr>
@@ -36,6 +39,7 @@ const SimpleBusTable: React.FC<BusTableProps> = ({
             <td>{dest}</td>
             <td>{date}</td>
             <td>{totalSeats}</td>
+            <td>{busType}</td>
             <td>{seatPrice}</td>
             <td>
               <Button onClick={handleSelect} variant="outline">

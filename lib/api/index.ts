@@ -49,6 +49,7 @@ export interface BuyTicketParams {
   email: string;
   id: string;
   name: string;
+  busNumber: number;
 }
 export const buyTicket = async ({
   userId,
@@ -60,6 +61,7 @@ export const buyTicket = async ({
   email,
   id,
   name,
+  busNumber,
 }: BuyTicketParams) => {
   const data = {
     userId,
@@ -71,6 +73,7 @@ export const buyTicket = async ({
     email,
     id,
     name,
+    busNumber,
   };
   try {
     // if (Array.isArray(seatNumber)) {

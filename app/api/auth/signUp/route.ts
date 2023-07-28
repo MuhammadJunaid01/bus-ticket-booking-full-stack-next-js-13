@@ -70,20 +70,25 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       /* The `sendVerificationEmail` function is being called with two arguments: `user.email` and
      `user.verificationToken`. This function is responsible for sending a verification email to the
      user's email address. */
-      sendVerificationEmail(
-        user.email,
-        user.verificationToken,
-        "verifyEmail",
-        (error, successMessage) => {
-          if (error) {
-            console.error("Failed to send verification email:", error);
-            // Handle the error here, notify the user, or perform any other necessary action.
-          } else {
-            console.log(successMessage);
-            // Email sent successfully, you can perform additional actions if needed.
-          }
-        }
-      );
+      sendVerificationEmail({
+        email: user.email,
+        verificationToken: user.verificationToken,
+        emailType: "verifyEmail",
+      });
+      // sendVerificationEmail(
+      //   user.email,
+      //   user.verificationToken,
+      //   "verifyEmail",
+      //   (error, successMessage) => {
+      //     if (error) {
+      //       console.error("Failed to send verification email:", error);
+      //       // Handle the error here, notify the user, or perform any other necessary action.
+      //     } else {
+      //       console.log(successMessage);
+      //       // Email sent successfully, you can perform additional actions if needed.
+      //     }
+      //   }
+      // );
 
       /* The code `return new NextResponse(...)` is creating a new response object to be returned by the
      server. */

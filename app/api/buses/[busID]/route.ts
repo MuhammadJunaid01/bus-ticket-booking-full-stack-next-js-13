@@ -22,7 +22,7 @@ export const GET = async (req: NextRequest, { params }: any) => {
     });
   }
   try {
-    const bus = await Buses.findById(id);
+    const bus = await Buses.findOne({ busNumber: id });
     if (!bus) {
       return new NextResponse(
         JSON.stringify({

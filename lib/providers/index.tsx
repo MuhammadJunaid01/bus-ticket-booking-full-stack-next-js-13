@@ -13,6 +13,7 @@ import NextTopLoader from "nextjs-toploader";
 import React from "react";
 import { Provider } from "react-redux";
 import { ProvidersProps } from "../interfaces";
+import { CookiesProvider, useCookies } from "react-cookie";
 
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   // const dispatch = useAppDispatch();
@@ -27,7 +28,8 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
 
   const isHomePage = "/" === path ? true : false;
   // console.log(data);
-
+  // const [cookies] = useCookies(["jwt"]); //
+  // console.log("JWT COKC FROM Providers cookies.jwt", cookies);
   return (
     <div>
       <AffixScroll />
@@ -44,7 +46,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
           <Provider store={store}>
             {isHomePage ? null : <Navbar isHomePage={false} />}
             <Notifications position="top-center" zIndex={2077} />
-            {children}
+            <CookiesProvider>{children}</CookiesProvider>
           </Provider>
         </MantineProvider>
       </ColorSchemeProvider>

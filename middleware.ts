@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { cookies } from "next/headers";
+import { hasCookie } from "cookies-next";
 
 const domain =
   process.env.NODE_ENV === "production"
@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
   const jwtCookie = request.cookies.get("jwt")?.value;
   if (jwtCookie) {
     const jwt = JSON.parse(jwtCookie); // Access the "jwt" property directly
-    console.log("jwt", jwt.name);
+    // console.log("jwt", jwt.name);
   }
 
   // Find cookie
@@ -31,22 +31,21 @@ export async function middleware(request: NextRequest) {
       },
     });
   }
-  // const jwt = getCookie("jwt"); // => 'value'
-  // console.log("JWT", jwt);
-  // if (request.url === `${domain}/api/buyTicket`) {
-  //   if (hasCookie("jwt")) {
-  //     console.log("COCKIE gotten");
-  //   } else {
-  //     const response = new NextResponse(null, {
-  //       status: 302,
-  //       statusText: "Redirecting to auth page",
-  //       headers: {
-  //         Location: "http://localhost:3000/auth",
-  //       },
-  //     });
-  //     return response;
-  //   }
-  // }
+
+  if (request.url === `http://localhost:3000/makeBooking`) {
+    if (jwtCookie) {
+      console.log("COCKIE gotten");
+    } else {
+      const response = new NextResponse(null, {
+        status: 302,
+        statusText: "Redirecting to auth page",
+        headers: {
+          Location: "http://localhost:3000/auth",
+        },
+      });
+      return response;
+    }
+  }
   const response = NextResponse.next();
   request.headers.append("origin", request.nextUrl.pathname);
   if (request.nextUrl.pathname.startsWith("/api/products")) {

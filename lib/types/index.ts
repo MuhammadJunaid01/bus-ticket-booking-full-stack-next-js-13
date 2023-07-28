@@ -94,6 +94,8 @@ export type BusesTypes = {
   totalSeats: number;
   availableSeats: number;
   seatPrice: number;
+  busType: string;
+  busNumber: number;
 } & AvailableBussDataTypes;
 
 export type BusesApiResponseType = {

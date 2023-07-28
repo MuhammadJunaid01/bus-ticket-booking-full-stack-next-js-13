@@ -85,10 +85,6 @@ const BusModal: React.FC<BusPropsTypes> = ({
   const { formData, errors, handleChange, validateForm } =
     useFormValidation(initialValues);
   const handleBuyTicket = () => {
-    // if (!cookie) {
-    //   router.push("/auth");
-    //   return;
-    // }
     if (!bus) {
       alert("bus not found");
       return;

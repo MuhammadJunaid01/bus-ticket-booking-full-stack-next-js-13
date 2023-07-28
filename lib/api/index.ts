@@ -76,10 +76,6 @@ export const buyTicket = async ({
     busNumber,
   };
   try {
-    // if (Array.isArray(seatNumber)) {
-    //   console.log("CCCCCCCCCCCCCCCCCCCCCC");
-    //   console.log(seatNumber);
-    // }
     const res = await fetch(`${url}/api/buyTicket`, {
       method: "POST",
       headers: {

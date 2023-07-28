@@ -16,8 +16,8 @@ const useDestAndOrigin = ({
   const [dest, setDest] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    const newOriginSet = new Set<string>(origin);
-    const newDestSet = new Set<string>(dest);
+    const newOriginSet = new Set<string>();
+    const newDestSet = new Set<string>();
 
     data.forEach((item) => {
       const parts = item.split("-");
@@ -27,7 +27,7 @@ const useDestAndOrigin = ({
 
     setOrigin(Array.from(newOriginSet));
     setDest(Array.from(newDestSet));
-  }, []); // <-- Empty dependency array to run the effect only once
+  }, [data]); // <-- Only run the effect when "data" changes
 
   return { origin, dest };
 };

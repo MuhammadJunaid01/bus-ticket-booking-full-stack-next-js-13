@@ -9,22 +9,31 @@ const transporter = nodemailer.createTransport({
     pass: HOST_PASSWORD,
   },
 });
-
+function isValidEmail(email: string) {
+  // A basic email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 export const sendVerificationEmail = (
   email: string,
   verificationToken: string,
-  emailType: string
+  emailType: string,
+  callback: (error: Error | null, successMessage?: string) => void
 ) => {
   const mailOptions = {
     from: HOST_EMAIL,
     to: email,
-    subject: "Email Verification",
+    subject: emailType,
     text: `Click the following link to verify your email: ${BASE_URL}/verifyEmail?token=${verificationToken}&email=${email}`,
   };
 
   transporter.sendMail(mailOptions, (error: any, info: any) => {
     if (error) {
-      console.error("Error sending verification email:", error);
+      console.log(error);
+      callback(error); // Call the callback with the error object
+    } else {
+      const successMessage = "Verification email sent successfully.";
+      callback(null, successMessage); // Call the callback with null for error and the success message
     }
   });
 };

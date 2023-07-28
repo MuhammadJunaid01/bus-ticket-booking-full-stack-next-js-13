@@ -3,7 +3,6 @@ import { Box, Button, Input, Loader, UnstyledButton } from "@mantine/core";
 import React from "react";
 import { IconArrowsExchange2, IconMapPin } from "@tabler/icons-react";
 import { busRouteData } from "@/lib/data";
-
 import CustomCalendar from "./Calendar";
 import { seacrhBoxStyles } from "@/lib/styles";
 import CustomSelect from "../CustomSelect";
@@ -13,8 +12,11 @@ import { DateType, formatToDateString, loadUi, searchBus } from "@/lib/utils";
 import { BusesTypes } from "@/lib/types";
 import { BusModal } from "@/ui";
 import { notifications } from "@mantine/notifications";
+import { Busses } from "@/redux/features/buses";
 const SearchBox = () => {
-  const { data } = useAppSelector((state) => state.bussData);
+  const { data } = useAppSelector(
+    (state: { bussData: Busses }) => state.bussData
+  );
   const [bus, setBus] = React.useState<BusesTypes | null>(null);
   const [modalVisible, setModalVisible] = React.useState<boolean>(false);
   const [road, setRoad] = React.useState<string>("");
@@ -46,7 +48,7 @@ const SearchBox = () => {
     ) {
       notifications.show({
         title: "Please fil all feilds",
-        message: "Hey there, your code is awesome! 🤥",
+        message: "Please fil all feilds",
 
         // color: "red",
         // sx: { backgroundColor: },
@@ -54,7 +56,7 @@ const SearchBox = () => {
       return; // You might want to include this return statement to stop further execution after displaying the alert.
     }
     setLoading(true);
-    await loadUi(1000);
+    await loadUi(400);
     setLoading(false);
     const bus = searchBus(data, road);
     const dateStr = formatSelectedDates();
@@ -118,14 +120,6 @@ const SearchBox = () => {
           isHomePage
         />
         <CustomCalendar selected={selected} setSelected={setSelected} />
-        {/* <Input
-          variant="unstyled"
-          className={input}
-          style={{ cursor: "not-allowed" }}
-          icon={<IconMapPin size={14} />}
-          placeholder="RETURN "
-          readOnly
-        /> */}
 
         <Button loading={loading} onClick={handleSearch} className={searchBtn}>
           {/* {loading ? <Loader size={20} mt={10} /> : null} */}

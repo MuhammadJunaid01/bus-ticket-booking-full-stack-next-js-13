@@ -14,6 +14,10 @@ import { IconArmchair, IconCircleCheck } from "@tabler/icons-react";
 import React from "react";
 import { BookingForm } from "@/ui";
 import useFormValidation from "@/lib/hooks/validateForm";
+import { buyTicket } from "@/lib/api";
+import { getCookie, getCookies } from "cookies-next";
+import { useRouter } from "next/navigation";
+
 export interface BusPropsTypes {
   opend: boolean;
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -47,10 +51,7 @@ const BusModal: React.FC<BusPropsTypes> = ({
   const [isTableShow, setIsTableShow] = React.useState<boolean>(true);
   const [seatNumber, setSeatNumber] = React.useState<number[]>([]);
   const [active, setActive] = React.useState(0);
-  const [name, setName] = React.useState<string>("");
-  const [id, setId] = React.useState<number>(0);
-  const [email, setEmail] = React.useState<string>("");
-
+  const router = useRouter();
   ///
 
   const nextStep = () =>
@@ -82,14 +83,30 @@ const BusModal: React.FC<BusPropsTypes> = ({
       }
     }
   };
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
-  // };
+
+  const cookie = getCookie("jwt");
   const { formData, errors, handleChange, validateForm } =
     useFormValidation(initialValues);
+  const handleBuyTicket = () => {
+    if (!cookie) {
+      router.push("/auth");
+      return;
+    }
+    buyTicket({
+      busId: bus?._id,
+      userId: "64c1455dc150345607bdcaa5",
+      destination: dest,
+      boardingPlace: origin,
+      date: date,
+      seatNumber: seatNumber,
+      email: "m.junaidbknjnbnhb",
+      id: formData.id,
+      name: formData.name,
+    });
+  };
 
   // console.log(bus);
+  console.log("GET COCKIE ", cookie);
   return (
     <>
       <Modal
@@ -226,7 +243,9 @@ const BusModal: React.FC<BusPropsTypes> = ({
                 return <Text key={index}>Seatnumber: {seat}</Text>;
               })}
 
-              <Button my={11}>By a ticket</Button>
+              <Button onClick={handleBuyTicket} my={11}>
+                By a ticket
+              </Button>
             </Box>
           </Stepper.Completed>
         </Stepper>

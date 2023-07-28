@@ -5,7 +5,7 @@ import { ITicket } from "../interfaces";
 
 const ticketSchema: Schema<ITicket> = new mongoose.Schema({
   seatNumber: {
-    type: Number,
+    type: [Number],
     required: true,
   },
   busNumber: {
@@ -32,6 +32,10 @@ const ticketSchema: Schema<ITicket> = new mongoose.Schema({
   isPayment: {
     type: Boolean,
     default: false,
+  },
+  date: {
+    type: String,
+    required: true,
   },
   // Add other relevant ticket information here, such as payment status, transaction ID, etc.
 });

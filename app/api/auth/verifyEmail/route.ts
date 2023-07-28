@@ -1,4 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { setCookie } from "cookies-next";
+const domain =
+  process.env.NODE_ENV === "production"
+    ? "https://etickets-bd.vercel.app"
+    : process.env.BASE_URL;
 import User, { IUser } from "@/lib/models/user.models";
 export const GET = async (req: NextRequest) => {
   const origin = req.headers.get("origin");
@@ -26,20 +31,28 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       { new: true }
     );
 
+    // const {} = user;
     if (user) {
       const { password, ...userWithoutPassword } = user;
       const response = NextResponse.json(
         {
-          ...userWithoutPassword,
+          userWithoutPassword,
         },
         { status: 200 }
       );
-      response.cookies.set({
-        name: "jwt",
-        value: token,
+      setCookie("jwt", userWithoutPassword, {
+        maxAge: 60 * 6 * 24,
+        path: "/",
+        domain: domain,
         httpOnly: true,
-        maxAge: 60 * 60,
       });
+
+      // response.cookies.set({
+      //   name: "jwt",
+      //   value: token,
+      //   httpOnly: true,
+      //   maxAge: 60 * 60,
+      // });
       return response;
     } else {
       // return res.status(400).json({ message: "Invalid verification token" });

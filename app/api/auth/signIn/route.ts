@@ -10,15 +10,16 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const body = await req.json();
 
     const { email, password } = body;
-
+    console.log(body);
     // Find the user in the database
     const user = await User.findOne({ email });
-    const { _id: id } = user;
+    // console.log("user", user);
     if (!user) {
       return new NextResponse(JSON.stringify({ message: "User not found" }), {
         status: 404,
       });
     }
+    const { _id: id } = user;
 
     // Verify the password
     const isPasswordValid = await bcrypt.compare(password, user.password);

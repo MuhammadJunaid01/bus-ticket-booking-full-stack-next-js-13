@@ -6,7 +6,7 @@ export interface IBus extends Document {
   totalSeats: number;
   availableSeats: number;
   passengers: Array<{
-    seatNumber: number;
+    seatNumber: number[];
     user: IUser["_id"];
     boardingPlace: string;
     destination: string;
@@ -37,7 +37,7 @@ const busSchema: Schema<IBus> = new mongoose.Schema(
     passengers: [
       {
         seatNumber: {
-          type: Number,
+          type: [Number], // Update to an array of numbers
           required: true,
         },
         user: {
@@ -51,6 +51,11 @@ const busSchema: Schema<IBus> = new mongoose.Schema(
         destination: {
           type: String,
           required: true,
+        },
+        purchaseDate: {
+          type: Date,
+          required: true,
+          default: Date.now, // Set the default value to the current date/time when a new passenger is added
         },
       },
     ],

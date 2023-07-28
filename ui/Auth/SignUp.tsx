@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
+import { useSearchParams } from "next/navigation";
 
+import { useRouter } from "next/navigation";
 import { SignUpProps } from "@/lib/types";
 import handleAuth from "@/lib/utils/handleAuth";
 import {
@@ -26,6 +28,9 @@ interface User extends IUser {
 const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
   const [user, setUser] = React.useState<User | undefined>();
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<string>("");
+  const router = useRouter();
+
   const form = useForm({
     initialValues: {
       name: "",
@@ -48,10 +53,13 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
       state(false);
     }
   }, [state, user?.email]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   React.useEffect(() => {
     redirect();
     console.log(user?.email);
   }, [redirect, user]);
+
   return (
     <Card>
       <Box mx="auto">
@@ -81,20 +89,31 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
         <form
           onSubmit={form.onSubmit(async ({ name, email, password }) => {
             setLoading(true);
-            const response = handleAuth({
-              name,
-              email,
-              password,
-              endPoint: "signUp",
-            });
-            const data = await response;
-            if (data.user) {
-              notifications.show({
-                title: "successfully signUp",
-                message: "Hey there, your code is awesome! 🤥",
+            try {
+              const response = handleAuth({
+                name,
+                email,
+                password,
+                endPoint: "signUp",
               });
+              const data = await response;
+              if (data.user) {
+                notifications.show({
+                  title: "successfully signUp",
+                  message: "Hey there, your code is awesome! 🤥",
+                });
+                setLoading(false);
+                setUser(data.user);
+                router.push(`/auth?email=${email}&password=${password}`);
+              }
+            } catch (error: any) {
+              console.log("errro", error);
+              notifications.show({
+                title: "signUp Failed!",
+                message: error.message,
+              });
+              setError(error.message);
               setLoading(false);
-              setUser(data.user);
             }
           })}
         >

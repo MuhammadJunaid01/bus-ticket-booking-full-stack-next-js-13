@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Date } from "mongoose";
 import {
   BusMockDataType,
-  BussesTypes,
+  BusesTypes,
   FactsDataTypes,
   PopularBusRouteDataType,
   StoriesTypes,
@@ -57,7 +57,7 @@ export interface BusPageProps {
 }
 export interface MakeBookUiPropsTypes {
   data: string[];
-  buses: BussesTypes[];
+  buses: BusesTypes[];
 }
 export interface RoadsPropsType {
   title: string;
@@ -68,13 +68,14 @@ export interface RoadsPropsType {
 
 //MODELS INTERFACES
 export interface ITicket extends Document {
-  seatNumber: number;
+  seatNumber: number[];
   user: mongoose.Types.ObjectId;
   boardingPlace: string;
   destination: string;
   purchaseDate: Date;
   isPayment: boolean;
   busNumber: number;
+  date: string;
   // New field for payment status with default value false
   // Add other relevant ticket information here, such as payment status, transaction ID, etc.
 }

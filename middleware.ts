@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { hasCookie } from "cookies-next";
 
 const domain =
   process.env.NODE_ENV === "production"

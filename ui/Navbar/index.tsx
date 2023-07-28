@@ -36,21 +36,6 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
   const theme = useMantineTheme();
   const isDarkMode = theme.colorScheme === "dark";
 
-  // React.useEffect(() => {
-  //   const mode = localStorage.getItem("mantine-color-scheme");
-  //   // mode === "dark" ? setIsDarkMode(true) : setIsDarkMode(false);
-  //   // console.log(mode);
-  //   // const dr = JSON.parse(mode);
-  //   if (mode == "dark") {
-  //     console.log("DARK MODE TRUE");
-  //     setIsDarkMode(true);
-  //   } else {
-  //     console.log("LIGHT MODE TRUE");
-  //     setIsDarkMode(false);
-  //   }
-  //   console.log("mode", mode);
-  // }, []);
-  console.log("IsDarkmode", isDarkMode);
   return (
     <Box>
       <Header

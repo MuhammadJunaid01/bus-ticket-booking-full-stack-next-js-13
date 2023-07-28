@@ -71,7 +71,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         httpOnly: true,
         path: "/",
         secure: true,
-        domain: domain,
+        domain: "",
       });
       // return response;
       return new NextResponse(JSON.stringify(userInfo), {

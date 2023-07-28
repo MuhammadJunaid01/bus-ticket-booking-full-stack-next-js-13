@@ -46,11 +46,11 @@ const SignIn: React.FC<{
     router.push("/auth");
   };
   React.useEffect(() => {
-    const call = async () => {
+    const signIn = async () => {
       if (email !== "" || pass !== "") {
         setLoading(true);
         setIsRedirectSign(true);
-        await loadUi(11000);
+        await loadUi(3000);
         handleAuth({
           email: email,
           password: pass,
@@ -61,35 +61,45 @@ const SignIn: React.FC<{
       setLoading(false);
     };
     try {
-      call();
+      signIn();
 
       setTimeout(() => {
         handleClearQuery();
-      }, 9000);
+      }, 5000);
     } catch (error) {
       setLoading(false);
     }
   }, [email, pass]);
   return (
-    <Card>
+    <Card
+      sx={(theme) => ({
+        backgroundColor:
+          theme.colorScheme === "dark" ? "#25262B" : theme.colors.gray[3],
+        height: "85vh",
+      })}
+    >
       <Box mx="auto">
-        <Text>{email}</Text>
-        <Text>{pass}</Text>
         <Text
+          sx={(theme) => ({
+            color: theme.colorScheme === "dark" ? "white" : "black",
+          })}
           style={{
             fontSize: "50px",
             fontWeight: "800",
-            color: "white",
+            // color: "white",
             textAlign: "center",
           }}
         >
           Ar Poribohon
         </Text>
         <Text
+          sx={(theme) => ({
+            color: theme.colorScheme === "dark" ? "white" : "black",
+          })}
           style={{
             fontSize: "30px",
             fontWeight: "600",
-            color: "white",
+            // color: "white",
             textAlign: "center",
           }}
         >
@@ -128,13 +138,14 @@ const SignIn: React.FC<{
           <TextInput
             mt="sm"
             label="Email"
-            placeholder="Email"
+            placeholder={isRedirectSign ? email : "Email"}
+            // value={}
             disabled={isRedirectSign ? true : false}
             {...form.getInputProps("email")}
           />
           <PasswordInput
             label="Password"
-            placeholder="Password"
+            placeholder={isRedirectSign ? pass : "Password"}
             disabled={isRedirectSign ? true : false}
             {...form.getInputProps("password")}
           />

@@ -106,7 +106,6 @@ const BusModal: React.FC<BusPropsTypes> = ({
   };
 
   // console.log(bus);
-  console.log("GET COCKIE ", cookie);
   return (
     <>
       <Modal

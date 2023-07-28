@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Text, TextInput } from "@mantine/core";
+import { Box, Button, Card, Text, TextInput } from "@mantine/core";
 import handleAuth from "@/lib/utils/handleAuth";
 import { useForm } from "@mantine/form";
 const ForgotPassword: React.FC<{
@@ -17,22 +17,34 @@ const ForgotPassword: React.FC<{
     },
   });
   return (
-    <div>
+    <Card
+      sx={(theme) => ({
+        backgroundColor:
+          theme.colorScheme === "dark" ? "#25262B" : theme.colors.gray[3],
+        height: "85vh",
+      })}
+    >
       <Text
+        sx={(theme) => ({
+          color: theme.colorScheme === "dark" ? "white" : "black",
+        })}
         style={{
           fontSize: "50px",
           fontWeight: "800",
-          color: "white",
+          // color: "white",
           textAlign: "center",
         }}
       >
         AR Poribohon
       </Text>
       <Text
+        sx={(theme) => ({
+          color: theme.colorScheme === "dark" ? "white" : "black",
+        })}
         style={{
           textAlign: "center",
           marginTop: "11px",
-          color: "white",
+          // color: "white",
           fontSize: "18px",
           fontWeight: "700",
         }}
@@ -40,10 +52,13 @@ const ForgotPassword: React.FC<{
         Recover your password
       </Text>
       <Text
+        sx={(theme) => ({
+          color: theme.colorScheme === "dark" ? "white" : "black",
+        })}
         style={{
           textAlign: "center",
           marginTop: "11px",
-          color: "white",
+          // color: "white",
           fontSize: "18px",
         }}
       >
@@ -95,7 +110,7 @@ const ForgotPassword: React.FC<{
           Don’t have an account?
         </Text>
       </Box>
-    </div>
+    </Card>
   );
 };
 

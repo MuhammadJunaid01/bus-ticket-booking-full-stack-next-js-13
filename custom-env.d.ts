@@ -9,6 +9,9 @@ declare namespace NodeJS {
     BASE_URL: string;
     NEXT_PUBLIC_BASE_URL: string;
 
+    PRODUCTION_URL: string;
+    NEXT_PUBLIC_PRODUCTION__URL: string;
+
     //google env
     // APP_PUBLIC_API: string;
 

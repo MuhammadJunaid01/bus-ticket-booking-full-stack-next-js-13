@@ -1,7 +1,7 @@
-import { BussesTypes } from "@/lib/types";
+import { BusesTypes } from "@/lib/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export interface Busses {
-  data: BussesTypes[];
+  data: BusesTypes[];
 }
 const initialState: Busses = {
   data: [],
@@ -10,7 +10,7 @@ export const bussesSlice = createSlice({
   name: "bussesSlice",
   initialState,
   reducers: {
-    getAllBussData: (state, action: PayloadAction<BussesTypes[]>) => {
+    getAllBussData: (state, action: PayloadAction<BusesTypes[]>) => {
       state.data = action.payload;
     },
   },

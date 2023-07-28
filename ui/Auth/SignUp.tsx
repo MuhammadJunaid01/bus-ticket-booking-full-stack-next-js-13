@@ -57,17 +57,25 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
 
   React.useEffect(() => {
     redirect();
-    console.log(user?.email);
   }, [redirect, user]);
 
   return (
-    <Card>
+    <Card
+      sx={(theme) => ({
+        backgroundColor:
+          theme.colorScheme === "dark" ? "#25262B" : theme.colors.gray[3],
+        height: "85vh",
+      })}
+    >
       <Box mx="auto">
         <Text
+          sx={(theme) => ({
+            color: theme.colorScheme === "dark" ? "white" : "black",
+          })}
           style={{
             fontSize: "50px",
             fontWeight: "800",
-            color: "white",
+
             textAlign: "center",
             marginTop: "-20px",
           }}
@@ -75,10 +83,13 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
           AR Poribohon
         </Text>
         <Text
+          sx={(theme) => ({
+            color: theme.colorScheme === "dark" ? "white" : "black",
+          })}
           style={{
             fontSize: "30px",
             fontWeight: "600",
-            color: "white",
+            // color: "white",
             textAlign: "center",
           }}
         >
@@ -107,7 +118,6 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
                 router.push(`/auth?email=${email}&password=${password}`);
               }
             } catch (error: any) {
-              console.log("errro", error);
               notifications.show({
                 title: "signUp Failed!",
                 message: error.message,

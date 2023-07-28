@@ -31,13 +31,9 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     }
 
     // Generate access token
-    const accessToken = jwt.sign(
-      { id, role: user.role },
-      process.env.AUTH_SECRET ?? "",
-      {
-        expiresIn: "15m",
-      }
-    );
+    const accessToken = jwt.sign({ id }, process.env.AUTH_SECRET ?? "", {
+      expiresIn: "15m",
+    });
 
     // Generate refresh token
     const refreshToken = jwt.sign({ id }, process.env.AUTH_SECRET ?? "", {

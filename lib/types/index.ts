@@ -68,7 +68,7 @@ export type StoriesTypes = {
 export type AuthTypes = {
   name?: string;
   email: string;
-  password: string;
+  password?: string;
   endPoint: string;
 };
 export type SignUpProps = {

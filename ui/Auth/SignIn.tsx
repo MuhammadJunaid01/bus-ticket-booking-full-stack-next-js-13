@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Button,
@@ -78,17 +79,17 @@ const SignIn: React.FC<{
           style={{
             fontSize: "50px",
             fontWeight: "800",
-            color: "#2D385E",
+            color: "white",
             textAlign: "center",
           }}
         >
-          MultyShop
+          Ar Poribohon
         </Text>
         <Text
           style={{
             fontSize: "30px",
             fontWeight: "600",
-            color: "#2D385E",
+            color: "white",
             textAlign: "center",
           }}
         >

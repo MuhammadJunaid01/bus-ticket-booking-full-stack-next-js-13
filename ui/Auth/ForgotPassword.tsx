@@ -22,17 +22,17 @@ const ForgotPassword: React.FC<{
         style={{
           fontSize: "50px",
           fontWeight: "800",
-          color: "#2D385E",
+          color: "white",
           textAlign: "center",
         }}
       >
-        MultyShop
+        AR Poribohon
       </Text>
       <Text
         style={{
           textAlign: "center",
           marginTop: "11px",
-          color: "#2D385E",
+          color: "white",
           fontSize: "18px",
           fontWeight: "700",
         }}
@@ -43,7 +43,7 @@ const ForgotPassword: React.FC<{
         style={{
           textAlign: "center",
           marginTop: "11px",
-          color: "#2D385E",
+          color: "white",
           fontSize: "18px",
         }}
       >
@@ -53,7 +53,10 @@ const ForgotPassword: React.FC<{
       <Box mx="auto">
         <form
           onSubmit={form.onSubmit(({ email }) =>
-            handleAuth({ email, endPoint: "forgotPassword" })
+            handleAuth({
+              email: email,
+              endPoint: "forgotPass",
+            })
           )}
         >
           <TextInput

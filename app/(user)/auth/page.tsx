@@ -6,7 +6,7 @@ import { Box, Container, Grid, MediaQuery, Text } from "@mantine/core";
 const SignUpPage = () => {
   return (
     <Box style={{ margin: "10px 0px" }}>
-      <Container size="xl">
+      <Container fluid>
         <Grid>
           <Grid.Col span={12} md={4}>
             <Auth isOpen />
@@ -36,7 +36,7 @@ const SignUpPage = () => {
                     color: "white",
                   }}
                 >
-                  Welcome to Multy Shop Account
+                  Welcome to AR Poribohon Account
                 </Text>
               </Box>
             </MediaQuery>

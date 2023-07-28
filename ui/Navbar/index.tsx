@@ -1,19 +1,25 @@
 import { mockdata, navlinkData } from "@/lib/data";
 import { navbarStyles } from "@/lib/styles";
 import { useRouter } from "next/navigation";
-import { Header, Group, Text, Box, Burger } from "@mantine/core";
+import {
+  Header,
+  Group,
+  Text,
+  Box,
+  Burger,
+  useMantineTheme,
+} from "@mantine/core";
 import { useColorScheme, useDisclosure, useWindowScroll } from "@mantine/hooks";
 import Links from "./Links";
 import DarkAndLightMode from "./DarkAndLightMode";
 import NavLinks from "../Navlinks";
 import NavbarSmallDevices from "./NavbarSmallDevices";
 import { Profile } from "@/ui";
-import Logo from "@/public/logo-darkmode.png";
 import Logo1 from "@/public/logo-3-r-bg.png";
 import Image from "next/image";
 import React from "react";
 // import { window } from "global";
-
+import BusImage from "@/public/bus.png";
 export interface NavbarProps {
   isHomePage: boolean;
 }
@@ -21,18 +27,30 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-  const { classes, theme } = navbarStyles();
+  const { classes } = navbarStyles();
   const router = useRouter();
-
+  // const [isDarkMode, setIsDarkMode] = React.useState<boolean>(false);
   const [themeMode, settThemeMode] = React.useState<string | null>();
   const links = Links({ data: mockdata });
   const [scroll, scrollTo] = useWindowScroll();
-  React.useEffect(() => {
-    const themeModeVal = localStorage.getItem("mantine-color-scheme");
-    console.log("themeMode", themeMode);
-    settThemeMode(themeModeVal);
-  }, [themeMode]);
+  const theme = useMantineTheme();
+  const isDarkMode = theme.colorScheme === "dark";
 
+  // React.useEffect(() => {
+  //   const mode = localStorage.getItem("mantine-color-scheme");
+  //   // mode === "dark" ? setIsDarkMode(true) : setIsDarkMode(false);
+  //   // console.log(mode);
+  //   // const dr = JSON.parse(mode);
+  //   if (mode == "dark") {
+  //     console.log("DARK MODE TRUE");
+  //     setIsDarkMode(true);
+  //   } else {
+  //     console.log("LIGHT MODE TRUE");
+  //     setIsDarkMode(false);
+  //   }
+  //   console.log("mode", mode);
+  // }, []);
+  console.log("IsDarkmode", isDarkMode);
   return (
     <Box>
       <Header
@@ -53,14 +71,45 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
         px="md"
       >
         <Group position="apart" sx={{ height: "100%" }}>
-          <Image
-            onClick={() => router.push("/")}
-            style={{ cursor: "pointer" }}
-            src={Logo1}
-            width={160}
-            height={50}
-            alt="main-logo"
-          />
+          {isDarkMode && isHomePage === false ? (
+            <Box style={{ cursor: "pointer" }} onClick={() => router.push("/")}>
+              <Text size={26} fw={900} color="white">
+                AR Poribohon
+              </Text>
+              <Box
+                style={{
+                  display: "flex",
+                  // alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text
+                  style={{ marginTop: "3px", letterSpacing: "2px" }}
+                  ff={"cursive"}
+                  size={12}
+                  color="white"
+                >
+                  SAFE JOURNY
+                </Text>
+                <Image
+                  style={{ cursor: "pointer", marginTop: "-8px" }}
+                  src={BusImage}
+                  width={70}
+                  height={44}
+                  alt="main-logo"
+                />
+              </Box>
+            </Box>
+          ) : (
+            <Image
+              onClick={() => router.push("/")}
+              style={{ cursor: "pointer" }}
+              src={Logo1}
+              width={160}
+              height={50}
+              alt="main-logo"
+            />
+          )}
 
           <Group
             sx={{ height: "100%" }}

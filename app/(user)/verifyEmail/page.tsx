@@ -1,5 +1,5 @@
 "use client";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { IconDatabase, IconAt } from "@tabler/icons-react";
 import { Box, Button, Card, Input, Text } from "@mantine/core";
 import React from "react";
@@ -9,34 +9,39 @@ const VerifyEmailPage = () => {
   //   const { token } = router.query;/
   const token = searchParams.get("token");
   const email = searchParams.get("email");
-
+  const router = useRouter();
   // Implement the logic for verifying the email using the token
   React.useEffect(() => {
     const verify = async () => {
-      const response = await fetch(
-        `http://localhost:3000/api/auth/verifyEmail`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, token }), // Replace 'data' with your request payload
-        }
-      );
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/auth/verifyEmail`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, token }), // Replace 'data' with your request payload
+          }
+        );
 
-      if (!response.ok) {
-        throw new Error("Request failed");
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+        const responseData = await response.json();
+        return responseData;
+      } catch (error: any) {
+        console.log(error.message);
       }
-      const responseData = await response.json();
-      return responseData;
     };
     verify().then((user) => {
       if (user) {
         console.log(user);
         // redirect("/home");
+        router.push("/");
       }
     });
-  }, [token, email]);
+  }, [token, email, router]);
   return (
     <Box
       style={{

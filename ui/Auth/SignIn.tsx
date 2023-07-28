@@ -50,7 +50,7 @@ const SignIn: React.FC<{
       if (email !== "" || pass !== "") {
         setLoading(true);
         setIsRedirectSign(true);
-        await loadUi(3000);
+        await loadUi(5000);
         handleAuth({
           email: email,
           password: pass,
@@ -65,7 +65,7 @@ const SignIn: React.FC<{
 
       setTimeout(() => {
         handleClearQuery();
-      }, 5000);
+      }, 8000);
     } catch (error) {
       setLoading(false);
     }

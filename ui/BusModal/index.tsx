@@ -15,7 +15,6 @@ import React from "react";
 import { BookingForm } from "@/ui";
 import useFormValidation from "@/lib/hooks/validateForm";
 import { buyTicket } from "@/lib/api";
-import { getCookie, getCookies } from "cookies-next";
 import { useRouter } from "next/navigation";
 
 export interface BusPropsTypes {
@@ -84,14 +83,13 @@ const BusModal: React.FC<BusPropsTypes> = ({
     }
   };
 
-  const cookie = getCookie("jwt");
   const { formData, errors, handleChange, validateForm } =
     useFormValidation(initialValues);
   const handleBuyTicket = () => {
-    if (!cookie) {
-      router.push("/auth");
-      return;
-    }
+    // if (!cookie) {
+    //   router.push("/auth");
+    //   return;
+    // }
     buyTicket({
       busId: bus?._id,
       userId: "64c1455dc150345607bdcaa5",

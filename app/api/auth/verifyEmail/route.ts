@@ -39,12 +39,12 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       // const { password, ...userWithoutPassword } = user;
       const { _doc } = user;
       const { password, ...userInfo } = _doc;
-      // const response = NextResponse.json(
-      //   {
-      //     others,
-      //   },
-      //   { status: 200 }
-      // );
+      const response = NextResponse.json(
+        {
+          userInfo,
+        },
+        { status: 200 }
+      );
       // setCookie("jwt", _doc, {
       //   maxAge: 60 * 6 * 24,
       //   path: "/",
@@ -65,18 +65,26 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       //   path: "/",
       //   domain: domain,
       // });
-      cookies().set({
+      // cookies().set({
+      //   name: "jwt",
+      //   value: userInfo,
+      //   httpOnly: true,
+      //   path: "/",
+      //   secure: true,
+      //   domain: "",
+      // });
+      // console.log("USER INFO", userInfo);
+      const userInfoString = JSON.stringify(userInfo);
+
+      response.cookies.set({
         name: "jwt",
-        value: userInfo,
+        value: userInfoString,
         httpOnly: true,
-        path: "/",
-        secure: true,
-        domain: "",
       });
-      // return response;
-      return new NextResponse(JSON.stringify(userInfo), {
-        status: 200,
-      });
+      return response;
+      // return new NextResponse(JSON.stringify(userInfo), {
+      //   status: 200,
+      // });
     } else {
       // return res.status(400).json({ message: "Invalid verification token" });
       return new NextResponse(

@@ -24,7 +24,7 @@ const fetchAllBuss = async () => {
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const [data, setData] = React.useState<BusesApiResponseType | null>(null);
-
+  // console.log("JWT", jWT);
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,6 +40,7 @@ const HomePage = () => {
 
     fetchData();
   }, [dispatch]);
+
   return (
     <div className="main-bg">
       <Navbar isHomePage />

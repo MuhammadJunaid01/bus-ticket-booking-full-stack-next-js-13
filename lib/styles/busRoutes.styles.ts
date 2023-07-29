@@ -34,10 +34,8 @@ export const busRoutesStyles = createStyles((theme) => ({
     textDecoration: "none",
     padding: "12px 5px",
     backgroundColor:
-      theme.colorScheme === "dark"
-        ? theme.colors.gray[7]
-        : theme.colors.cyan[2],
+      theme.colorScheme === "dark" ? theme.colors.gray[7] : "#B2BEB5",
     borderRadius: "4px",
-    color: theme.colorScheme === "dark" ? theme.colors.gray[1] : "",
+    color: theme.colorScheme === "dark" ? theme.colors.gray[1] : "black",
   },
 }));

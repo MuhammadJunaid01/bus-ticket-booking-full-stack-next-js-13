@@ -21,7 +21,7 @@ const OurBusses: React.FC<AvailableBussProps> = ({ title }) => {
     <Box className={container}>
       <Text className={titileStle}>{title}</Text>
 
-      {data ? <BusTable data={data} /> : <Loader size="sm" />}
+      {/* {data ? <BusTable data={data} /> : <Loader size="sm" />} */}
 
       {/* {paginateData.map((bus, index) => {
         return (

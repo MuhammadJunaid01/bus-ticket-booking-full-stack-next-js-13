@@ -23,13 +23,13 @@ interface verifyEmail {
   email: string;
   verificationToken?: string;
   emailType?: "verifyEmail" | "sendPdf";
-  pdfFilePath?: string;
+  pdfBuffer?: ArrayBuffer;
 }
 export const sendVerificationEmail = ({
   email,
   emailType,
   verificationToken,
-  pdfFilePath,
+  pdfBuffer,
 }: verifyEmail) =>
   // Path to the PDF file you want to attach (optional)
   {
@@ -42,7 +42,9 @@ export const sendVerificationEmail = ({
         subject: emailType,
         text: `Click the following link to verify your email: ${BASE_URL}/verifyEmail?token=${verificationToken}&email=${email}`,
       };
-    } else if (emailType === "sendPdf" && pdfFilePath) {
+    } else if (emailType === "sendPdf" && pdfBuffer) {
+      const bufferPdf = Buffer.from(pdfBuffer);
+
       mailOptions = {
         from: HOST_EMAIL,
         to: email,
@@ -50,7 +52,8 @@ export const sendVerificationEmail = ({
         attachments: [
           {
             filename: "Your Ticket Information.pdf", // Change the filename as you desire
-            path: pdfFilePath, // Path to the PDF file to attach
+            content: bufferPdf, // Use the Buffer here
+            contentType: "application/pdf",
           },
         ],
       };
@@ -67,3 +70,8 @@ export const sendVerificationEmail = ({
       }
     });
   };
+// export const config: = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };

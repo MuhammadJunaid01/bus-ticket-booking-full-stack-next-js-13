@@ -29,9 +29,13 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   });
 
   doc.save(filePath);
+  const pdfBuffer = doc.output("arraybuffer");
+
+  // Convert the pdfBuffer from ArrayBuffer to Buffer
+  const bufferPdf = Buffer.from(pdfBuffer);
   sendVerificationEmail({
     email: "m.junaidbkh2020@gmail.com",
-    pdfFilePath: filePath,
+    // pdfBuffer: bufferPdf,
     emailType: "sendPdf",
   });
   //   console.log("path pfg", pathD);
@@ -40,12 +44,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   doc.text("Hello, This is your PDF!", 10, 10);
 
   // Save the PDF to a buffer
-  const pdfBuffer = doc.output("arraybuffer");
 
-  // Write the buffer to a file
-  await fs.writeFile(filePath, Buffer.from(pdfBuffer));
-  // Set the response headers
-  const response = new NextResponse(Buffer.from(pdfBuffer));
+  const response = new NextResponse(Buffer.from(bufferPdf));
   response.headers.set("Content-Type", "application/pdf");
   response.headers.set(
     "Content-Disposition",
@@ -63,5 +63,5 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   console.log(__dirname);
   return response;
   //   doc.pipe(fs.createWriteStream("../auth/padf.pdf")); // write to PDF
-  return new NextResponse(JSON.stringify({ m: "jnjnkjkj" }));
+  // return new NextResponse(JSON.stringify({ m: "jnjnkjkj" }));
 };

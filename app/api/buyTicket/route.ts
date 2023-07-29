@@ -152,7 +152,7 @@ export const POST = async (req: NextRequest) => {
     const pdfBuffer = doc.output("arraybuffer");
 
     doc.save(filePath);
-    await fs.writeFile(filePath, Buffer.from(pdfBuffer));
+    // await fs.writeFile(filePath, Buffer.from(pdfBuffer));
     const response = new NextResponse(Buffer.from(pdfBuffer));
     sendVerificationEmail({
       email: "m.junaidbkh2020@gmail.com",

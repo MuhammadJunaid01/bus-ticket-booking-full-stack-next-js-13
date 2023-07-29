@@ -137,3 +137,14 @@
 // };
 
 // export default BusTable;
+import React from "react";
+
+const Table = () => {
+  return (
+    <div>
+      <h1>add table</h1>
+    </div>
+  );
+};
+
+export default Table;

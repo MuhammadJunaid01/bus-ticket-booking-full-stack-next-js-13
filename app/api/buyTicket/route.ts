@@ -164,16 +164,16 @@ export const POST = async (req: NextRequest) => {
       "Content-Disposition",
       `attachment; filename=${fileName}`
     );
-    const unlinkAsync = promisify(fs.unlink);
+    // const unlinkAsync = promisify(fs.unlink);
 
-    setTimeout(async () => {
-      try {
-        await unlinkAsync(filePath);
-        console.log("PDF file deleted after 2 minutes.");
-      } catch (error) {
-        console.error("Error deleting the PDF file after 2 minutes:", error);
-      }
-    }, 120000);
+    // setTimeout(async () => {
+    //   try {
+    //     await unlinkAsync(filePath);
+    //     console.log("PDF file deleted after 2 minutes.");
+    //   } catch (error) {
+    //     console.error("Error deleting the PDF file after 2 minutes:", error);
+    //   }
+    // }, 120000);
     return response;
     // return new NextResponse(
     //   JSON.stringify({ message: "success", data: ticket }),

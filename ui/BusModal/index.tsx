@@ -123,7 +123,6 @@ const BusModal: React.FC<BusPropsTypes> = ({
         <LoadingOverlay visible={visible} overlayBlur={2} />
         {pdfUrl ? (
           <Box>
-            {" "}
             <iframe
               src={pdfUrl}
               width="100%"

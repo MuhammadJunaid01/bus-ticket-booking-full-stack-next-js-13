@@ -62,7 +62,7 @@ export const buyTicket = async ({
   id,
   name,
   busNumber,
-}: BuyTicketParams) => {
+}: BuyTicketParams): Promise<string> => {
   const data = {
     userId,
     busId,
@@ -83,7 +83,20 @@ export const buyTicket = async ({
       },
       body: JSON.stringify(data),
     });
+
+    if (res.ok) {
+      // Process the response here
+      const pdfBlob = await res.blob();
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+
+      return pdfUrl; // Return the PDF URL to the caller
+    } else {
+      // Handle the error case when the response is not successful
+      console.error("Failed to generate PDF:", res.status, res.statusText);
+      throw new Error("Failed to generate PDF");
+    }
   } catch (error: any) {
-    console.log("error", error.message);
+    console.error("Error generating PDF:", error.message);
+    throw error;
   }
 };

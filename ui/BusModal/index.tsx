@@ -51,6 +51,8 @@ const BusModal: React.FC<BusPropsTypes> = ({
   const [isTableShow, setIsTableShow] = React.useState<boolean>(true);
   const [seatNumber, setSeatNumber] = React.useState<number[]>([]);
   const [active, setActive] = React.useState(0);
+  const [pdfUrl, setPdfUrl] = React.useState<string | null>(null);
+
   const router = useRouter();
   ///
   const nextStep = () =>
@@ -84,23 +86,28 @@ const BusModal: React.FC<BusPropsTypes> = ({
   };
   const { formData, errors, handleChange, validateForm } =
     useFormValidation(initialValues);
-  const handleBuyTicket = () => {
+  const handleBuyTicket = async () => {
     if (!bus) {
       alert("bus not found");
       return;
     }
-    buyTicket({
-      busId: bus?._id,
-      userId: "64c3d6b0826091556b9d2f27",
-      destination: dest,
-      boardingPlace: origin,
-      date: date,
-      seatNumber: seatNumber,
-      email: "m.junaidbknjnbnhb",
-      id: formData.id,
-      name: formData.name,
-      busNumber: bus.busNumber,
-    });
+    try {
+      const pdfUrl = await buyTicket({
+        busId: bus?._id,
+        userId: "64c3d6b0826091556b9d2f27",
+        destination: dest,
+        boardingPlace: origin,
+        date: date,
+        seatNumber: seatNumber,
+        email: "m.junaidbknjnbnhb",
+        id: formData.id,
+        name: formData.name,
+        busNumber: bus.busNumber,
+      });
+      setPdfUrl(pdfUrl);
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
 
   return (
@@ -114,140 +121,157 @@ const BusModal: React.FC<BusPropsTypes> = ({
         // title="m,fakmfjk"
       >
         <LoadingOverlay visible={visible} overlayBlur={2} />
-
-        <Stepper active={active} onStepClick={setActive} breakpoint="sm">
-          <Stepper.Step label="First step" description="Select Bus">
-            Step 1 Select Bus
-            <SimpleBusTable
-              roadName={bus?.roadName}
-              dest={dest}
-              date={date}
-              totalSeats={bus?.totalSeats}
-              seatPrice={bus?.seatPrice}
-              handleSelect={handleSelect}
-              busType={bus?.busType}
+        {pdfUrl ? (
+          <Box>
+            {" "}
+            <iframe
+              src={pdfUrl}
+              width="100%"
+              height="500px"
+              title="PDF Viewer"
             />
-          </Stepper.Step>
-          <Stepper.Step label="Second step" description="Select Seat ">
-            Step 2 Select Seat:
-            <Box
-              sx={(theme) => ({
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: theme.spacing.lg,
-                height: "200px",
-                overflowY: "scroll",
-                // Adjust the gap between the grid items as needed
-              })}
-            >
-              {Array.from({ length: bus?.totalSeats ?? 0 }).map((_, index) => {
-                return (
-                  <Box
-                    onClick={() => handleSeatSelect(index)}
-                    style={{
-                      display: "flex",
-                      gap: "11px",
-                      cursor: "pointer",
-                    }}
-                    key={index}
-                  >
-                    <IconArmchair
-                      color={seatNumber.includes(index) ? "#1971C2" : "white"}
-                    />
-                    <Text
-                      color={seatNumber.includes(index) ? "#1971C2" : "unset"}
-                    >
-                      {index}
-                    </Text>
-                    {seatNumber.includes(index) ? (
-                      <IconCircleCheck color="#1971C2" />
-                    ) : null}
-                  </Box>
-                );
-              })}
-            </Box>
-            <Box
-              style={{
-                display: "flex",
-                gap: "11px",
-                justifyContent: "center",
-                marginTop: "11px",
-              }}
-            >
-              <Button
-                onClick={() => setActive((currentStep) => currentStep + 1)}
-                disabled={seatNumber.length === 0}
+          </Box>
+        ) : (
+          <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+            <Stepper.Step label="First step" description="Select Bus">
+              Step 1 Select Bus
+              <SimpleBusTable
+                roadName={bus?.roadName}
+                dest={dest}
+                date={date}
+                totalSeats={bus?.totalSeats}
+                seatPrice={bus?.seatPrice}
+                handleSelect={handleSelect}
+                busType={bus?.busType}
+              />
+            </Stepper.Step>
+            <Stepper.Step label="Second step" description="Select Seat ">
+              Step 2 Select Seat:
+              <Box
+                sx={(theme) => ({
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: theme.spacing.lg,
+                  height: "200px",
+                  overflowY: "scroll",
+                  // Adjust the gap between the grid items as needed
+                })}
               >
-                Next
-              </Button>
-              <Button variant="default" onClick={prevStep}>
-                Back
-              </Button>
-            </Box>
-          </Stepper.Step>
-          <Stepper.Step label="Final step" description="fill information box">
-            <BookingForm handleChange={handleChange} />
-            <Box
-              style={{
-                display: "flex",
-                gap: "11px",
-                justifyContent: "center",
-                marginTop: "11px",
-              }}
-            >
-              <Button
-                onClick={() => {
-                  if (!validateForm()) {
-                    // Perform form submission logic here, e.g., send data to the server
-                    console.log("", errors);
-                    const { email, name, id } = errors;
-                    notifications.show({
-                      title: "Default notification",
-                      message: `${name} ${email} ${id}`,
-                    });
-                    return;
+                {Array.from({ length: bus?.totalSeats ?? 0 }).map(
+                  (_, index) => {
+                    return (
+                      <Box
+                        onClick={() => handleSeatSelect(index)}
+                        style={{
+                          display: "flex",
+                          gap: "11px",
+                          cursor: "pointer",
+                        }}
+                        key={index}
+                      >
+                        <IconArmchair
+                          color={
+                            seatNumber.includes(index) ? "#1971C2" : "white"
+                          }
+                        />
+                        <Text
+                          color={
+                            seatNumber.includes(index) ? "#1971C2" : "unset"
+                          }
+                        >
+                          {index}
+                        </Text>
+                        {seatNumber.includes(index) ? (
+                          <IconCircleCheck color="#1971C2" />
+                        ) : null}
+                      </Box>
+                    );
                   }
-                  setActive((currentStep) => currentStep + 1);
+                )}
+              </Box>
+              <Box
+                style={{
+                  display: "flex",
+                  gap: "11px",
+                  justifyContent: "center",
+                  marginTop: "11px",
                 }}
-                disabled={
-                  formData.id === "" ||
-                  formData.name === "" ||
-                  formData.email == ""
-                }
               >
-                Next
-              </Button>
-              <Button variant="default" onClick={prevStep}>
-                Back
-              </Button>
-            </Box>
-          </Stepper.Step>
-          <Stepper.Completed>
-            <Box
-              sx={(theme) => ({
-                textAlign: "center",
-              })}
-            >
-              <Text>ID: {formData.id}</Text>
-              <Text>Name: {formData.name}</Text>
-              <Text>Email: {formData.email}</Text>
-              <Text>Date: {date}</Text>
-              <Text>Origin: {origin}</Text>
-              <Text>Destination: {dest}</Text>
-              <Text>Road: {road}</Text>
-              <Text>BusId: {bus?._id}</Text>
-              <Text>seatPrice: {bus?.seatPrice}</Text>
-              <Text>BusNumber: {bus?._id}</Text>
-              {seatNumber.map((seat, index) => {
-                return <Text key={index}>Seatnumber: {seat}</Text>;
-              })}
+                <Button
+                  onClick={() => setActive((currentStep) => currentStep + 1)}
+                  disabled={seatNumber.length === 0}
+                >
+                  Next
+                </Button>
+                <Button variant="default" onClick={prevStep}>
+                  Back
+                </Button>
+              </Box>
+            </Stepper.Step>
+            <Stepper.Step label="Final step" description="fill information box">
+              <BookingForm handleChange={handleChange} />
+              <Box
+                style={{
+                  display: "flex",
+                  gap: "11px",
+                  justifyContent: "center",
+                  marginTop: "11px",
+                }}
+              >
+                <Button
+                  onClick={() => {
+                    if (!validateForm()) {
+                      // Perform form submission logic here, e.g., send data to the server
+                      console.log("", errors);
+                      const { email, name, id } = errors;
+                      notifications.show({
+                        title: "Default notification",
+                        message: `${name} ${email} ${id}`,
+                      });
+                      return;
+                    }
+                    setActive((currentStep) => currentStep + 1);
+                  }}
+                  disabled={
+                    formData.id === "" ||
+                    formData.name === "" ||
+                    formData.email == ""
+                  }
+                >
+                  Next
+                </Button>
+                <Button variant="default" onClick={prevStep}>
+                  Back
+                </Button>
+              </Box>
+            </Stepper.Step>
+            <Stepper.Completed>
+              <Box
+                sx={(theme) => ({
+                  textAlign: "center",
+                })}
+              >
+                <Text>ID: {formData.id}</Text>
+                <Text>Name: {formData.name}</Text>
+                <Text>Email: {formData.email}</Text>
+                <Text>Date: {date}</Text>
+                <Text>Origin: {origin}</Text>
+                <Text>Destination: {dest}</Text>
+                <Text>Road: {road}</Text>
+                <Text>BusId: {bus?._id}</Text>
+                <Text>seatPrice: {bus?.seatPrice}</Text>
+                <Text>BusNumber: {bus?._id}</Text>
+                {seatNumber.map((seat, index) => {
+                  return <Text key={index}>Seatnumber: {seat}</Text>;
+                })}
 
-              <Button onClick={handleBuyTicket} my={11}>
-                By a ticket
-              </Button>
-            </Box>
-          </Stepper.Completed>
-        </Stepper>
+                <Button onClick={handleBuyTicket} my={11}>
+                  By a ticket
+                </Button>
+              </Box>
+            </Stepper.Completed>
+          </Stepper>
+        )}
 
         {/* <Group position="center" mt="xl">
           <Button variant="default" onClick={prevStep}>

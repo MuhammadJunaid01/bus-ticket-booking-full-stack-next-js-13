@@ -1,13 +1,11 @@
 import { connectDB } from "@/lib/db";
 import Bus from "@/lib/models/buss.models";
 import Ticket from "@/lib/models/ticket.models";
-import { Types } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
-import jsPDF from "jspdf";
 import fs from "fs-extra";
 import path from "path";
-import autoTable from "jspdf-autotable";
 import { sendVerificationEmail } from "@/lib/email";
+import { promisify } from "util";
 export const POST = async (req: NextRequest) => {
   connectDB();
 
@@ -24,16 +22,43 @@ export const POST = async (req: NextRequest) => {
     name,
     busNumber,
   } = body;
+  if (
+    userId === "" ||
+    busId === "" ||
+    seatNumber.length === 0 ||
+    boardingPlace === "" ||
+    destination === "" ||
+    date === "" ||
+    email === "" ||
+    id === "" ||
+    name === "" ||
+    busNumber === undefined
+  ) {
+    return new NextResponse(
+      JSON.stringify({ message: "something you miss try again!" }),
+      {
+        status: 404,
+      }
+    );
+  }
   const bus = await Bus.findById(busId);
+  const jsPDF = (await import("jspdf")).default; // Dynamic import of jspdf
+  const autoTable = (await import("jspdf-autotable")).default;
   const doc = new jsPDF();
+
   const fileName = `${Math.trunc(Math.random() * 10000) + "generated.pdf"}`; // Change the file name if needed
   const publicPath = path.join(process.cwd(), "public");
-  console.log("BUS Number", busNumber);
+  // console.log("BUS Number", busNumber);
   const pdfFolderPath = path.join(publicPath, "pdf");
   const filePath = path.join(pdfFolderPath, fileName);
   await fs.ensureDir(pdfFolderPath);
+  const text = "Ticket Information";
+  const fontSize = 12; // Adjust the font size if needed
+  const textWidth =
+    doc.getTextWidth(text) * (fontSize / doc.internal.scaleFactor);
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const centerPosition = (pageWidth - textWidth) / 2;
   try {
-    console.log("BUS ID", busId);
     if (!bus) {
       throw new Error("Bus not found");
     }
@@ -103,38 +128,59 @@ export const POST = async (req: NextRequest) => {
         }
       );
     }
-    doc.text("Ticket Information", 10, 10);
+    // const pdfBuffer = doc.output("arraybuffer");
+    const totalPrice = seatNumber.reduce(
+      (total: number, seat: number) => total + seat * bus.seatPrice,
+      0
+    );
+    doc.setFontSize(fontSize);
+    doc.text(text, centerPosition, 10);
     autoTable(doc, {
-      head: [["Ticket ID", "Buyer Name", "Price", "Date", "Destination"]],
-
-      body: [
+      head: [
         [
-          ticket._id,
-          name,
-          seatNumber.reduce(
-            (total: number, number: number) => total + number,
-            0
-          ),
-          date,
-          destination,
+          "Ticket ID",
+          "Buyer Name",
+          "Price",
+          "Date",
+          "boardingPlace",
+          "Destination",
         ],
-
-        // ...
       ],
+      body: [[ticket._id, name, totalPrice, date, boardingPlace, destination]],
+      // ...
     });
+    const pdfBuffer = doc.output("arraybuffer");
 
     doc.save(filePath);
+    await fs.writeFile(filePath, Buffer.from(pdfBuffer));
+    const response = new NextResponse(Buffer.from(pdfBuffer));
     sendVerificationEmail({
       email: "m.junaidbkh2020@gmail.com",
       pdfFilePath: filePath,
       emailType: "sendPdf",
     });
-    return new NextResponse(
-      JSON.stringify({ message: "successfully buy a ticket", data: ticket }),
-      {
-        status: 200,
-      }
+    response.headers.set("Content-Type", "application/pdf");
+    response.headers.set(
+      "Content-Disposition",
+      `attachment; filename=${fileName}`
     );
+    const unlinkAsync = promisify(fs.unlink);
+
+    setTimeout(async () => {
+      try {
+        await unlinkAsync(filePath);
+        console.log("PDF file deleted after 2 minutes.");
+      } catch (error) {
+        console.error("Error deleting the PDF file after 2 minutes:", error);
+      }
+    }, 120000);
+    return response;
+    // return new NextResponse(
+    //   JSON.stringify({ message: "success", data: ticket }),
+    //   {
+    //     status: 500,
+    //   }
+    // );
   } catch (error: any) {
     console.log("errror ", error.message);
     return new NextResponse(JSON.stringify({ message: error.message }), {

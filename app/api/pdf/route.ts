@@ -36,21 +36,21 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   });
   //   console.log("path pfg", pathD);
   // Add content to the PDF
-  //   doc.setFontSize(25);
-  //   doc.text("Hello, This is your PDF!", 10, 10);
+  doc.setFontSize(25);
+  doc.text("Hello, This is your PDF!", 10, 10);
 
   // Save the PDF to a buffer
-  //   const pdfBuffer = doc.output("arraybuffer");
+  const pdfBuffer = doc.output("arraybuffer");
 
   // Write the buffer to a file
-  //   await fs.writeFile(filePath, Buffer.from(pdfBuffer));
+  await fs.writeFile(filePath, Buffer.from(pdfBuffer));
   // Set the response headers
-  //   const response = new NextResponse(Buffer.from(pdfBuffer));
-  //   response.headers.set("Content-Type", "application/pdf");
-  //   response.headers.set(
-  //     "Content-Disposition",
-  //     `attachment; filename=${fileName}`
-  //   );
+  const response = new NextResponse(Buffer.from(pdfBuffer));
+  response.headers.set("Content-Type", "application/pdf");
+  response.headers.set(
+    "Content-Disposition",
+    `attachment; filename=${fileName}`
+  );
   //   res.setHeader("Content-Type", "application/pdf");
   //   res.setHeader("Content-Disposition", `attachment; filename=${fileName}`);
 
@@ -59,10 +59,9 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
   // Optionally, you can remove the generated file after sending it to the client
 
-  //   await fs.remove(filePath);
-  //   response.json({});
-  //   console.log(__dirname);
-  //   return response;
+  await fs.remove(filePath);
+  console.log(__dirname);
+  return response;
   //   doc.pipe(fs.createWriteStream("../auth/padf.pdf")); // write to PDF
   return new NextResponse(JSON.stringify({ m: "jnjnkjkj" }));
 };

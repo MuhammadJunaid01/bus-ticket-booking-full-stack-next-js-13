@@ -99,7 +99,7 @@ const BusModal: React.FC<BusPropsTypes> = ({
         boardingPlace: origin,
         date: date,
         seatNumber: seatNumber,
-        email: "m.junaidbknjnbnhb",
+        email: formData.email,
         id: formData.id,
         name: formData.name,
         busNumber: bus.busNumber,

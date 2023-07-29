@@ -60,6 +60,9 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     doc.getTextWidth(text) * (fontSize / doc.internal.scaleFactor);
   const pageWidth = doc.internal.pageSize.getWidth();
   const centerPosition = (pageWidth - textWidth) / 2;
+
+  const totalPrice = seatNumber.length * bus.seatPrice;
+
   try {
     if (!bus) {
       throw new Error("Bus not found");

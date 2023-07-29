@@ -27,6 +27,8 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   const isHomePage = "/" === path ? true : false;
+  const isSlashHomePage = "/home" === path ? true : false;
+  console.log("isSlashHomePage", isSlashHomePage);
   // console.log(data);
   // const [cookies] = useCookies(["jwt"]); //
   // console.log("JWT COKC FROM Providers cookies.jwt", cookies);
@@ -44,7 +46,9 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
           theme={{ colorScheme }}
         >
           <Provider store={store}>
-            {isHomePage ? null : <Navbar isHomePage={false} />}
+            {isHomePage || isSlashHomePage ? null : (
+              <Navbar isHomePage={false} />
+            )}
             <Notifications position="top-center" zIndex={2077} />
             <CookiesProvider>{children}</CookiesProvider>
           </Provider>

@@ -1,3 +1,4 @@
+"use client";
 import Auth from "./Auth";
 import AffixScroll from "./AffixScroll";
 import Header from "./Header";
@@ -17,7 +18,7 @@ import SimpleBusTable from "./SimpleBusTable";
 import BusModal from "./BusModal";
 import BookingForm from "./BookingForm";
 import CustomSelect from "./CustomSelect";
-
+import CheckTicket from "./CheckTicket";
 export {
   Navbar,
   HomePage,
@@ -38,4 +39,5 @@ export {
   BusModal,
   BookingForm,
   CustomSelect,
+  CheckTicket,
 };

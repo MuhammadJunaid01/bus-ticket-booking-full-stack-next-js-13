@@ -3,17 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-const secretKey = "your-secret-key"; // Change this to a secure secret key
 
-export const POST = async (req: NextRequest, res: NextResponse) => {
+export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
 
     const { email, password } = body;
-    console.log(body);
     // Find the user in the database
     const user = await User.findOne({ email });
-    // console.log("user", user);
+
     if (!user) {
       return new NextResponse(JSON.stringify({ message: "User not found" }), {
         status: 404,

@@ -75,20 +75,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         verificationToken: user.verificationToken,
         emailType: "verifyEmail",
       });
-      // sendVerificationEmail(
-      //   user.email,
-      //   user.verificationToken,
-      //   "verifyEmail",
-      //   (error, successMessage) => {
-      //     if (error) {
-      //       console.error("Failed to send verification email:", error);
-      //       // Handle the error here, notify the user, or perform any other necessary action.
-      //     } else {
-      //       console.log(successMessage);
-      //       // Email sent successfully, you can perform additional actions if needed.
-      //     }
-      //   }
-      // );
 
       /* The code `return new NextResponse(...)` is creating a new response object to be returned by the
      server. */

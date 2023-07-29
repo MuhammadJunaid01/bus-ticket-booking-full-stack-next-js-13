@@ -23,10 +23,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const body = await req.json();
   const { email, token } = body;
 
-  // return new NextResponse(
-  //   JSON.stringify({ message: "1111111111111Email already exists" }),
-  //   { status: 200 }
-  // );
   try {
     const user = await User.findOneAndUpdate(
       { email, verificationToken: token },
@@ -45,34 +41,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         },
         { status: 200 }
       );
-      // setCookie("jwt", _doc, {
-      //   maxAge: 60 * 6 * 24,
-      //   path: "/",
-      //   domain: domain,
-      //   httpOnly: true,
-      // });
-      // cookies().set({
-      //   name: "jwt",
-      //   value: _doc,
-      //   httpOnly: true,
-      //   path: "/",
-      //   maxAge: 60 * 6 * 24,
-      //   domain: domain,
-      // });
-      // cookies().set("jwt", userInfo, {
-      //   secure: true,
-      //   httpOnly: true,
-      //   path: "/",
-      //   domain: domain,
-      // });
-      // cookies().set({
-      //   name: "jwt",
-      //   value: userInfo,
-      //   httpOnly: true,
-      //   path: "/",
-      //   secure: true,
-      //   domain: "",
-      // });
+
       // console.log("USER INFO", userInfo);
       const userInfoString = JSON.stringify(userInfo);
 

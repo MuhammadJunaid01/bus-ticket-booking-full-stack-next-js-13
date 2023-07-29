@@ -8,7 +8,7 @@ import { AuthTypes } from "@/lib/types";
 const handleAuth = async ({ name, email, password, endPoint }: AuthTypes) => {
   const BASEURL =
     process.env.NODE_ENV === "production"
-      ? "https://multishop-ecommerce.vercel.app"
+      ? "https://etickets-bd.vercel.app"
       : "http://localhost:3000";
   let data: any = {};
   if (name === undefined) {

@@ -7,12 +7,8 @@ import Ticket from "@/lib/models/ticket.models";
 import { NextRequest, NextResponse } from "next/server";
 import { sendVerificationEmail } from "@/lib/email";
 import path from "path";
+import { promisify } from "util";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 export const POST = async (req: NextRequest, res: NextResponse) => {
   connectDB();
 
@@ -176,16 +172,16 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       `attachment; filename=${fileName}`
     );
 
-    // const unlinkAsync = promisify(fs.unlink);
+    const unlinkAsync = promisify(fs.unlink);
 
-    // setTimeout(async () => {
-    //   try {
-    //     await unlinkAsync(filePath);
-    //     console.log("PDF file deleted after 2 minutes.");
-    //   } catch (error) {
-    //     console.error("Error deleting the PDF file after 2 minutes:", error);
-    //   }
-    // }, 120000);
+    setTimeout(async () => {
+      try {
+        await unlinkAsync(filePath);
+        console.log("PDF file deleted after 2 minutes.");
+      } catch (error) {
+        console.error("Error deleting the PDF file after 2 minutes:", error);
+      }
+    }, 120000);
     return response;
   } catch (error: any) {
     console.log("errror ", error.message);

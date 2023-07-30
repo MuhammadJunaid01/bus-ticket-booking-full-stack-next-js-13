@@ -1,6 +1,3 @@
-import fs from "fs-extra";
-// api/buyTicket.ts
-
 import { connectDB } from "@/lib/db";
 import Bus from "@/lib/models/buss.models";
 import Ticket from "@/lib/models/ticket.models";
@@ -10,6 +7,7 @@ import path from "path";
 import { promisify } from "util";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+
 export const POST = async (req: NextRequest, res: NextResponse) => {
   connectDB();
 
@@ -49,11 +47,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
   const doc = new jsPDF();
   const fileName = `${Math.trunc(Math.random() * 10000) + "generated.pdf"}`; // Change the file name if needed
-  const publicPath = path.join(process.cwd(), "public");
-
-  const pdfFolderPath = path.join(publicPath, "pdf");
-  const filePath = path.join(pdfFolderPath, fileName);
-  await fs.ensureDir(pdfFolderPath);
   const text = "Ticket Information";
   const fontSize = 12; // Adjust the font size if needed
   const textWidth =
@@ -132,11 +125,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         }
       );
     }
-    const totalPrice = seatNumber.reduce(
-      (total: number, seat: number) => total + seat * bus.seatPrice,
-      0
-    );
-    doc.save(filePath);
+
     doc.setFontSize(fontSize);
     doc.text(text, centerPosition, 10);
     autoTable(doc, {
@@ -153,36 +142,26 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       body: [[ticket._id, name, totalPrice, date, boardingPlace, destination]],
       // ...
     });
+
     const pdfBuffer = doc.output("arraybuffer");
-    await fs.writeFile(filePath, Buffer.from(pdfBuffer));
 
-    const response = new NextResponse(Buffer.from(pdfBuffer));
-
-    // Send the email
+    // Send the email with the PDF buffer as an attachment
     sendVerificationEmail({
       email: "m.junaidbkh2020@gmail.com",
-      pdfBuffer: pdfBuffer, // You might need to modify the email sending function to accept a PDF buffer directly
+      pdfBuffer: pdfBuffer,
       emailType: "sendPdf",
     });
+
+    const response = new NextResponse(Buffer.from(pdfBuffer));
     response.headers.set("Content-Type", "application/pdf");
     response.headers.set(
       "Content-Disposition",
       `attachment; filename=${fileName}`
     );
 
-    const unlinkAsync = promisify(fs.unlink);
-
-    setTimeout(async () => {
-      try {
-        await unlinkAsync(filePath);
-        console.log("PDF file deleted after 2 minutes.");
-      } catch (error) {
-        console.error("Error deleting the PDF file after 2 minutes:", error);
-      }
-    }, 120000);
     return response;
   } catch (error: any) {
-    console.log("errror ", error.message);
+    console.log("error ", error.message);
     return new NextResponse(JSON.stringify({ message: error.message }), {
       status: 500,
     });

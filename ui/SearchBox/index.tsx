@@ -1,5 +1,12 @@
 /* eslint-disable react/jsx-no-undef */
-import { Box, Button, Input, Loader, UnstyledButton } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Input,
+  Loader,
+  TextInput,
+  UnstyledButton,
+} from "@mantine/core";
 import React from "react";
 import { IconArrowsExchange2, IconMapPin } from "@tabler/icons-react";
 import { busRouteData } from "@/lib/data";
@@ -40,32 +47,30 @@ const SearchBox = () => {
     return selected.map((data) => formatToDateString(data));
   }, [selected]);
   const handleSearch = async () => {
-    if (
-      road === "" ||
-      destValue === "" ||
-      originValue === "" ||
-      selected.length === 0
-    ) {
+    if (destValue === "" || originValue === "" || selected.length === 0) {
       notifications.show({
         title: "Please fil all feilds",
         message: "Please fil all feilds",
-
-        // color: "red",
-        // sx: { backgroundColor: },
       });
-      return; // You might want to include this return statement to stop further execution after displaying the alert.
+      return;
     }
     setLoading(true);
     await loadUi(400);
     setLoading(false);
-    const bus = searchBus(data, road);
-    const dateStr = formatSelectedDates();
-    seDateStr(dateStr[0]);
+    const roadVl = `${originValue}-${destValue}`;
+    const bus = searchBus(data, roadVl);
+
     if (bus) {
       setBus(bus);
-      setModalVisible(true); // Show the modal if the bus is found
+      setModalVisible(true);
     }
   };
+  React.useEffect(() => {
+    const dateStr = formatSelectedDates();
+    seDateStr(dateStr[0]);
+  }, [formatSelectedDates]);
+
+  // console.log("road val", roadVl);
   return (
     <>
       <Box className={container}>
@@ -111,15 +116,21 @@ const SearchBox = () => {
             </UnstyledButton>
           </Box>
         </Box>
-        <CustomSelect
+
+        {/* <CustomSelect
           value={road}
           setState={setRoad}
           pl="Pick one Road"
           label=""
           data={busRouteData}
           isHomePage
+        /> */}
+
+        <CustomCalendar
+          date={dateStr}
+          selected={selected}
+          setSelected={setSelected}
         />
-        <CustomCalendar selected={selected} setSelected={setSelected} />
 
         <Button loading={loading} onClick={handleSearch} className={searchBtn}>
           {/* {loading ? <Loader size={20} mt={10} /> : null} */}

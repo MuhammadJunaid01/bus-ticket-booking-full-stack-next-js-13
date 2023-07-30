@@ -39,18 +39,29 @@ export const selectDate = (
   // If the maximum selection is reached, return the original array
   return selected;
 };
+const areStringArraysEqual = (arr1: string[], arr2: string[]): boolean => {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  return arr1.every((element, index) => element === arr2[index]);
+};
 export const searchBus = (
   data: BusesTypes[],
   road: string
 ): BusesTypes | null => {
-  const result = data.find((bus) => bus.roadName === road);
-  // If there's a matching result, return it
+  const result = data.find((bus) => {
+    const busRoadNameArray = bus.roadName.split("-");
+    const dataRoadArray = road.split("-");
+    if (areStringArraysEqual(busRoadNameArray, dataRoadArray)) {
+      return bus;
+    }
+  });
 
   if (result) {
     return result;
   }
 
-  // If there's no matching result, return null
   return null;
 };
 export const loadUi = (num: number) => {

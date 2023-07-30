@@ -2,7 +2,8 @@ import { createStyles } from "@mantine/core";
 export const seacrhBoxStyles = createStyles((theme) => ({
   container: {
     backgroundColor: theme.colorScheme === "dark" ? "white" : "#5B21A9",
-    width: "100%",
+    width: "70%",
+    margin: "0 auto",
     borderRadius: theme.radius.sm,
     [theme.fn.largerThan("sm")]: {
       height: "140px",
@@ -46,7 +47,7 @@ export const seacrhBoxStyles = createStyles((theme) => ({
   },
   searchBtn: {
     height: "50px",
-    width: "17%",
+    width: "22%",
     textAlign: "center",
     borderRadius: theme.radius.sm,
     backgroundColor:

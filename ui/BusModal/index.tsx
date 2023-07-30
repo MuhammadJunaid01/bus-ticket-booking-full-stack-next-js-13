@@ -52,7 +52,7 @@ const BusModal: React.FC<BusPropsTypes> = ({
   const [seatNumber, setSeatNumber] = React.useState<number[]>([]);
   const [active, setActive] = React.useState(0);
   const [pdfUrl, setPdfUrl] = React.useState<string | null>(null);
-
+  const [loading, setIsloading] = React.useState<boolean>(false);
   const router = useRouter();
   ///
   const nextStep = () =>
@@ -92,7 +92,8 @@ const BusModal: React.FC<BusPropsTypes> = ({
       return;
     }
     try {
-      const pdfUrl = await buyTicket({
+      setIsloading(true);
+      const pdfUrl: string | null = await buyTicket({
         busId: bus?._id,
         userId: "64c3d6b0826091556b9d2f27",
         destination: dest,
@@ -105,6 +106,7 @@ const BusModal: React.FC<BusPropsTypes> = ({
         busNumber: bus.busNumber,
       });
       setPdfUrl(pdfUrl);
+      setIsloading(false);
     } catch (error: any) {
       console.error(error.message);
     }
@@ -120,7 +122,8 @@ const BusModal: React.FC<BusPropsTypes> = ({
         centered
         // title="m,fakmfjk"
       >
-        <LoadingOverlay visible={visible} overlayBlur={2} />
+        <LoadingOverlay visible={visible || loading} overlayBlur={2} />
+        {/* <LoadingOverlay visible={loading} overlayBlur={2} /> */}
         {pdfUrl ? (
           <Box>
             <iframe
@@ -245,29 +248,35 @@ const BusModal: React.FC<BusPropsTypes> = ({
               </Box>
             </Stepper.Step>
             <Stepper.Completed>
-              <Box
-                sx={(theme) => ({
-                  textAlign: "center",
-                })}
-              >
-                <Text>ID: {formData.id}</Text>
-                <Text>Name: {formData.name}</Text>
-                <Text>Email: {formData.email}</Text>
-                <Text>Date: {date}</Text>
-                <Text>Origin: {origin}</Text>
-                <Text>Destination: {dest}</Text>
-                <Text>Road: {road}</Text>
-                <Text>BusId: {bus?._id}</Text>
-                <Text>seatPrice: {bus?.seatPrice}</Text>
-                <Text>BusNumber: {bus?._id}</Text>
-                {seatNumber.map((seat, index) => {
-                  return <Text key={index}>Seatnumber: {seat}</Text>;
-                })}
+              {loading ? (
+                <Box>
+                  <Text>Wait for your ticket invoice</Text>
+                </Box>
+              ) : (
+                <Box
+                  sx={(theme) => ({
+                    textAlign: "center",
+                  })}
+                >
+                  <Text>ID: {formData.id}</Text>
+                  <Text>Name: {formData.name}</Text>
+                  <Text>Email: {formData.email}</Text>
+                  <Text>Date: {date}</Text>
+                  <Text>Origin: {origin}</Text>
+                  <Text>Destination: {dest}</Text>
+                  <Text>Road: {road}</Text>
+                  <Text>BusId: {bus?._id}</Text>
+                  <Text>seatPrice: {bus?.seatPrice}</Text>
+                  <Text>BusNumber: {bus?._id}</Text>
+                  {seatNumber.map((seat, index) => {
+                    return <Text key={index}>Seatnumber: {seat}</Text>;
+                  })}
 
-                <Button onClick={handleBuyTicket} my={11}>
-                  By a ticket
-                </Button>
-              </Box>
+                  <Button onClick={handleBuyTicket} my={11}>
+                    By a ticket
+                  </Button>
+                </Box>
+              )}
             </Stepper.Completed>
           </Stepper>
         )}

@@ -5,7 +5,6 @@ import { connectDB } from "@/lib/db";
 import Bus from "@/lib/models/buss.models";
 import Ticket from "@/lib/models/ticket.models";
 import { NextRequest, NextResponse } from "next/server";
-import { sendVerificationEmail } from "@/lib/email";
 import path from "path";
 import { promisify } from "util";
 
@@ -159,11 +158,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const response = new NextResponse(Buffer.from(pdfBuffer));
 
     // Send the email
-    sendVerificationEmail({
-      email: "m.junaidbkh2020@gmail.com",
-      pdfBuffer: pdfBuffer, // You might need to modify the email sending function to accept a PDF buffer directly
-      emailType: "sendPdf",
-    });
+
     response.headers.set("Content-Type", "application/pdf");
     response.headers.set(
       "Content-Disposition",

@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes } = navbarStyles();
   const router = useRouter();
-  // const [isDarkMode, setIsDarkMode] = React.useState<boolean>(false);
+
   const [themeMode, settThemeMode] = React.useState<string | null>();
   const links = Links({ data: mockdata });
   const [scroll, scrollTo] = useWindowScroll();
@@ -64,7 +64,6 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
               <Box
                 style={{
                   display: "flex",
-                  // alignItems: "center",
                   justifyContent: "space-between",
                 }}
               >

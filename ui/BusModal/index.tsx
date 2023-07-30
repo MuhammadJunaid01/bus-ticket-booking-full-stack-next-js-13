@@ -250,7 +250,7 @@ const BusModal: React.FC<BusPropsTypes> = ({
             <Stepper.Completed>
               {loading ? (
                 <Box>
-                  <Text>Wait for your ticket invoice</Text>
+                  <Text size={55}>Wait for your ticket invoice</Text>
                 </Box>
               ) : (
                 <Box

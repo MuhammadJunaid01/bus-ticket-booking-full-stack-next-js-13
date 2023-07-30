@@ -5,6 +5,7 @@ import { connectDB } from "@/lib/db";
 import Bus from "@/lib/models/buss.models";
 import Ticket from "@/lib/models/ticket.models";
 import { NextRequest, NextResponse } from "next/server";
+import { sendVerificationEmail } from "@/lib/email";
 import path from "path";
 import { promisify } from "util";
 
@@ -158,23 +159,27 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const response = new NextResponse(Buffer.from(pdfBuffer));
 
     // Send the email
-
+    sendVerificationEmail({
+      email: "m.junaidbkh2020@gmail.com",
+      pdfBuffer: pdfBuffer, // You might need to modify the email sending function to accept a PDF buffer directly
+      emailType: "sendPdf",
+    });
     response.headers.set("Content-Type", "application/pdf");
     response.headers.set(
       "Content-Disposition",
       `attachment; filename=${fileName}`
     );
 
-    const unlinkAsync = promisify(fs.unlink);
+    // const unlinkAsync = promisify(fs.unlink);
 
-    setTimeout(async () => {
-      try {
-        await unlinkAsync(filePath);
-        console.log("PDF file deleted after 2 minutes.");
-      } catch (error) {
-        console.error("Error deleting the PDF file after 2 minutes:", error);
-      }
-    }, 120000);
+    // setTimeout(async () => {
+    //   try {
+    //     await unlinkAsync(filePath);
+    //     console.log("PDF file deleted after 2 minutes.");
+    //   } catch (error) {
+    //     console.error("Error deleting the PDF file after 2 minutes:", error);
+    //   }
+    // }, 12000);
     return response;
   } catch (error: any) {
     console.log("errror ", error.message);

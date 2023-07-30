@@ -8,7 +8,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendVerificationEmail } from "@/lib/email";
 import path from "path";
 import { promisify } from "util";
-
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 export const POST = async (req: NextRequest, res: NextResponse) => {
   connectDB();
 
@@ -45,8 +46,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     );
   }
   const bus = await Bus.findById(busId);
-  const jsPDF = (await import("jspdf")).default; // Dynamic import of jspdf
-  const autoTable = (await import("jspdf-autotable")).default;
+
   const doc = new jsPDF();
   const fileName = `${Math.trunc(Math.random() * 10000) + "generated.pdf"}`; // Change the file name if needed
   const publicPath = path.join(process.cwd(), "public");
@@ -170,16 +170,16 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       `attachment; filename=${fileName}`
     );
 
-    // const unlinkAsync = promisify(fs.unlink);
+    const unlinkAsync = promisify(fs.unlink);
 
-    // setTimeout(async () => {
-    //   try {
-    //     await unlinkAsync(filePath);
-    //     console.log("PDF file deleted after 2 minutes.");
-    //   } catch (error) {
-    //     console.error("Error deleting the PDF file after 2 minutes:", error);
-    //   }
-    // }, 12000);
+    setTimeout(async () => {
+      try {
+        await unlinkAsync(filePath);
+        console.log("PDF file deleted after 2 minutes.");
+      } catch (error) {
+        console.error("Error deleting the PDF file after 2 minutes:", error);
+      }
+    }, 120000);
     return response;
   } catch (error: any) {
     console.log("errror ", error.message);

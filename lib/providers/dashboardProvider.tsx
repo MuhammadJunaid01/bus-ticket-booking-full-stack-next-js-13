@@ -4,6 +4,7 @@ import { AffixScroll } from "@/ui";
 import {
   ColorScheme,
   ColorSchemeProvider,
+  Grid,
   MantineProvider,
 } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
@@ -24,7 +25,7 @@ const DashboardProvider = ({ children }: ProvidersProps) => {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   return (
-    <div>
+    <>
       <AffixScroll />
       <NextTopLoader height={3} showSpinner={false} />
       <ColorSchemeProvider
@@ -38,11 +39,12 @@ const DashboardProvider = ({ children }: ProvidersProps) => {
         >
           <Provider store={store}>
             <Notifications position="top-center" zIndex={2077} />
+            {/* <h1>navbar</h1> */}
             {children}
           </Provider>
         </MantineProvider>
       </ColorSchemeProvider>
-    </div>
+    </>
   );
 };
 

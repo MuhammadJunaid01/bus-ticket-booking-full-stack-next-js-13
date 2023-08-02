@@ -34,7 +34,7 @@ const NavbarSmallDevices: React.FC<NavbarSmallDevicesProps> = ({
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="E SHOP"
+        title="AR Poribohon"
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >

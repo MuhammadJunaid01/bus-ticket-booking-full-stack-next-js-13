@@ -47,7 +47,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
       }
       // console.log(isVaildAccess);
     }
-  }, []);
+  }, [push]);
   return (
     <div>
       <AffixScroll />

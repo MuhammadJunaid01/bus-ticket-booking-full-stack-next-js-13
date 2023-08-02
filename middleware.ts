@@ -31,20 +31,20 @@ export async function middleware(request: NextRequest) {
       },
     });
   }
-  if (request.url === `${domain}/dashboard`) {
-    if (refreshTokenValue) {
-      const { isAdmin, refreshToken } = JSON.parse(refreshTokenValue ?? "");
-      if (!isAdmin) {
-        return NextResponse.redirect(new URL("/", request.url));
-      }
-      console.log("user id", isAdmin);
+  // if (request.url === `${domain}/dashboard`) {
+  //   if (refreshTokenValue) {
+  //     const { isAdmin, refreshToken } = JSON.parse(refreshTokenValue ?? "");
+  //     if (!isAdmin) {
+  //       return NextResponse.redirect(new URL("/", request.url));
+  //     }
+  //     console.log("user id", isAdmin);
 
-      // if (!) {
+  //     // if (!) {
 
-      // }
-    }
-    console.log("dashboard");
-  }
+  //     // }
+  //   }
+  //   console.log("dashboard");
+  // }
   if (
     pathname.includes("/api/buyTicket") ||
     pathname.includes("/api/checkTicket") ||

@@ -2,11 +2,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Providers from "@/lib/providers";
-import Cookies from "js-cookie";
 import DashboardProvider from "@/lib/providers/dashboardProvider";
-import { cookies } from "next/headers";
-
+import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 /* The code block `export const metadata: Metadata = { ... }` is defining an object named `metadata`
 with the type `Metadata`. */

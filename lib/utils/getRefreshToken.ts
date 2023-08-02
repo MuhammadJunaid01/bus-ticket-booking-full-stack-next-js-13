@@ -17,6 +17,10 @@ export const getReshToken = async (refreshToken: any) => {
     const data = await response.json();
     // // Handle the data as needed
     // console.log("DATA", data);
+    if (data) {
+      const { token } = data;
+      localStorage.setItem("accessToken", JSON.stringify(token));
+    }
   } catch (error: any) {
     console.log(error.message);
   }

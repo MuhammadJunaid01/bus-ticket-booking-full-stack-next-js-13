@@ -1,4 +1,4 @@
-import User from "@/lib/models/user.models";
+import User, { IUser } from "@/lib/models/user.models";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest) => {
 
     const { email, password: pass } = body;
     // Find the user in the database
-    const user = await User.findOne({ email });
+    const user: IUser | null = await User.findOne({ email });
     if (user) {
       // Verify the password
       const isPasswordValid = await bcrypt.compare(pass, user.password);
@@ -33,10 +33,13 @@ export const POST = async (req: NextRequest) => {
           { status: 410 }
         );
       }
-      const { password, ...userInfo } = user._doc;
+      const { password, ...userInfo } = user;
       // Generate tokens
       const { accessToken, refreshToken } = generateTokens(user._id);
-
+      const refreshTokenTokenWithInfo = {
+        refreshToken,
+        isAdmin: user.isAdmin,
+      };
       const response = NextResponse.json(
         {
           message: "login success",
@@ -46,6 +49,8 @@ export const POST = async (req: NextRequest) => {
         },
         { status: 200 }
       );
+      const refreshTokenSerialized = JSON.stringify(refreshTokenTokenWithInfo);
+
       response.cookies.set({
         name: "accessToken",
         value: accessToken,
@@ -56,7 +61,7 @@ export const POST = async (req: NextRequest) => {
       });
       response.cookies.set({
         name: "refreshToken",
-        value: refreshToken,
+        value: refreshTokenSerialized,
         httpOnly: true,
         maxAge: 604800,
         sameSite: "strict",

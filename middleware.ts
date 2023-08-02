@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
+import jwt from "jsonwebtoken";
+import User from "./lib/models/user.models";
+import { connectDB } from "./lib/db";
 
 const domain =
   process.env.NODE_ENV === "production"
@@ -16,7 +19,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const jwtCookie = request.cookies.get("jwt")?.value;
   const accessToken = request.cookies.get("accessToken")?.value;
-  const refreshToken = request.cookies.get("refreshToken")?.value;
+  const refreshTokenValue = request.cookies.get("refreshToken")?.value;
 
   const origin = request.headers.get("origin");
   if (origin && !allowedOrign.includes(origin)) {
@@ -28,7 +31,20 @@ export async function middleware(request: NextRequest) {
       },
     });
   }
+  if (request.url === `${domain}/dashboard`) {
+    if (refreshTokenValue) {
+      const { isAdmin, refreshToken } = JSON.parse(refreshTokenValue ?? "");
+      if (!isAdmin) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
+      console.log("user id", isAdmin);
 
+      // if (!) {
+
+      // }
+    }
+    console.log("dashboard");
+  }
   if (
     pathname.includes("/api/buyTicket") ||
     pathname.includes("/api/checkTicket") ||
@@ -60,5 +76,5 @@ this case, it specifies that the middleware should be applied to any request tha
 `/api/:path*` pattern. This means that any request to a path starting with `/api/` will trigger the
 middleware function. */
 export const config = {
-  matcher: ["/api/:path*", "/makeBooking"],
+  matcher: ["/api/:path*", "/makeBooking", "/dashboard"],
 };

@@ -24,7 +24,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const { email, token } = body;
 
   try {
-    const user = await User.findOneAndUpdate(
+    const user: IUser | null = await User.findOneAndUpdate(
       { email, verificationToken: token },
       { $set: { isVerified: true }, $unset: { verificationToken: 1 } },
       { new: true }
@@ -33,8 +33,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     // const {} = user;
     if (user) {
       // const { password, ...userWithoutPassword } = user;
-      const { _doc } = user;
-      const { password, ...userInfo } = _doc;
+
+      const { password, ...userInfo } = user;
       const response = NextResponse.json(
         {
           userInfo,

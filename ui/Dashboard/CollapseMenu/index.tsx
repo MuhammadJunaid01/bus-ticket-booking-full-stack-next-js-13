@@ -31,7 +31,7 @@ const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
   return (
     <Box style={{ width: "100%" }}>
       {isopenSidebar && isHover === false ? (
-        <Box style={{ cursor: "pointer" }}>{icon}</Box>
+        <Box style={{ cursor: "pointer", textAlign: "center" }}>{icon}</Box>
       ) : (
         <Box>
           <Box

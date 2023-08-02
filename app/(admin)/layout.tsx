@@ -1,9 +1,11 @@
-import "./globals.css";
+// import "./globals.css";
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "@/lib/providers";
 import Cookies from "js-cookie";
+import DashboardProvider from "@/lib/providers/dashboardProvider";
+import { cookies } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 /* The code block `export const metadata: Metadata = { ... }` is defining an object named `metadata`
@@ -23,9 +25,9 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <Providers>
+        <DashboardProvider>
           <main>{children}</main>
-        </Providers>
+        </DashboardProvider>
       </body>
     </html>
   );

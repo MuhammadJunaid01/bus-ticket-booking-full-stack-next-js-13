@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { AuthTypes, BusesTypes } from "../types";
+import { BusesTypes } from "../types";
 
 export type DateType = Date | string; // Customize this based on your date representation
 
@@ -46,6 +46,7 @@ const areStringArraysEqual = (arr1: string[], arr2: string[]): boolean => {
 
   return arr1.every((element, index) => element === arr2[index]);
 };
+
 export const searchBus = (
   data: BusesTypes[],
   road: string
@@ -64,6 +65,7 @@ export const searchBus = (
 
   return null;
 };
+
 export const loadUi = (num: number) => {
   return new Promise<void>((resolve) => {
     setTimeout(() => {

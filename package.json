@@ -38,10 +38,11 @@
     "embla-carousel-react": "^8.0.0-rc10",
     "eslint": "^8.0.1",
     "eslint-config-next": "13.4.9",
-    "fs-extra": "^11.1.1",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.31",
+    "jwt-decode": "^3.1.2",
     "limiter": "^2.1.0",
     "mantine-react-table": "^1.0.0",
     "mongoose": "^7.3.4",
@@ -50,7 +51,6 @@
     "nodemailer": "^6.9.3",
     "query-string": "^8.1.0",
     "react": "18.2.0",
-    "react-cookie": "^4.1.1",
     "react-countup": "^6.4.2",
     "react-dom": "18.2.0",
     "react-redux": "^8.1.1",
@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
-    "@types/fs-extra": "^11.0.1",
+    "@types/js-cookie": "^3.0.3",
     "@types/nodemailer": "^6.4.8"
   }
 }

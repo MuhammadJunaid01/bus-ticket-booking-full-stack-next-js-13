@@ -1,7 +1,6 @@
 import { BusesTypes } from "@/lib/types";
 import { loadUi } from "@/lib/utils";
 import { SimpleBusTable } from "@/ui";
-import { useCookies } from "react-cookie";
 
 import {
   Box,
@@ -16,7 +15,7 @@ import { IconArmchair, IconCircleCheck } from "@tabler/icons-react";
 import React from "react";
 import { BookingForm } from "@/ui";
 import useFormValidation from "@/lib/hooks/validateForm";
-import { buyTicket } from "@/lib/api";
+import { buyTicket, domain } from "@/lib/api";
 import { useRouter } from "next/navigation";
 export interface BusPropsTypes {
   opend: boolean;
@@ -68,7 +67,6 @@ const BusModal: React.FC<BusPropsTypes> = ({
     nextStep();
   };
   const handleSeatSelect = (index: number) => {
-    // Check if the seat is already selected
     if (seatNumber.includes(index)) {
       setSeatNumber((prevSelect) =>
         prevSelect.filter((seatIndex) => seatIndex !== index)
@@ -105,8 +103,13 @@ const BusModal: React.FC<BusPropsTypes> = ({
         name: formData.name,
         busNumber: bus.busNumber,
       });
-      setPdfUrl(pdfUrl);
-      setIsloading(false);
+
+      if (pdfUrl === `${domain}/auth`) {
+        router.push(pdfUrl);
+      } else {
+        setPdfUrl(pdfUrl);
+        setIsloading(false);
+      }
     } catch (error: any) {
       console.error(error.message);
     }
@@ -117,13 +120,11 @@ const BusModal: React.FC<BusPropsTypes> = ({
       <Modal
         opened={opend}
         onClose={() => closeModal(false)}
-        // mt={53}
         size="xl"
         centered
-        // title="m,fakmfjk"
       >
-        <LoadingOverlay visible={visible || loading} overlayBlur={2} />
-        {/* <LoadingOverlay visible={loading} overlayBlur={2} /> */}
+        <LoadingOverlay visible={visible || loading} overlayBlur={0.5} />
+
         {pdfUrl ? (
           <Box>
             <iframe

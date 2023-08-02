@@ -13,13 +13,11 @@ const allowedOrign =
 export async function middleware(request: NextRequest) {
   /* The code snippet is checking the value of the "Origin" header in the incoming request. The
   "Origin" header specifies the domain that the request is coming from. */
+  const { pathname } = request.nextUrl;
   const jwtCookie = request.cookies.get("jwt")?.value;
-  if (jwtCookie) {
-    const jwt = JSON.parse(jwtCookie); // Access the "jwt" property directly
-    // console.log("jwt", jwt.name);
-  }
+  const accessToken = request.cookies.get("accessToken")?.value;
+  const refreshToken = request.cookies.get("refreshToken")?.value;
 
-  // Find cookie
   const origin = request.headers.get("origin");
   if (origin && !allowedOrign.includes(origin)) {
     return new NextResponse(null, {
@@ -31,15 +29,19 @@ export async function middleware(request: NextRequest) {
     });
   }
 
-  if (request.url === `http://localhost:3000/makeBooking`) {
-    if (jwtCookie) {
-      console.log("COCKIE gotten");
+  if (
+    pathname.includes("/api/buyTicket") ||
+    pathname.includes("/api/checkTicket") ||
+    request.url === `${domain}/makeBooking`
+  ) {
+    // console.log("/api/checkTicket");
+    if (accessToken) {
     } else {
       const response = new NextResponse(null, {
         status: 302,
         statusText: "Redirecting to auth page",
         headers: {
-          Location: "http://localhost:3000/auth",
+          Location: `${domain}/auth`,
         },
       });
       return response;

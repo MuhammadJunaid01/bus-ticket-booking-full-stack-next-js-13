@@ -1,19 +1,36 @@
-import { cache } from "react";
-const url =
-  process.env.NODE_ENV === "production"
-    ? "https://etickets-bd.vercel.app"
-    : process.env.NEXT_PUBLIC_BASE_URL;
-export const checkTicketByID = cache(async (endPoint: string) => {
+import { domain } from ".";
+
+export interface checkTicketParam {
+  endPoint: string;
+  ticketId: string;
+}
+export const checkTicketByID = async (params: checkTicketParam) => {
+  const { endPoint, ticketId } = params;
+  let accessToken;
+  if (typeof window !== "undefined") {
+    accessToken = localStorage.getItem("accessToken") ?? "";
+  }
   try {
-    const res = await fetch(`${url}/${endPoint}`, {
-      next: { revalidate: 60 },
+    const res = await fetch(`${domain}${endPoint}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ ticketId: ticketId }),
     });
 
-    // console.log("CONSOLE FROM", data.status);
-    if (!res.ok) undefined;
+    if (!res.ok) {
+      // Handle non-JSON responses here
+      throw new Error("Error: Request failed with status " + res.status);
+    }
+    if (res.redirected) {
+      return res.url;
+    }
+
     return res.json();
   } catch (error: any) {
     console.log(error.message);
     throw error;
   }
-});
+};

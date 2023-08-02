@@ -79,3 +79,15 @@ export interface ITicket extends Document {
   // New field for payment status with default value false
   // Add other relevant ticket information here, such as payment status, transaction ID, etc.
 }
+export interface TicketData {
+  boardingPlace: string;
+  busNumber: number;
+  date: string;
+  destination: string;
+  isPayment: boolean;
+  purchaseDate: string;
+  seatNumber: number[];
+  user: string;
+  __v: number;
+  _id: string;
+}

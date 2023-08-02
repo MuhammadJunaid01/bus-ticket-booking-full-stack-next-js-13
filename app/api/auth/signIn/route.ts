@@ -3,56 +3,71 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
+import { connectDB } from "@/lib/db";
+const generateTokens = (id: any) => {
+  const accessToken = jwt.sign({ id }, process.env.AUTH_SECRET, {
+    expiresIn: "15m",
+  });
 
+  const refreshToken = jwt.sign({ id }, process.env.AUTH_SECRET, {
+    expiresIn: "7d",
+  });
+
+  return { accessToken, refreshToken };
+};
 export const POST = async (req: NextRequest) => {
+  connectDB();
   try {
     const body = await req.json();
 
-    const { email, password } = body;
+    const { email, password: pass } = body;
     // Find the user in the database
     const user = await User.findOne({ email });
+    if (user) {
+      // Verify the password
+      const isPasswordValid = await bcrypt.compare(pass, user.password);
 
-    if (!user) {
+      if (!isPasswordValid) {
+        return new NextResponse(
+          JSON.stringify({ message: "Invalid credentials" }),
+          { status: 410 }
+        );
+      }
+      const { password, ...userInfo } = user._doc;
+      // Generate tokens
+      const { accessToken, refreshToken } = generateTokens(user._id);
+
+      const response = NextResponse.json(
+        {
+          message: "login success",
+          accessToken,
+          refreshToken,
+          userInfo,
+        },
+        { status: 200 }
+      );
+      response.cookies.set({
+        name: "accessToken",
+        value: accessToken,
+        httpOnly: true,
+        maxAge: 900,
+        sameSite: "strict",
+        path: "/",
+      });
+      response.cookies.set({
+        name: "refreshToken",
+        value: refreshToken,
+        httpOnly: true,
+        maxAge: 604800,
+        sameSite: "strict",
+        path: "/",
+      });
+      return response;
+    } else {
       return new NextResponse(JSON.stringify({ message: "User not found" }), {
         status: 404,
       });
     }
-    const { _id: id } = user;
-
-    // Verify the password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return new NextResponse(
-        JSON.stringify({ message: "Invalid credentials" }),
-        { status: 410 }
-      );
-    }
-
-    // Generate access token
-    const accessToken = jwt.sign({ id }, process.env.AUTH_SECRET ?? "", {
-      expiresIn: "15m",
-    });
-
-    // Generate refresh token
-    const refreshToken = jwt.sign({ id }, process.env.AUTH_SECRET ?? "", {
-      expiresIn: "7d",
-    });
-
-    // Store the refresh token in the user document
-    user.refreshToken = refreshToken;
-    await user.save();
-
-    // Set the access token as a cookie
-    cookies().set({
-      name: "accessToken",
-      value: accessToken,
-      httpOnly: true,
-      path: "/",
-    });
-    // Return the access token as the response
-    return new NextResponse(JSON.stringify({ message: "login success" }), {
-      status: 200,
-    });
   } catch (error) {
     console.error(error);
     return new NextResponse(

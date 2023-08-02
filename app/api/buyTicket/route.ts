@@ -3,8 +3,6 @@ import Bus from "@/lib/models/buss.models";
 import Ticket from "@/lib/models/ticket.models";
 import { NextRequest, NextResponse } from "next/server";
 import { sendVerificationEmail } from "@/lib/email";
-import path from "path";
-import { promisify } from "util";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 

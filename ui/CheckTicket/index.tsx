@@ -1,11 +1,26 @@
 "use client";
-import { Box, Card, MediaQuery, Text, TextInput } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Card,
+  Loader,
+  LoadingOverlay,
+  MediaQuery,
+  Modal,
+  Text,
+  TextInput,
+  UnstyledButton,
+} from "@mantine/core";
 import React from "react";
 import CheckTicketIMG from "@/public/checkTicket.svg";
 import Image from "next/image";
 import { checkTicketStyles } from "@/lib/styles/checkTicket.styles";
 import { IconSearch } from "@tabler/icons-react";
 import { isValidID } from "@/lib/utils";
+import { checkTicketByID, checkTicketParam } from "@/lib/api/checkTicket";
+import { TicketData } from "@/lib/interfaces";
+import { domain } from "@/lib/api";
+import { useRouter } from "next/navigation";
 // import { isValidID } from "@/lib/utils";
 export interface CheckTicketProps {
   title: string;
@@ -13,8 +28,13 @@ export interface CheckTicketProps {
 const CheckTicket: React.FC<CheckTicketProps> = ({ title }) => {
   const { classes } = checkTicketStyles();
   const [id, setID] = React.useState<string>("");
-
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [ticketId, setTicketId] = React.useState<string>(
+    "64c2cfe00cb28551bfcd5ec4"
+  );
+  const [data, setData] = React.useState<TicketData | undefined>(undefined);
   const [error, setError] = React.useState<boolean>(false);
+  const [visible, setVisible] = React.useState<boolean>(false);
   const {
     container,
     content,
@@ -22,17 +42,10 @@ const CheckTicket: React.FC<CheckTicketProps> = ({ title }) => {
     inputStyle,
     serchIcon,
     searchInputBox,
+    searchBtn,
   } = classes;
-  //   const isValidID = (): boolean => {
-  //     console.log("ID", id);
-  //     let validId: boolean;
-  //     if (id.length <= 24) {
-  //       validId = false;
-  //     } else {
-  //       validId = true;
-  //     }
-  //     return validId;
-  //   };
+  const router = useRouter();
+
   const handleChanegeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setID(e.target.value);
     if (!isValidID(id)) {
@@ -41,6 +54,30 @@ const CheckTicket: React.FC<CheckTicketProps> = ({ title }) => {
       setError(false);
     }
   };
+
+  const handleCheckTicket = async () => {
+    const endPoint: string = "/api/checkTicket";
+    const params: checkTicketParam = {
+      endPoint,
+      ticketId,
+    };
+    setVisible(true);
+    setLoading(true);
+    const result = await checkTicketByID(params);
+    console.log(result);
+    if (result === `${domain}/auth`) {
+      router.push(result);
+    }
+    if (result.data) {
+      setData(result.data);
+      // setLoading(false);
+      setVisible(false);
+    } else {
+      setLoading(false);
+    }
+    // console.log(result);
+  };
+
   return (
     <Box className={container}>
       <Text size={40} mt={20} fw={600} align="center">
@@ -51,12 +88,10 @@ const CheckTicket: React.FC<CheckTicketProps> = ({ title }) => {
           <Box className={searchInputBox}>
             <TextInput
               className={inputStyle}
-              //   error={error ? "Invalid email" : null}
               placeholder="Your name"
-              // label="Full name"
               withAsterisk
               variant="unstyled"
-              onBlur={handleChanegeInput}
+              onChange={handleChanegeInput}
             />
             {error ? <Text color="red">Invalid ID</Text> : null}
             <Box className={serchIcon}>
@@ -70,8 +105,31 @@ const CheckTicket: React.FC<CheckTicketProps> = ({ title }) => {
             height={180}
             alt="check ticket logo"
           />
+          <UnstyledButton
+            onClick={handleCheckTicket}
+            style={{ cursor: error ? "not-allowed" : "pointer" }}
+            className={searchBtn}
+          >
+            Search {loading ? <Loader mt={2} size="xs" /> : null}
+          </UnstyledButton>
         </Card>
       </Box>
+      <Modal
+        opened={loading}
+        onClose={() => setLoading(false)}
+        title="Your Ticket Information"
+        centered
+      >
+        <Box>
+          <LoadingOverlay visible={visible} overlayBlur={2} />
+          <Text>Boarding Place: {data?.boardingPlace}</Text>
+          <Text>busNumber: {data?.busNumber}</Text>
+          <Text>Date: {data?.date}</Text>
+          <Text>Payment Status: {data?.isPayment ? "paid" : "unpaid"}</Text>
+          <Text>Purchase Date: {data?.purchaseDate}</Text>
+          <Text>Seats: {data?.seatNumber.map((seat, index) => seat)}</Text>
+        </Box>
+      </Modal>
     </Box>
   );
 };

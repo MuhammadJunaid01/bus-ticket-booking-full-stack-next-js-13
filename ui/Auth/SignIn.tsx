@@ -15,6 +15,7 @@ import handleAuth from "@/lib/utils/handleAuth";
 import { useForm } from "@mantine/form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { loadUi } from "@/lib/utils";
+import { notifications } from "@mantine/notifications";
 const SignIn: React.FC<{
   isSignUp: () => void;
   isForgottenPassword: () => void;
@@ -45,7 +46,7 @@ const SignIn: React.FC<{
 
     router.push("/auth");
   };
-  React.useEffect(() => {
+  const SignByRedirect = React.useCallback(() => {
     const signIn = async () => {
       if (email !== "" || pass !== "") {
         setLoading(true);
@@ -56,20 +57,39 @@ const SignIn: React.FC<{
           password: pass,
           endPoint: "signIn",
         });
+        setLoading(false);
       }
-
-      setLoading(false);
     };
-    try {
-      signIn();
+    return signIn;
+  }, [email, pass]); // Update the dependencies here
 
-      setTimeout(() => {
-        handleClearQuery();
-      }, 8000);
+  React.useEffect(() => {
+    try {
+      if (params) {
+        // Check if params exist
+        SignByRedirect();
+        setTimeout(() => {
+          handleClearQuery();
+        }, 8000);
+      }
     } catch (error) {
       setLoading(false);
     }
-  }, [email, pass]);
+  }, [params, SignByRedirect]);
+  React.useEffect(() => {
+    try {
+      if (params) {
+        SignByRedirect();
+
+        setTimeout(() => {
+          handleClearQuery();
+        }, 8000);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  }, []);
+
   return (
     <Card
       sx={(theme) => ({
@@ -131,8 +151,31 @@ const SignIn: React.FC<{
       </Box>
       <Box mx="auto">
         <form
-          onSubmit={form.onSubmit(({ email, password }) => {
-            handleAuth({ email, password, endPoint: "signIn" });
+          onSubmit={form.onSubmit(async ({ email, password }) => {
+            setLoading(true);
+            const response = handleAuth({
+              email,
+              password,
+              endPoint: "signIn",
+            });
+            const data = await response;
+            console.log("data", data);
+            if (data) {
+              notifications.show({
+                title: "successfully signIn",
+                message: "Hey there, your code is awesome! 🤥",
+              });
+              localStorage.setItem(
+                "accessToken",
+                JSON.stringify(data.accessToken)
+              );
+              localStorage.setItem(
+                "refreshToken",
+                JSON.stringify(data.refreshToken)
+              );
+              localStorage.setItem("userInfo", JSON.stringify(data.userInfo));
+              setLoading(false);
+            }
           })}
         >
           <TextInput

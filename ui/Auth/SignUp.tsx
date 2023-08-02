@@ -196,7 +196,7 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
             mt="sm"
             loading={loading ? true : false}
           >
-            Sign up{" "}
+            Sign up
           </Button>
         </form>
 

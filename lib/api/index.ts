@@ -1,5 +1,6 @@
 import { cache } from "react";
-const url =
+
+export const domain =
   process.env.NODE_ENV === "production"
     ? "https://etickets-bd.vercel.app"
     : process.env.NEXT_PUBLIC_BASE_URL;
@@ -7,7 +8,7 @@ const url =
 the `cache` function from the `react` library to cache the result of the function call. */
 export const getBusByID = cache(async (endPoint: string) => {
   try {
-    const res = await fetch(`${url}/${endPoint}`, {
+    const res = await fetch(`${domain}/${endPoint}`, {
       next: { revalidate: 60 },
     });
 
@@ -29,7 +30,7 @@ export const getBusByID = cache(async (endPoint: string) => {
 export const getAllBus = async () => {
   try {
     const res = await fetch(
-      `${url}/api/buses`,
+      `${domain}/api/buses`,
 
       { cache: "force-cache" }
     );
@@ -76,7 +77,7 @@ export const buyTicket = async ({
     busNumber,
   };
   try {
-    const res = await fetch(`${url}/api/buyTicket`, {
+    const res = await fetch(`${domain}/api/buyTicket`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -88,8 +89,13 @@ export const buyTicket = async ({
       // Process the response here
       const pdfBlob = await res.blob();
       const pdfUrl = URL.createObjectURL(pdfBlob);
-
-      return pdfUrl; // Return the PDF URL to the caller
+      // console.log("BUY TICKET RES", res);
+      if (res.redirected) {
+        return res.url;
+      } else {
+        return pdfUrl;
+      }
+      // Return the PDF URL to the caller
     } else {
       // Handle the error case when the response is not successful
       console.error("Failed to generate PDF:", res.status, res.statusText);

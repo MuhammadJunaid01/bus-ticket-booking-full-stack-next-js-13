@@ -10,18 +10,15 @@ import {
   IconArrowBadgeRight,
   IconArrowBadgeDown,
 } from "@tabler/icons-react";
-import { useRouter } from "next/navigation";
-import { siderbarDahboardData } from "@/lib/data/dashboard-data";
+import { useRouter, usePathname } from "next/navigation";
+
+import SideBarMenu from "./SideBarMenu";
 
 const SidebarLargeDevice = () => {
   const { open, isHover } = useAppSelector((state) => state.dashboard);
-  const [isCollapse, setIsCollapse] = React.useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const handleCollapse = () => {
-    console.log("clicked");
-    setIsCollapse((prev) => !prev);
-  };
+  const pathName = usePathname();
   const { push } = useRouter();
+  console.log("pathName", pathName);
   return (
     <Box style={{ width: "100%", overflow: "hidden" }}>
       <ScrollArea
@@ -53,7 +50,9 @@ const SidebarLargeDevice = () => {
               onClick={() => push("/dashboard")}
               size={26}
               fw={900}
-              color="white"
+              sx={(theme) => ({
+                color: theme.colorScheme === "dark" ? "white" : "black",
+              })}
             >
               AR Poribohon
             </Text>
@@ -67,7 +66,9 @@ const SidebarLargeDevice = () => {
                 style={{ marginTop: "3px", letterSpacing: "2px" }}
                 ff={"cursive"}
                 size={12}
-                color="white"
+                sx={(theme) => ({
+                  color: theme.colorScheme === "dark" ? "white" : "black",
+                })}
               >
                 SAFE JOURNY
               </Text>
@@ -83,24 +84,7 @@ const SidebarLargeDevice = () => {
         )}
         {isHover && open ? null : <Divider mb={16} />}
 
-        <CollapseMenuSidebar
-          isMobile={false}
-          subTitle={12}
-          title="Dashboard"
-          icon={<IconHome cursor="pointer" size={open ? 35 : 26} />}
-          navData={siderbarDahboardData}
-          collapseIcon={
-            isCollapse ? (
-              <IconArrowBadgeDown cursor="pointer" />
-            ) : (
-              <IconArrowBadgeRight cursor="pointer" />
-            )
-          }
-          isCollapse={isCollapse}
-          handleCollapse={handleCollapse}
-          isopenSidebar={open}
-          isHover={isHover}
-        />
+        <SideBarMenu />
       </ScrollArea>
     </Box>
   );

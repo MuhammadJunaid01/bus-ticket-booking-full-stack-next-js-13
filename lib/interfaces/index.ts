@@ -114,3 +114,6 @@ export interface NavbarSmallDevicesProps {
   data?: navlinkDataType[];
 }
 export interface SidebarSmallDeviceProps extends NavbarSmallDevicesProps {}
+export interface HandleStateToggleProps {
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
+}

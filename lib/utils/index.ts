@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 import { BusesTypes } from "../types";
+import React from "react";
+import { HandleStateToggleProps } from "../interfaces";
 
 export type DateType = Date | string; // Customize this based on your date representation
 
@@ -87,4 +89,8 @@ export const isValidID = (id: string): boolean => {
     validId = true;
   }
   return validId;
+};
+
+export const handleStateToggle = ({ setState }: HandleStateToggleProps) => {
+  setState((prev) => !prev);
 };

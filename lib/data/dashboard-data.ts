@@ -14,3 +14,25 @@ export const siderbarDahboardData: NavDataTypes[] = [
     href: "users",
   },
 ];
+export const sideBarDashboardPagesData: NavDataTypes[] = [
+  {
+    label: "About Us",
+    href: "about-us",
+  },
+  {
+    label: "Blog",
+    href: "blog",
+  },
+  {
+    label: "FAQ'S",
+    href: "blog",
+  },
+  {
+    label: "Invoice",
+    href: "invoice",
+  },
+  {
+    label: "Profile",
+    href: "profile",
+  },
+];

@@ -1,7 +1,7 @@
 import React from "react";
 import MaintenanceImage from "@/public/under-maintenance.svg";
 import Image from "next/image";
-const AddBusPage = () => {
+const UsersPage = () => {
   return (
     <div style={{ textAlign: "center" }}>
       <h1> under maintenance page</h1>
@@ -14,4 +14,4 @@ const AddBusPage = () => {
   );
 };
 
-export default AddBusPage;
+export default UsersPage;

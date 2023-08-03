@@ -2,8 +2,22 @@ import { CollapseMenuSidebarProps } from "@/lib/interfaces";
 import NavLinks from "@/ui/Navlinks";
 import { Box, Drawer, Text, Transition } from "@mantine/core";
 import Link from "next/link";
+import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 import React from "react";
-
+import SidebarNavLink from "../Sidebar/SidebarNavLink";
+type MyLinkType = {
+  href: string;
+  label: string;
+};
+const MyLink = ({ href, label }: MyLinkType) => {
+  const pathName = usePathname();
+  const segment = useSelectedLayoutSegment();
+  const isActive = `/${segment}/${href}` === pathName;
+  console.log("isActivePath", isActive);
+  console.log("segment", segment);
+  console.log("pathName", pathName);
+  return <div style={{}}>{label}</div>;
+};
 const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
   icon,
   navData,
@@ -17,7 +31,7 @@ const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
   isMobile,
 }) => {
   return (
-    <Box style={{ width: "100%" }}>
+    <Box style={{ width: "100%", marginBottom: "19px" }}>
       {isopenSidebar && isHover === false ? (
         <Box style={{ cursor: "pointer", textAlign: "center" }}>{icon}</Box>
       ) : (
@@ -25,7 +39,7 @@ const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
           <Box
             sx={(theme) => ({
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "space-between",
               alignItems: "center",
               position: "relative",
             })}
@@ -45,20 +59,7 @@ const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
               <div style={styles}>
                 {navData.map(({ href, label }, index) => {
                   return (
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: "unset",
-                        display: "block",
-                        marginLeft: "19px",
-                      }}
-                      href={`/dashboard/${href}`}
-                      key={index}
-                    >
-                      <Text size={19} key={index}>
-                        {label}
-                      </Text>
-                    </Link>
+                    <SidebarNavLink key={index} label={label} href={href} />
                   );
                 })}
               </div>

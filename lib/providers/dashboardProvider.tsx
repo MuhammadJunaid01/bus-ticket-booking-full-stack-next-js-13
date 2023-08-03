@@ -3,7 +3,8 @@
 import { useCustomHover } from "@/redux/features/dashboard";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { AffixScroll } from "@/ui";
-import { DashboardTopbar, SideBar } from "@/ui/Dashboard";
+import { DashboardTopbar } from "@/ui/Dashboard";
+import { SidebarLargeDevice } from "@/ui/Dashboard/Sidebar";
 import {
   Box,
   ColorScheme,
@@ -57,7 +58,7 @@ const DashboardProvider = ({ children }: ProvidersProps) => {
                   onMouseLeave={() => dispatch(useCustomHover(false))}
                   style={{ position: "relative" }}
                 >
-                  <SideBar />
+                  <SidebarLargeDevice />
                 </Box>
               </Grid.Col>
             ) : null}

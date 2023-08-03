@@ -3,8 +3,10 @@ import {
   BusMockDataType,
   BusesTypes,
   FactsDataTypes,
+  NavDataTypes,
   PopularBusRouteDataType,
   StoriesTypes,
+  navlinkDataType,
 } from "../types";
 
 export interface LinksProps {
@@ -91,3 +93,24 @@ export interface TicketData {
   __v: number;
   _id: string;
 }
+
+// Dashboard
+export interface CollapseMenuSidebarProps {
+  icon: React.ReactNode;
+  navData: NavDataTypes[];
+  title: string;
+  subTitle: number | "New" | "Hot";
+  collapseIcon: React.ReactNode;
+  handleCollapse: () => void;
+  isCollapse: boolean;
+  isopenSidebar: boolean;
+  isHover: boolean;
+  isMobile: boolean;
+}
+export interface NavbarSmallDevicesProps {
+  drawerOpened: boolean;
+  closeDrawer: () => void;
+  toggleLinks?: () => void;
+  data?: navlinkDataType[];
+}
+export interface SidebarSmallDeviceProps extends NavbarSmallDevicesProps {}

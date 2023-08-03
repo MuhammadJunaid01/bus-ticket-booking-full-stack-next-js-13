@@ -1,27 +1,16 @@
 import React from "react";
-import {
-  Header,
-  Container,
-  Group,
-  Burger,
-  Paper,
-  Transition,
-  rem,
-  Box,
-} from "@mantine/core";
+import { Header, Container, Group, Burger, Text, Box } from "@mantine/core";
 import { useDisclosure, useWindowScroll } from "@mantine/hooks";
-import {
-  IconSearch,
-  IconAlignJustified,
-  IconNotification,
-  IconBell,
-} from "@tabler/icons-react";
+import { IconSearch, IconAlignJustified, IconBell } from "@tabler/icons-react";
 import { navbarStyles } from "@/lib/styles";
 import Profile from "@/ui/Profile";
 import DarkAndLightMode from "@/ui/Navbar/DarkAndLightMode";
 import NavbarSmallDevices from "@/ui/Navbar/NavbarSmallDevices";
 import { useAppDispatch } from "@/redux/hooks";
 import { openDahboardDrawer } from "@/redux/features/dashboard";
+import { siderbarDahboardData } from "@/lib/data/dashboard-data";
+import { SideBarSmallDevice } from "../Sidebar";
+import { useRouter } from "next/navigation";
 
 const DashboardTopbar = () => {
   const [opened, { toggle, close }] = useDisclosure(false);
@@ -30,6 +19,8 @@ const DashboardTopbar = () => {
   const [scroll, scrollTo] = useWindowScroll();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
+  const { push } = useRouter();
+
   return (
     <div>
       <Box style={{ width: "100%" }}>
@@ -52,7 +43,14 @@ const DashboardTopbar = () => {
                 },
               })}
             >
-              kkkk
+              <Text
+                onClick={() => push("/dashboard")}
+                size={26}
+                fw={900}
+                color="white"
+              >
+                AR Poribohon
+              </Text>
             </Box>
             <Group
               style={{ width: "100%" }}
@@ -104,10 +102,10 @@ const DashboardTopbar = () => {
         {/* /* The code is rendering the `NavbarSmallDevices` component, which is responsible for displaying the
    navigation links in a collapsible menu for small devices. */}
 
-        <NavbarSmallDevices
+        <SideBarSmallDevice
           drawerOpened={drawerOpened}
           closeDrawer={closeDrawer}
-          data={[]}
+          data={siderbarDahboardData}
         />
       </Box>
     </div>

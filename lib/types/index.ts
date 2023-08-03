@@ -112,3 +112,8 @@ export type busCHairDataypes = {
   type: string;
   gender?: string;
 };
+// dashboard
+export type NavDataTypes = {
+  label: string;
+  href: string;
+};

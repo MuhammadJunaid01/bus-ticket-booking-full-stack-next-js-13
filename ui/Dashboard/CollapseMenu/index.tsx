@@ -1,22 +1,8 @@
+import { CollapseMenuSidebarProps } from "@/lib/interfaces";
+import NavLinks from "@/ui/Navlinks";
 import { Box, Drawer, Text, Transition } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
-export type NavDataTypes = {
-  label: string;
-  href: string;
-};
-
-export interface CollapseMenuSidebarProps {
-  icon: React.ReactNode;
-  navData: NavDataTypes[];
-  title: string;
-  subTitle: number | "New" | "Hot";
-  collapseIcon: React.ReactNode;
-  handleCollapse: () => void;
-  isCollapse: boolean;
-  isopenSidebar: boolean;
-  isHover: boolean;
-}
 
 const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
   icon,
@@ -28,6 +14,7 @@ const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
   handleCollapse,
   isopenSidebar,
   isHover,
+  isMobile,
 }) => {
   return (
     <Box style={{ width: "100%" }}>
@@ -59,11 +46,18 @@ const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
                 {navData.map(({ href, label }, index) => {
                   return (
                     <Link
-                      style={{ textDecoration: "none", color: "unset" }}
+                      style={{
+                        textDecoration: "none",
+                        color: "unset",
+                        display: "block",
+                        marginLeft: "19px",
+                      }}
                       href={`/dashboard/${href}`}
                       key={index}
                     >
-                      <Text key={index}>{label}</Text>
+                      <Text size={19} key={index}>
+                        {label}
+                      </Text>
                     </Link>
                   );
                 })}

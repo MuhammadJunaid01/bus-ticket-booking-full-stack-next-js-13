@@ -12,7 +12,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ href, label }) => {
   const segment = useSelectedLayoutSegment();
   const { classes, theme } = navbarStyles();
 
-  const active = href === segment;
+  const isActive = href == segment;
 
   return (
     <Link className={classes.link} href={href}>

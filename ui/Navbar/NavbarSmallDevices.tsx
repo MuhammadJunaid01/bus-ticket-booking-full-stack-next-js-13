@@ -11,14 +11,9 @@ import {
 } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons-react";
 import { navbarStyles } from "@/lib/styles";
-import { navlinkDataType } from "@/lib/types";
 import NavLinks from "../Navlinks";
-export interface NavbarSmallDevicesProps {
-  drawerOpened: boolean;
-  closeDrawer: () => void;
-  toggleLinks?: () => void;
-  data: navlinkDataType[];
-}
+import { NavbarSmallDevicesProps } from "@/lib/interfaces";
+
 const NavbarSmallDevices: React.FC<NavbarSmallDevicesProps> = ({
   drawerOpened,
   closeDrawer,
@@ -44,7 +39,7 @@ const NavbarSmallDevices: React.FC<NavbarSmallDevicesProps> = ({
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
 
-          {data.map(({ href, label }, index) => {
+          {data?.map(({ href, label }, index) => {
             return <NavLinks key={index} href={href} label={label} />;
           })}
 

@@ -1,13 +1,18 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
+import { useCustomHover } from "@/redux/features/dashboard";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { store } from "@/redux/store";
 import { AffixScroll } from "@/ui";
+import { DashboardTopbar, SideBar } from "@/ui/Dashboard";
 import {
+  Box,
   ColorScheme,
   ColorSchemeProvider,
   Grid,
   MantineProvider,
 } from "@mantine/core";
-import { useLocalStorage } from "@mantine/hooks";
+import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import { Notifications } from "@mantine/notifications";
 import NextTopLoader from "nextjs-toploader";
 import React from "react";
@@ -23,7 +28,10 @@ const DashboardProvider = ({ children }: ProvidersProps) => {
   });
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const { open, isHover } = useAppSelector((state) => state.dashboard);
+  const dispatch = useAppDispatch();
 
+  const isDesktop = useMediaQuery("(min-width:768px)");
   return (
     <>
       <AffixScroll />
@@ -37,11 +45,31 @@ const DashboardProvider = ({ children }: ProvidersProps) => {
           withNormalizeCSS
           theme={{ colorScheme }}
         >
-          <Provider store={store}>
-            <Notifications position="top-center" zIndex={2077} />
-            {/* <h1>navbar</h1> */}
-            {children}
-          </Provider>
+          <Notifications position="top-center" zIndex={2077} />
+          {/* <h1>navbar</h1> */}
+          <Grid>
+            {isDesktop ? (
+              <Grid.Col span={12} md={open ? 0.8 : 2}>
+                <Box
+                  sx={(theme) => ({
+                    position: open && isHover ? "absolute" : "relative",
+                    width: open && isHover ? "300px" : "100%",
+                  })}
+                  onMouseEnter={() => dispatch(useCustomHover(true))}
+                  onMouseLeave={() => dispatch(useCustomHover(false))}
+                  style={{ position: "relative" }}
+                >
+                  <SideBar />
+                </Box>
+
+                {/* <Divider size="xl" orientation="vertical" /> */}
+              </Grid.Col>
+            ) : null}
+            <Grid.Col span={12} md={open ? 11.2 : 10}>
+              <DashboardTopbar />
+              {children}
+            </Grid.Col>
+          </Grid>
         </MantineProvider>
       </ColorSchemeProvider>
     </>

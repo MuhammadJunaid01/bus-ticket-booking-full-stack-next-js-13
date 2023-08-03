@@ -1,4 +1,5 @@
 import { Box, Drawer, Text, Transition } from "@mantine/core";
+import Link from "next/link";
 import React from "react";
 export type NavDataTypes = {
   label: string;
@@ -56,7 +57,11 @@ const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
             {(styles) => (
               <div style={styles}>
                 {navData.map(({ href, label }, index) => {
-                  return <Text key={index}>{label}</Text>;
+                  return (
+                    <Link href={`/dashboard/${href}`} key={index}>
+                      <Text key={index}>{label}</Text>
+                    </Link>
+                  );
                 })}
               </div>
             )}

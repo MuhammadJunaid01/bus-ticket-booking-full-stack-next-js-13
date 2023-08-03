@@ -14,9 +14,8 @@ export const dashboardSlice = createSlice({
     openDahboardDrawer: (state) => {
       state.open = !state.open;
     },
-    useCustomHover: (state) => {
-      console.log("called");
-      state.isHover = !state.isHover;
+    useCustomHover: (state, { payload }: PayloadAction<boolean>) => {
+      state.isHover = payload;
     },
   },
 });

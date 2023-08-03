@@ -12,6 +12,7 @@ import {
 } from "@tabler/icons-react";
 import { NavDataTypes } from "../CollapseMenu";
 import { useCustomHover } from "@/redux/features/dashboard";
+import { useRouter } from "next/navigation";
 
 export const siderbarDahboardData: NavDataTypes[] = [
   {
@@ -31,7 +32,7 @@ const SideBar = () => {
     console.log("clicked");
     setIsCollapse((prev) => !prev);
   };
-
+  const { push } = useRouter();
   return (
     <Box style={{ width: "100%", overflow: "hidden" }}>
       <ScrollArea
@@ -47,6 +48,7 @@ const SideBar = () => {
         {open && isHover === false ? (
           <Box>
             <Text
+              onClick={() => push("/dashboard")}
               style={{ fontWeight: "800" }}
               sx={(theme) => ({
                 fontSize: "45px",
@@ -59,7 +61,12 @@ const SideBar = () => {
           </Box>
         ) : (
           <Box style={{ cursor: "pointer" }}>
-            <Text size={26} fw={900} color="white">
+            <Text
+              onClick={() => push("/dashboard")}
+              size={26}
+              fw={900}
+              color="white"
+            >
               AR Poribohon
             </Text>
             <Box

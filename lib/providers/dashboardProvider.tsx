@@ -2,7 +2,6 @@
 "use client";
 import { useCustomHover } from "@/redux/features/dashboard";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { store } from "@/redux/store";
 import { AffixScroll } from "@/ui";
 import { DashboardTopbar, SideBar } from "@/ui/Dashboard";
 import {
@@ -16,7 +15,6 @@ import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import { Notifications } from "@mantine/notifications";
 import NextTopLoader from "nextjs-toploader";
 import React from "react";
-import { Provider } from "react-redux";
 export interface ProvidersProps {
   children: React.ReactNode;
 }
@@ -46,7 +44,7 @@ const DashboardProvider = ({ children }: ProvidersProps) => {
           theme={{ colorScheme }}
         >
           <Notifications position="top-center" zIndex={2077} />
-          {/* <h1>navbar</h1> */}
+
           <Grid>
             {isDesktop ? (
               <Grid.Col span={12} md={open ? 0.8 : 2}>
@@ -61,8 +59,6 @@ const DashboardProvider = ({ children }: ProvidersProps) => {
                 >
                   <SideBar />
                 </Box>
-
-                {/* <Divider size="xl" orientation="vertical" /> */}
               </Grid.Col>
             ) : null}
             <Grid.Col span={12} md={open ? 11.2 : 10}>

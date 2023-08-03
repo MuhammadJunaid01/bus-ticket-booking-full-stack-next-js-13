@@ -58,7 +58,11 @@ const CollapseMenuSidebar: React.FC<CollapseMenuSidebarProps> = ({
               <div style={styles}>
                 {navData.map(({ href, label }, index) => {
                   return (
-                    <Link href={`/dashboard/${href}`} key={index}>
+                    <Link
+                      style={{ textDecoration: "none", color: "unset" }}
+                      href={`/dashboard/${href}`}
+                      key={index}
+                    >
                       <Text key={index}>{label}</Text>
                     </Link>
                   );

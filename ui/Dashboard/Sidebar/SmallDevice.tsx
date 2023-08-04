@@ -13,6 +13,7 @@ import {
 } from "@tabler/icons-react";
 import { siderbarDahboardData } from "@/lib/data/dashboard-data";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import SideBarMenu from "./SideBarMenu";
 const SideBarSmallDevice: React.FC<SidebarSmallDeviceProps> = ({
   drawerOpened,
   closeDrawer,
@@ -36,59 +37,10 @@ const SideBarSmallDevice: React.FC<SidebarSmallDeviceProps> = ({
         title="AR Poribohon"
         className={classes.hiddenDesktop}
         zIndex={1000000}
-        style={{ fontSize: "32px" }}
+        style={{ fontSize: "22px" }}
         classNames={{ title: "title" }}
       >
-        {/* <Box style={{ cursor: "pointer" }}>
-          <Text
-            onClick={() => push("/dashboard")}
-            size={26}
-            fw={900}
-            color="white"
-          >
-            AR Poribohon
-          </Text>
-          <Box
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{ marginTop: "3px", letterSpacing: "2px" }}
-              ff={"cursive"}
-              size={12}
-              color="white"
-            >
-              SAFE JOURNY
-            </Text>
-            <Image
-              style={{ cursor: "pointer", marginTop: "-8px" }}
-              src={BusImage}
-              width={70}
-              height={44}
-              alt="main-logo"
-            />
-          </Box>
-        </Box> */}
-        <CollapseMenuSidebar
-          isMobile={false}
-          subTitle={12}
-          title="Dashboard"
-          icon={<IconHome cursor="pointer" size={open ? 35 : 26} />}
-          navData={siderbarDahboardData}
-          collapseIcon={
-            isCollapse ? (
-              <IconArrowBadgeDown cursor="pointer" />
-            ) : (
-              <IconArrowBadgeRight cursor="pointer" />
-            )
-          }
-          isCollapse={isCollapse}
-          handleCollapse={handleCollapse}
-          isopenSidebar={open}
-          isHover={isHover}
-        />
+        <SideBarMenu />
       </Drawer>
     </div>
   );

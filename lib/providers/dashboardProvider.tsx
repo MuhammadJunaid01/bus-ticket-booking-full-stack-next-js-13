@@ -56,7 +56,7 @@ const DashboardProvider = ({ children }: ProvidersProps) => {
                   })}
                   onMouseEnter={() => dispatch(useCustomHover(true))}
                   onMouseLeave={() => dispatch(useCustomHover(false))}
-                  style={{ position: "relative" }}
+                  style={{ position: "relative", zIndex: "999" }}
                 >
                   <SidebarLargeDevice />
                 </Box>

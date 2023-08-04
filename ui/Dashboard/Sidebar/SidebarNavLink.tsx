@@ -20,7 +20,6 @@ const SidebarNavLink = ({ label, href }: SidebarNavLinkType) => {
             }`
           : "none",
       })}
-      //   style={isActive ? { borderLeft: "2px solid red" } : {}}
     >
       <Link
         style={{
@@ -33,7 +32,7 @@ const SidebarNavLink = ({ label, href }: SidebarNavLinkType) => {
       >
         <Text
           sx={(theme) => ({
-            marginTop: "6px",
+            marginTop: "2px",
             padding: "0px 12px",
             borderRadius: "5px",
             "&:hover": {
@@ -44,7 +43,8 @@ const SidebarNavLink = ({ label, href }: SidebarNavLinkType) => {
               // padding: "0px 6px",
             },
           })}
-          size={19}
+          size={16}
+          fw={600}
         >
           {label}
         </Text>

@@ -8,3 +8,27 @@ body {
 .title {
   font-size: 25px;
 }
+.root {
+  /* color: red;
+  background-color: red; */
+}
+.crt::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-image: url("https://i.ibb.co/S3Dx6RR/highlited-chart-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.2;
+  /* height: 120px;
+  width: 100%; */
+  overflow: hidden;
+}
+.crt-body {
+  z-index: 11;
+  /* opacity: 0.1; */
+  background-color: red;
+}

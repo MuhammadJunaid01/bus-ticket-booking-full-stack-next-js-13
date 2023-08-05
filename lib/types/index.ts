@@ -6,6 +6,10 @@ import {
   IconEye,
   IconFingerprint,
   IconNotification,
+  IconBrandGithub,
+  IconBrandFacebook,
+  IconBrandLinkedin,
+  IconBrandTwitter,
 } from "@tabler/icons-react";
 import { StaticImageData } from "next/image";
 import { SeatMap } from "../interfaces";
@@ -116,4 +120,30 @@ export type busCHairDataypes = {
 export type NavDataTypes = {
   label: string;
   href: string;
+};
+export type btnText = "Click here" | "View All";
+export type ChartDataTypes = {
+  name: string;
+  uv: number;
+  pv: number;
+  amt: number;
+};
+
+export type FooterDataTypes = {};
+export type FooterCompanyInfoTypes = {
+  name: string;
+  href: string;
+};
+export type FooterCompanyAboutTypes = {
+  name: string;
+  href: string;
+};
+type SocialIconType =
+  | typeof IconBrandGithub
+  | typeof IconBrandFacebook
+  | typeof IconBrandLinkedin
+  | typeof IconBrandTwitter;
+export type SocialLinkDataTypes = {
+  Icon: SocialIconType;
+  link: string;
 };

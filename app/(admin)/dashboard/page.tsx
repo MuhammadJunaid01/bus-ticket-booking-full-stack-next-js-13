@@ -3,7 +3,15 @@ import React from "react";
 
 const AdminPage = () => {
   return (
-    <div>
+    <div
+      style={{
+        height: "220vh",
+        // height:""
+        width: "100%",
+        overflowY: "scroll",
+        overflowX: "hidden",
+      }}
+    >
       <DashboardHome />
     </div>
   );

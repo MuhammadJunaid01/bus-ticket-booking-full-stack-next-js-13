@@ -59,7 +59,7 @@ export const navlinkData: navlinkDataType[] = [
     label: "Check Tickets",
   },
   {
-    href: "contsct",
+    href: "contact-us",
     label: "Contact Us",
   },
 ];

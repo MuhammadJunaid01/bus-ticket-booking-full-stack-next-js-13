@@ -1,16 +1,8 @@
 import { Box, Button, Highlight, Text, UnstyledButton } from "@mantine/core";
 import React from "react";
-import PercentageBox from "../percentageBox";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-export interface DashboardCardProps {
-  icon?: React.ReactNode;
-  title: string;
-  chart: React.ReactNode;
-  btnText: "Click here" | "View All";
-  percentage: number;
-  info: number | string;
-  isHighlighted: boolean;
-}
+import { DashboardCardProps } from "@/lib/interfaces";
+import { dashboardCardStyle } from "@/lib/styles";
 const DashboardCard: React.FC<DashboardCardProps> = ({
   isHighlighted,
   info,
@@ -19,28 +11,15 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   chart,
   title,
   icon,
+  iconBoxClor,
 }) => {
-  const check = typeof info === "string";
-  console.log("CHECK", check);
+  const { classes } = dashboardCardStyle({
+    isHighlighted,
+    iconBoxClor,
+    btnText,
+  });
   return (
-    <Box
-      sx={(theme) => ({
-        backgroundColor: isHighlighted
-          ? "#7092D8"
-          : theme.colorScheme === "dark"
-          ? theme.colors.gray[9]
-          : theme.colors.gray[1],
-        [theme.fn.largerThan("sm")]: {
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-        },
-        borderRadius: "6px",
-        padding: "10px",
-        marginTop: "12px",
-      })}
-      style={{ position: "relative" }}
-    >
+    <Box className={classes.container}>
       {isHighlighted ? (
         <Box sx={{ padding: "4px 11px" }}>
           <Text size={21} color="white">
@@ -53,40 +32,17 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
               <Text>{info}</Text>
             )}
           </Text>
-          <UnstyledButton
-            style={
-              btnText === "Click here"
-                ? {
-                    textDecoration: "underline",
-                    marginTop: "11px",
-                    color: "white",
-                  }
-                : {}
-            }
-          >
-            {btnText}
-          </UnstyledButton>
+          <UnstyledButton className={classes.btn}>{btnText}</UnstyledButton>
         </Box>
       ) : (
         <Box
           style={{
             display: "flex",
-            // alignItems: "center",
             justifyContent: "space-between",
             gap: "19px",
           }}
         >
-          <Box
-            sx={(theme) => ({
-              height: "40px",
-              width: "40px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#845ADF",
-              borderRadius: "50%",
-            })}
-          >
+          <Box className={classes.iconBox} sx={(theme) => ({})}>
             {icon}
           </Box>
           <Box>
@@ -104,7 +60,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
               <UnstyledButton
                 sx={(theme) => ({
                   marginTop: "19px",
-                  color: "#845ADF",
+                  color: iconBoxClor,
                   fontSize: "13px",
                 })}
               >
@@ -113,7 +69,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
               <IconArrowNarrowRight
                 style={{ marginTop: "19px" }}
                 cursor="pointer"
-                color="#845ADF"
+                color={iconBoxClor}
                 size={15}
               />
             </Box>
@@ -122,7 +78,6 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
       )}
       <Box>
         {chart}
-
         {isHighlighted ? null : (
           <Box>
             <Text fw={600} color="#24BF94">

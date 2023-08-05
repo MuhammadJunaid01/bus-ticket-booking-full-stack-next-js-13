@@ -19,6 +19,7 @@ import BusModal from "./BusModal";
 import BookingForm from "./BookingForm";
 import CustomSelect from "./CustomSelect";
 import CheckTicket from "./CheckTicket";
+import Footer from "./Footer";
 export {
   Navbar,
   HomePage,
@@ -40,4 +41,5 @@ export {
   BookingForm,
   CustomSelect,
   CheckTicket,
+  Footer,
 };

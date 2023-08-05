@@ -1,6 +1,6 @@
 "use client";
 import { store } from "@/redux/store";
-import { AffixScroll, Navbar } from "@/ui";
+import { AffixScroll, Footer, Navbar } from "@/ui";
 import {
   ColorScheme,
   ColorSchemeProvider,
@@ -67,6 +67,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
             )}
             <Notifications position="top-center" zIndex={2077} />
             {children}
+            {isHomePage || isSlashHomePage ? null : <Footer />}
           </Provider>
         </MantineProvider>
       </ColorSchemeProvider>

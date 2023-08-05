@@ -6,7 +6,7 @@ import { busRouteData, someFactsData, storiesData } from "@/lib/data";
 import { BusesApiResponseType } from "@/lib/types";
 import { getAllBussData } from "@/redux/features/buses";
 import { useAppDispatch } from "@/redux/hooks";
-import { BusRoutes, Header, Navbar, SomeFacts, Stories } from "@/ui";
+import { BusRoutes, Footer, Header, Navbar, SomeFacts, Stories } from "@/ui";
 import { Container } from "@mantine/core";
 import { isTokenExpired } from "@/lib/utils/isTokenExpired";
 
@@ -60,6 +60,7 @@ const HomePage = () => {
           <OurBuses title="Our Available Buss" />
         </Suspense> */}
       </Container>
+      <Footer />
     </div>
   );
 };

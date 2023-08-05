@@ -2,10 +2,12 @@ import mongoose, { Date } from "mongoose";
 import {
   BusMockDataType,
   BusesTypes,
+  ChartDataTypes,
   FactsDataTypes,
   NavDataTypes,
   PopularBusRouteDataType,
   StoriesTypes,
+  btnText,
   navlinkDataType,
 } from "../types";
 
@@ -116,4 +118,18 @@ export interface NavbarSmallDevicesProps {
 export interface SidebarSmallDeviceProps extends NavbarSmallDevicesProps {}
 export interface HandleStateToggleProps {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export interface DashboardCardProps {
+  icon?: React.ReactNode;
+  title: string;
+  chart: React.ReactNode;
+  btnText: btnText;
+  percentage: number;
+  info: number | string;
+  isHighlighted: boolean;
+  iconBoxClor?: string;
+}
+export interface CustomLineChartProps {
+  data: ChartDataTypes[];
+  color: string;
 }

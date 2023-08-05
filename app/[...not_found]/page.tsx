@@ -1,9 +1,14 @@
+"use client";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const NotFoundPage = () => {
+  const pathName = usePathname();
+
+  let modifiedString = pathName.replace(/\//g, "");
   return (
     <div>
-      <h1> catch all not found route</h1>
+      <h1>under maintenance {modifiedString} page</h1>
     </div>
   );
 };

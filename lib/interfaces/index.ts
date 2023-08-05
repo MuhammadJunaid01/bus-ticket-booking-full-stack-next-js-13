@@ -138,3 +138,6 @@ export interface FaqPropsTypes {
   title: string;
   data: FaqDataTypes[];
 }
+export interface BusProps {
+  bus: BusesTypes;
+}

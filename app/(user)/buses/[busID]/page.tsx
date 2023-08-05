@@ -41,6 +41,7 @@ export async function generateMetadata({ params }: BusPageProps) {
 console.log("");
 const Product: React.FC<BusPageProps> = async ({ params }) => {
   const { busID } = params;
+
   const busData: Promise<BusApiResponseType> = getBusByID(
     `/api/buses/${busID}`
   );
@@ -51,29 +52,6 @@ const Product: React.FC<BusPageProps> = async ({ params }) => {
     return notFound();
   }
 
-  const { A, B } = data.seats;
-  type SeatDataAG1 = {
-    seat: string;
-    passengerName: string;
-    passengerId: string | null;
-    isBooked: boolean;
-    _id: string;
-  };
-  interface SeatDataAG1Props {
-    data: SeatDataAG1[];
-  }
-  const Set15 = ({ data }: SeatDataAG1Props) => {
-    return (
-      <div>
-        <h1>h</h1>
-      </div>
-    );
-  };
-  const g1 = [];
-  for (let index = 0; index < A.length && index < 15; index++) {
-    g1.push(A[index]);
-  }
-  console.log("G!", g1);
   return (
     <div className={styles.container}>
       <div>

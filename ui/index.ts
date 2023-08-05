@@ -21,6 +21,7 @@ import CustomSelect from "./CustomSelect";
 import CheckTicket from "./CheckTicket";
 import Footer from "./Footer";
 import FAQ from "./FAQ";
+import Bus from "./Bus";
 export {
   Navbar,
   HomePage,
@@ -44,4 +45,5 @@ export {
   CheckTicket,
   Footer,
   FAQ,
+  Bus,
 };

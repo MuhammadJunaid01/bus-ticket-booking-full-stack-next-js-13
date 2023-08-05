@@ -49,7 +49,7 @@ export const footerStyles = createStyles((theme) => ({
     alignItems: "center",
   },
   icon: {
-    color: theme.colorScheme === "dark" ? theme.colors.gray[1] : "white",
+    color: theme.colorScheme === "dark" ? "#1C7ED6" : "white",
     fontSize: "21px",
     marginTop: "4px",
   },

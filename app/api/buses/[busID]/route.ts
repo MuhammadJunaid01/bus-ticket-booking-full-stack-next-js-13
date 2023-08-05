@@ -8,8 +8,8 @@ export const GET = async (req: NextRequest, { params }: any) => {
   req.headers.append("origin", req.nextUrl.pathname);
   const origin = req.headers.get("origin");
   const remaining = await limiter.removeTokens(1);
-  const id = params.busID;
-  console.log("id", id);
+  const roadName = params.busID;
+  console.log("ID", roadName);
   console.log("remaining", remaining);
   if (remaining < 0) {
     return new NextResponse(JSON.stringify({ message: "Too many request" }), {
@@ -22,7 +22,8 @@ export const GET = async (req: NextRequest, { params }: any) => {
     });
   }
   try {
-    const bus = await Buses.findOne({ busNumber: id });
+    const bus = await Buses.findOne({ roadName: roadName });
+    console.log("bus", bus);
     if (!bus) {
       return new NextResponse(
         JSON.stringify({

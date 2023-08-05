@@ -85,14 +85,33 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
               </Box>
             </Box>
           ) : (
-            <Image
-              onClick={() => router.push("/")}
-              style={{ cursor: "pointer" }}
-              src={Logo1}
-              width={160}
-              height={50}
-              alt="main-logo"
-            />
+            <Box style={{ cursor: "pointer" }} onClick={() => router.push("/")}>
+              <Text size={26} fw={900} color="white">
+                AR Poribohon
+              </Text>
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text
+                  style={{ marginTop: "3px", letterSpacing: "2px" }}
+                  ff={"cursive"}
+                  size={12}
+                  color="white"
+                >
+                  SAFE JOURNY
+                </Text>
+                <Image
+                  style={{ cursor: "pointer", marginTop: "-8px" }}
+                  src={BusImage}
+                  width={70}
+                  height={44}
+                  alt="main-logo"
+                />
+              </Box>
+            </Box>
           )}
 
           <Group

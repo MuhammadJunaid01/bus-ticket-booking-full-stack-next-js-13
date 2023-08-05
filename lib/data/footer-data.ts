@@ -29,7 +29,7 @@ export const companyInfo: FooterCompanyInfoTypes[] = [
   },
   {
     name: "How To Buy Ticket",
-    href: "How-to-buy-ticket",
+    href: "how-to-buy-ticket",
   },
 ];
 export const footerHelpCenterData: FooterCompanyAboutTypes[] = [

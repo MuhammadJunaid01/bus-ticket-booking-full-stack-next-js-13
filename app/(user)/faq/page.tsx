@@ -1,4 +1,4 @@
-import { faqData } from "@/lib/data";
+import { faqData } from "@/lib/data/faq-data";
 import { FAQ } from "@/ui";
 import React from "react";
 

@@ -22,16 +22,22 @@ const FAQ: React.FC<FaqPropsTypes> = ({ data, title }) => {
             <Accordion.Item key={index} value={name}>
               <Accordion.Control>{name}</Accordion.Control>
               <Accordion.Panel>
-                {value.map(({ question, answer }, valueIndex) => {
-                  return (
-                    <Box key={valueIndex}>
-                      <Box my={24}>
-                        <Text mb={6}>{question}</Text>
-                        <Text>{answer}</Text>
+                {typeof value === "string" ? (
+                  <Box>
+                    <Text>{value}</Text>
+                  </Box>
+                ) : (
+                  value.map(({ question, answer }, valueIndex) => {
+                    return (
+                      <Box key={valueIndex}>
+                        <Box my={24}>
+                          <Text mb={6}>{question}</Text>
+                          <Text>{answer}</Text>
+                        </Box>
                       </Box>
-                    </Box>
-                  );
-                })}
+                    );
+                  })
+                )}
               </Accordion.Panel>
             </Accordion.Item>
           );

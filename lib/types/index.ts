@@ -149,5 +149,5 @@ export type SocialLinkDataTypes = {
 };
 export type FaqDataTypes = {
   name: string;
-  value: { question: string; answer: string }[];
+  value: { question: string; answer: string }[] | string;
 };

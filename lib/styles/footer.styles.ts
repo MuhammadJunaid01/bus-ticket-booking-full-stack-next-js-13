@@ -16,7 +16,7 @@ export const footerStyles = createStyles((theme) => ({
   },
   logo: {
     width: "200px",
-    border: `1px solid ${theme.colorScheme === "dark" ? "#58D37F" : ""}`,
+    // border: `1px solid ${theme.colorScheme === "dark" ? "#58D37F" : ""}`,
     padding: "9px",
     borderRadius: "4px",
     // margin: "0 auto",

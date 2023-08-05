@@ -4,6 +4,7 @@ import {
   BusesTypes,
   ChartDataTypes,
   FactsDataTypes,
+  FaqDataTypes,
   NavDataTypes,
   PopularBusRouteDataType,
   StoriesTypes,
@@ -132,4 +133,8 @@ export interface DashboardCardProps {
 export interface CustomLineChartProps {
   data: ChartDataTypes[];
   color: string;
+}
+export interface FaqPropsTypes {
+  title: string;
+  data: FaqDataTypes[];
 }

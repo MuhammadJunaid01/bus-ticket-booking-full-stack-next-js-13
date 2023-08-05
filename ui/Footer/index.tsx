@@ -25,7 +25,7 @@ const Footer = () => {
       <Grid align="center" mb={20}>
         <Grid.Col span={12} md={3}>
           <FooterLogo />
-          <Text mt={11}>
+          <Text style={{ marginTop: "-8px" }}>
             etickets bd is premium online booking portal which allows you to
             purchase ticket for various bus services.
           </Text>

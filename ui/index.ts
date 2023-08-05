@@ -20,6 +20,7 @@ import BookingForm from "./BookingForm";
 import CustomSelect from "./CustomSelect";
 import CheckTicket from "./CheckTicket";
 import Footer from "./Footer";
+import FAQ from "./FAQ";
 export {
   Navbar,
   HomePage,
@@ -42,4 +43,5 @@ export {
   CustomSelect,
   CheckTicket,
   Footer,
+  FAQ,
 };

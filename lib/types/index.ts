@@ -147,3 +147,7 @@ export type SocialLinkDataTypes = {
   Icon: SocialIconType;
   link: string;
 };
+export type FaqDataTypes = {
+  name: string;
+  value: { question: string; answer: string }[];
+};

@@ -76,5 +76,5 @@ this case, it specifies that the middleware should be applied to any request tha
 `/api/:path*` pattern. This means that any request to a path starting with `/api/` will trigger the
 middleware function. */
 export const config = {
-  matcher: ["/api/:path*", "/makeBooking", "/dashboard"],
+  matcher: ["/api/:path*", "/makeBooking", "/dashboard", "/profile"],
 };

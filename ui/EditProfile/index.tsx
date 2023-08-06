@@ -18,13 +18,18 @@ import {
   IconCloudUpload,
 } from "@tabler/icons-react";
 import Image from "next/image";
+
 const profilePic =
   "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=120&q=120";
 const EditUserProfile = () => {
   const { classes } = userProfileStyles({});
   const [fisrtName, setFisrtName] = React.useState<string>("");
   const [lastName, setLastName] = React.useState<string>("");
-  console.log("");
+  React.useEffect(() => {
+    // const user = JSON.parse(localStorage.getItem("user")!);
+    // console.log("user", user);
+    // setState(user._id);
+  }, []);
   return (
     <Box className={classes.container}>
       <Grid>
@@ -100,7 +105,13 @@ const EditUserProfile = () => {
             </Box>
           </Card>
         </Grid.Col>
-        <Grid.Col span={12} md={2.5}></Grid.Col>
+        <Grid.Col span={12} md={2.5}>
+          <Card className={classes.card}>
+            <Box>
+              <Text className={classes.ticketTitle}>My Ticket Info.</Text>
+            </Box>
+          </Card>
+        </Grid.Col>
       </Grid>
     </Box>
   );

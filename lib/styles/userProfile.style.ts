@@ -106,5 +106,11 @@ export const userProfileStyles = createStyles(
     icon: {
       position: "absolute",
     },
+    ticketBox: {},
+    ticketTitle: {
+      textAlign: "center",
+      color: theme.colorScheme === "dark" ? "white" : "black",
+      fontWeight: 500,
+    },
   })
 );

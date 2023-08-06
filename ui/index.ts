@@ -22,7 +22,7 @@ import CheckTicket from "./CheckTicket";
 import Footer from "./Footer";
 import FAQ from "./FAQ";
 import Bus from "./Bus";
-import EditUserProfile from "@/app/(user)/EditProfile";
+import EditUserProfile from "@/ui/EditProfile";
 export {
   Navbar,
   HomePage,

@@ -3,11 +3,12 @@ import {
   IconArrowsLeftRight,
   IconMessageCircle,
   IconPhoto,
-  IconSearch,
+  IconLayoutDashboard,
   IconSettings,
   IconTrash,
   IconCircleLetterP,
 } from "@tabler/icons-react";
+import Link from "next/link";
 import React from "react";
 
 const Profile = () => {
@@ -36,16 +37,30 @@ const Profile = () => {
 
         <Menu.Dropdown>
           <Menu.Label>Profile</Menu.Label>
-          <Menu.Item icon={<IconCircleLetterP size={14} />}>Profile</Menu.Item>
-
-          <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
+          <Link
+            style={{ textDecoration: "none", color: "unset" }}
+            href="/profile"
+          >
+            <Menu.Item icon={<IconCircleLetterP size={14} />}>
+              Profile
+            </Menu.Item>
+          </Link>
+          <Menu.Label>Dashboard</Menu.Label>
+          <Link
+            style={{ textDecoration: "none", color: "unset" }}
+            href="/dashboard"
+          >
+            <Menu.Item icon={<IconLayoutDashboard size={14} />}>
+              Dashboard
+            </Menu.Item>
+          </Link>
 
           <Menu.Divider />
 
           <Menu.Label>Danger zone</Menu.Label>
 
           <Menu.Item color="red" icon={<IconTrash size={14} />}>
-            Delete my account
+            Logout
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>

@@ -22,6 +22,7 @@ import CheckTicket from "./CheckTicket";
 import Footer from "./Footer";
 import FAQ from "./FAQ";
 import Bus from "./Bus";
+import EditUserProfile from "@/app/(user)/EditProfile";
 export {
   Navbar,
   HomePage,
@@ -46,4 +47,5 @@ export {
   Footer,
   FAQ,
   Bus,
+  EditUserProfile,
 };

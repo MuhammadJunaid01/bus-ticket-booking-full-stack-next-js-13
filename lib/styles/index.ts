@@ -8,6 +8,7 @@ import { ourBusesStyles } from "./ourBuses.styles";
 import { pleaseCallStyles } from "./pleaseCall.styles";
 import { seacrhBoxStyles } from "./searchBox.style";
 import { storiesStyles } from "./stories.styles";
+import { userProfileStyles } from "./userProfile.style";
 export {
   busRoutesStyles,
   factsStyles,
@@ -19,4 +20,5 @@ export {
   storiesStyles,
   dashboardCardStyle,
   footerStyles,
+  userProfileStyles,
 };

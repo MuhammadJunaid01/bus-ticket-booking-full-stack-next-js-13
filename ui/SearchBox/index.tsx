@@ -117,15 +117,6 @@ const SearchBox = () => {
           </Box>
         </Box>
 
-        {/* <CustomSelect
-          value={road}
-          setState={setRoad}
-          pl="Pick one Road"
-          label=""
-          data={busRouteData}
-          isHomePage
-        /> */}
-
         <CustomCalendar
           date={dateStr}
           selected={selected}

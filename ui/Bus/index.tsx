@@ -4,9 +4,8 @@ import BusImage from "@/public/bus.png";
 import { Box, Card, Text } from "@mantine/core";
 import { Table } from "@mantine/core";
 import Image from "next/image";
-
+import { IconCurrencyTaka } from "@tabler/icons-react";
 const Bus: React.FC<BusProps> = ({ bus }) => {
-  console.log("bus", bus);
   return (
     <Box
       sx={(theme) => ({
@@ -39,7 +38,10 @@ const Bus: React.FC<BusProps> = ({ bus }) => {
               <td>{bus.busNumber}</td>
               <td>{bus.busType}</td>
               <td>{bus.totalSeats}</td>
-              <td>{bus.seatPrice}</td>
+              <td>
+                {bus.seatPrice}
+                <IconCurrencyTaka />
+              </td>
             </tr>
           </tbody>
         </Table>

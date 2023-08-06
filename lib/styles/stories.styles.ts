@@ -7,6 +7,10 @@ export const storiesStyles = createStyles((theme) => ({
       textAlign: "center",
       padding: "20px 0px",
     },
+    [theme.fn.smallerThan("sm")]: {
+      marginTop: "20px",
+      overflowX: "hidden",
+    },
   },
   title: {
     color: theme.colorScheme === "dark" ? "white" : "unset",
@@ -14,12 +18,19 @@ export const storiesStyles = createStyles((theme) => ({
       fontSize: "35px",
       fontWeight: "bold",
     },
+    [theme.fn.smallerThan("sm")]: {
+      textAlign: "center",
+    },
   },
   story: {
     cursor: "pointer",
     width: "100%",
     [theme.fn.largerThan("sm")]: {
       padding: "30px 0px",
+    },
+    [theme.fn.smallerThan("sm")]: {
+      textAlign: "center",
+      margin: "11px 0px",
     },
     "&:hover": {
       boxShadow:

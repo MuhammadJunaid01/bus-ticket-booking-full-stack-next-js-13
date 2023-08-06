@@ -10,8 +10,12 @@ export const busRoutesStyles = createStyles((theme) => ({
     },
   },
   title: {
-    fontSize: "35px",
-    fontWeight: "bold",
+    marginTop: "22px",
+    fontSize: "17px",
+    [theme.fn.largerThan("sm")]: {
+      fontSize: "35px",
+      fontWeight: "bold",
+    },
   },
 
   busRouteBox: {
@@ -37,5 +41,6 @@ export const busRoutesStyles = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.gray[7] : "#B2BEB5",
     borderRadius: "4px",
     color: theme.colorScheme === "dark" ? theme.colors.gray[1] : "black",
+    margin: "11px 0px",
   },
 }));

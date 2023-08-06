@@ -64,7 +64,7 @@ const Footer = () => {
       <Box className={classes.icon_and_social}>
         <Box>
           <Text ml={35}>Download Our App Now!</Text>
-          <Box style={{ display: "flex", gap: "11px" }}>
+          <Box className={classes.appIconBox}>
             <Image
               src={PlayStoreIcon}
               className={classes.appIcon}
@@ -77,7 +77,7 @@ const Footer = () => {
             />
           </Box>
         </Box>
-        <Box style={{ display: "flex", gap: "22px" }}>
+        <Box className={classes.socialIcoBox}>
           {socialLinkData.map(({ link, Icon }, index) => {
             return (
               <Box className={classes.socialIcon} key={index}>

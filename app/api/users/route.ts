@@ -1,8 +1,37 @@
+import { connectDB } from "@/lib/db";
+import { User } from "@/lib/models";
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  const users = await fetch("https://jsonplaceholder.typicode.com/users");
-  const data = await users.json();
-  console.log("users", data);
-  return NextResponse.json({ users: data });
-}
+export const GET = async () => {
+  connectDB();
+  try {
+    const users = await User.find({});
+    if (!users) {
+      return NextResponse.json(
+        {
+          users: null,
+          message: "something went wrong!",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+    return NextResponse.json(
+      { users: users },
+      {
+        status: 200,
+      }
+    );
+  } catch (error: any) {
+    return NextResponse.json(
+      {
+        users: null,
+        message: error.message,
+      },
+      {
+        status: 404,
+      }
+    );
+  }
+};

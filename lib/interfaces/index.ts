@@ -8,6 +8,7 @@ import {
   NavDataTypes,
   PopularBusRouteDataType,
   StoriesTypes,
+  User,
   btnText,
   navlinkDataType,
 } from "../types";
@@ -140,4 +141,8 @@ export interface FaqPropsTypes {
 }
 export interface BusProps {
   bus: BusesTypes;
+}
+export interface UsersPageProps {
+  users: User[];
+  title: string;
 }

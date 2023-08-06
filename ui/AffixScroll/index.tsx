@@ -1,6 +1,6 @@
 import { useWindowScroll } from "@mantine/hooks";
 import React from "react";
-import { Affix, Button, Transition, rem } from "@mantine/core";
+import { Affix, Button, Transition, UnstyledButton, rem } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons-react";
 const AffixScroll = () => {
   const [scroll, scrollTo] = useWindowScroll();
@@ -14,18 +14,18 @@ const AffixScroll = () => {
               sx={(theme) => ({
                 backgroundColor:
                   theme.colorScheme === "dark"
-                    ? theme.colors.dark[7]
+                    ? theme.colors.gray[1]
                     : theme.colors.cyan[8],
                 borderColor:
                   theme.colorScheme === "dark"
                     ? theme.colors.blue[8]
                     : theme.black[1],
               })}
-              leftIcon={<IconArrowUp size="1rem" />}
+              // leftIcon={}
               style={transitionStyles}
               onClick={() => scrollTo({ y: 0 })}
             >
-              Scroll to top
+              <IconArrowUp size="1rem" />
             </Button>
           )}
         </Transition>

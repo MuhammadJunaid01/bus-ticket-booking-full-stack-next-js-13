@@ -151,3 +151,15 @@ export type FaqDataTypes = {
   name: string;
   value: { question: string; answer: string }[] | string;
 };
+export type User = {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  isVerified: boolean;
+  isAdmin: boolean;
+  verificationToken: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};

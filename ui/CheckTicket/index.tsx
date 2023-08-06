@@ -21,6 +21,7 @@ import { checkTicketByID, checkTicketParam } from "@/lib/api/checkTicket";
 import { TicketData } from "@/lib/interfaces";
 import { domain } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { notifications } from "@mantine/notifications";
 // import { isValidID } from "@/lib/utils";
 export interface CheckTicketProps {
   title: string;
@@ -29,9 +30,7 @@ const CheckTicket: React.FC<CheckTicketProps> = ({ title }) => {
   const { classes } = checkTicketStyles();
   const [id, setID] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [ticketId, setTicketId] = React.useState<string>(
-    "64c2cfe00cb28551bfcd5ec4"
-  );
+  const [ticketId, setTicketId] = React.useState<string>("");
   const [data, setData] = React.useState<TicketData | undefined>(undefined);
   const [error, setError] = React.useState<boolean>(false);
   const [visible, setVisible] = React.useState<boolean>(false);
@@ -56,6 +55,13 @@ const CheckTicket: React.FC<CheckTicketProps> = ({ title }) => {
   };
 
   const handleCheckTicket = async () => {
+    if (ticketId === "" || error === true) {
+      notifications.show({
+        title: "input  your ticket id and your ticket id must be 24 character ",
+        message: "Hey there, your code is awesome! 🤥",
+      });
+      return;
+    }
     const endPoint: string = "/api/checkTicket";
     const params: checkTicketParam = {
       endPoint,
@@ -95,7 +101,7 @@ const CheckTicket: React.FC<CheckTicketProps> = ({ title }) => {
             />
             {error ? <Text color="red">Invalid ID</Text> : null}
             <Box className={serchIcon}>
-              <IconSearch />
+              <IconSearch onClick={handleCheckTicket} />
             </Box>
           </Box>
           <Image

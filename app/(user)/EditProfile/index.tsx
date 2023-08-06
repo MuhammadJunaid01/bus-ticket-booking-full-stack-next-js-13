@@ -24,7 +24,7 @@ const EditUserProfile = () => {
   const { classes } = userProfileStyles({});
   const [fisrtName, setFisrtName] = React.useState<string>("");
   const [lastName, setLastName] = React.useState<string>("");
-
+  console.log("");
   return (
     <Box className={classes.container}>
       <Grid>

@@ -102,10 +102,6 @@ Install my-project with yarn
 
 ```
 
-## For Find Out Me
-
-**email** dev.junaid.bd@gmail.com or call **+8801634-900664**.
-
 ## API Reference
 
 #### Sign Up
@@ -131,7 +127,7 @@ Install my-project with yarn
 | `email`    | `string` | **Required**. email    |
 | `password` | `string` | **Required**. password |
 
-#### verify email
+#### Verify Email
 
 ```http
   POST /api/auth/verifyEmail
@@ -142,7 +138,7 @@ Install my-project with yarn
 | `email`   | `string` | **Required**. email |
 | `token`   | `string` | **Required**. token |
 
-#### refresh token
+#### Refresh Token
 
 ```http
   POST /api/auth/refreshToken
@@ -166,7 +162,7 @@ Install my-project with yarn
 | `busType`    | `union`  | **Required**. "AC", "Non-AC", "Coach-Bus" |
 | `seatPrice`  | `number` | **Required**. seat Price                  |
 
-#### Get all bus
+#### Get All Bus
 
 ```http
   GET /api/buses
@@ -176,7 +172,7 @@ Install my-project with yarn
 | :------------ | :------- | :------------------------- |
 | `AccessToken` | `string` | **Required**. Access Token |
 
-#### check ticket
+#### Check Ticket
 
 ```http
   POST /api/checkTicket
@@ -197,3 +193,7 @@ Install my-project with yarn
 | :------------ | :------- | :-------------------------------- |
 | `id`          | `string` | **Required**. Id of item to fetch |
 | `AccessToken` | `string` | **Required**. AccessToken         |
+
+## For Find Out Me
+
+**email** dev.junaid.bd@gmail.com or call **+8801634-900664**.

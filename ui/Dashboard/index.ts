@@ -1,4 +1,5 @@
 "use client";
+import AddBuss from "./AddBus";
 import CollapseMenuSidebar from "./CollapseMenu";
 import DashboardCard from "./DashboardCard";
 import DashboardHome from "./DashboardHome";
@@ -11,4 +12,5 @@ export {
   DashboardHome,
   DashboardCard,
   Users,
+  AddBuss,
 };

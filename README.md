@@ -67,14 +67,6 @@ Install my-project with yarn
 
 ![Logo](https://i.ibb.co/QfKqVGD/logo-3-r-bg.png)
 
-## Screenshots
-
-![App Screenshot](https://i.ibb.co/BZzVpzN/etickets-header.png)
-
-![App Screenshot](https://i.ibb.co/fvW3BQ8/etickets-footer.png)
-
-![App Screenshot](https://i.ibb.co/25gVb5d/etickets-dahboard-1.png)
-
 ## Tech Stack
 
 **Client:** Next js, Typescript ,Redux, Mantine ui
@@ -84,11 +76,6 @@ Install my-project with yarn
 ## version
 
 **Next js 13.4.9 App Router**
-
-## Authors
-
-- [@Web](https://devjunaid.netlify.app/)
-- [@Email](dev.junaid.bd@gmil.com)
 
 ## Deployment
 
@@ -193,6 +180,19 @@ Install my-project with yarn
 | :------------ | :------- | :-------------------------------- |
 | `id`          | `string` | **Required**. Id of item to fetch |
 | `AccessToken` | `string` | **Required**. AccessToken         |
+
+## Screenshots
+
+![App Screenshot](https://i.ibb.co/BZzVpzN/etickets-header.png)
+
+![App Screenshot](https://i.ibb.co/fvW3BQ8/etickets-footer.png)
+
+![App Screenshot](https://i.ibb.co/25gVb5d/etickets-dahboard-1.png)
+
+## Authors
+
+- [@Web](https://devjunaid.netlify.app/)
+- [@Email](dev.junaid.bd@gmil.com)
 
 ## For Find Out Me
 

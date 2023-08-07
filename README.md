@@ -84,3 +84,115 @@ Install my-project with yarn
 ## version
 
 **Next js 13.4.9 App Router**
+
+## Authors
+
+- [@Web](https://devjunaid.netlify.app/)
+- [@Email](dev.junaid.bd@gmil.com)
+
+## Deployment
+
+------ To deploy this project follow --------
+
+```bash
+  ## yarn build
+  ## deploy vercel
+   -------------or-----------------------
+  ## connect github repo to auto deploy at vercel
+
+```
+
+## For Find Out Me
+
+**email** dev.junaid.bd@gmail.com or call **+8801634-900664**.
+
+## API Reference
+
+#### Sign Up
+
+```http
+  POST /api/auth/signUp
+```
+
+| Parameter  | Type     | Description            |
+| :--------- | :------- | :--------------------- |
+| `name`     | `string` | **Required**. name     |
+| `email`    | `string` | **Required**. email    |
+| `password` | `string` | **Required**. password |
+
+#### Sign In
+
+```http
+  POST /api/auth/signIn
+```
+
+| Parameter  | Type     | Description            |
+| :--------- | :------- | :--------------------- |
+| `email`    | `string` | **Required**. email    |
+| `password` | `string` | **Required**. password |
+
+#### verify email
+
+```http
+  POST /api/auth/verifyEmail
+```
+
+| Parameter | Type     | Description         |
+| :-------- | :------- | :------------------ |
+| `email`   | `string` | **Required**. email |
+| `token`   | `string` | **Required**. token |
+
+#### refresh token
+
+```http
+  POST /api/auth/refreshToken
+```
+
+| Parameter      | Type     | Description                |
+| :------------- | :------- | :------------------------- |
+| `refreshToken` | `string` | **Required**. refreshToken |
+
+#### Add Bus
+
+```http
+  POST /api/buses
+```
+
+| Parameter    | Type     | Description                               |
+| :----------- | :------- | :---------------------------------------- |
+| `busNumber`  | `number` | **Required**. bus Number                  |
+| `totalSeats` | `number` | **Required**. total Seats                 |
+| `roadName`   | `string` | **Required**. roadName                    |
+| `busType`    | `union`  | **Required**. "AC", "Non-AC", "Coach-Bus" |
+| `seatPrice`  | `number` | **Required**. seat Price                  |
+
+#### Get all bus
+
+```http
+  GET /api/busses
+```
+
+| Parameter     | Type     | Description                |
+| :------------ | :------- | :------------------------- |
+| `AccessToken` | `string` | **Required**. Access Token |
+
+#### check ticket
+
+```http
+  GET /api/checkTicket
+```
+
+| Parameter     | Type     | Description                |
+| :------------ | :------- | :------------------------- |
+| `AccessToken` | `string` | **Required**. Access Token |
+
+#### Get Bus
+
+```http
+  GET /api/busses/${id}
+```
+
+| Parameter     | Type     | Description                       |
+| :------------ | :------- | :-------------------------------- |
+| `id`          | `string` | **Required**. Id of item to fetch |
+| `AccessToken` | `string` | **Required**. AccessToken         |

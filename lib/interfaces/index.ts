@@ -145,4 +145,5 @@ export interface BusProps {
 export interface UsersPageProps {
   users: User[];
   title: string;
+  loading: boolean;
 }

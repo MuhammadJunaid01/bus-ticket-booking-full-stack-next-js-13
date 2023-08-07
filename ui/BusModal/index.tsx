@@ -1,5 +1,5 @@
 import { BusesTypes } from "@/lib/types";
-import { loadUi } from "@/lib/utils";
+import { getUser, loadUi } from "@/lib/utils";
 import { SimpleBusTable } from "@/ui";
 
 import {
@@ -84,7 +84,12 @@ const BusModal: React.FC<BusPropsTypes> = ({
   };
   const { formData, errors, handleChange, validateForm } =
     useFormValidation(initialValues);
+  const user = getUser();
   const handleBuyTicket = async () => {
+    if (!user) {
+      alert("user not found");
+      return;
+    }
     if (!bus) {
       alert("bus not found");
       return;
@@ -93,7 +98,7 @@ const BusModal: React.FC<BusPropsTypes> = ({
       setIsloading(true);
       const pdfUrl: string | null = await buyTicket({
         busId: bus?._id,
-        userId: "64c3d6b0826091556b9d2f27",
+        userId: user._id,
         destination: dest,
         boardingPlace: origin,
         date: date,

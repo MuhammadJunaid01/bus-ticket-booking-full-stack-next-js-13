@@ -1,3 +1,4 @@
+import axios, { AxiosInstance } from "axios";
 import { cache } from "react";
 
 export const domain =
@@ -6,6 +7,7 @@ export const domain =
     : process.env.NEXT_PUBLIC_BASE_URL;
 /* The `export const getProdcutByID` is a function that is being exported from the module. It is using
 the `cache` function from the `react` library to cache the result of the function call. */
+
 export const getBusByID = cache(async (endPoint: string) => {
   try {
     const res = await fetch(`${domain}/${endPoint}`, {
@@ -106,3 +108,22 @@ export const buyTicket = async ({
     throw error;
   }
 };
+export async function fetchDataWithBearerToken(id: string, token: string) {
+  try {
+    const response = await fetch(`${domain}/api/tickets/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+}

@@ -18,7 +18,6 @@ import { Profile } from "@/ui";
 import Logo1 from "@/public/logo-3-r-bg.png";
 import Image from "next/image";
 import React from "react";
-// import { window } from "global";
 import BusImage from "@/public/bus.png";
 export interface NavbarProps {
   isHomePage: boolean;

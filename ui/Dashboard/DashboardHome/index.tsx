@@ -22,31 +22,28 @@ import { User } from "@/lib/types";
 
 const DashboardHome = () => {
   const [users, setUsers] = React.useState<User[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
   React.useEffect(() => {
     axios
       .get(`${domain}/api/users`)
       .then((response) => {
         if (response.status === 200) {
-          return response.data; // Assuming the response data contains the users.
+          setLoading(true);
+
+          return response.data;
         } else if (response.status === 404) {
+          setLoading(false);
           return notFound();
-        } else {
-          // Handle other status codes or unexpected responses here.
-          // For example, you could return an error message or perform other actions.
         }
       })
       .then((users) => {
-        // This block will be executed if the request was successful (status 200)
-        // or if the notFound() function was called (status 404).
-        // You can further process the 'users' data or return it here.
+        setLoading(false);
         setUsers(users.users);
         // console.log(users);
       })
       .catch((error) => {
-        // Handle the error that occurred during the HTTP request.
-        // For example, you could return an error message or log the error.
         console.error("Error fetching users:", error);
-        // Return an error response or perform other actions if necessary.
+        setLoading(false);
       });
   }, []);
   return (
@@ -65,7 +62,7 @@ const DashboardHome = () => {
             isHighlighted
             percentage={0}
           />
-          <Users users={users} title={""} />
+          <Users users={users} title={""} loading={loading} />
         </Grid.Col>
         <Grid.Col span={12} md={8.5}>
           <Grid>

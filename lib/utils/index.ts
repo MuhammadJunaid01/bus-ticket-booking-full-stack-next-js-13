@@ -94,3 +94,17 @@ export const isValidID = (id: string): boolean => {
 export const handleStateToggle = ({ setState }: HandleStateToggleProps) => {
   setState((prev) => !prev);
 };
+export const getToken = () => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("accessToken");
+  } else {
+    return undefined;
+  }
+};
+export const getUser = () => {
+  if (typeof window !== "undefined") {
+    return JSON.parse(localStorage.getItem("user") ?? "");
+  } else {
+    return undefined;
+  }
+};

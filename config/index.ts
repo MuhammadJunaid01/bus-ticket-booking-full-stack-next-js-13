@@ -14,7 +14,7 @@ const config = {
   url: {
     BASE_URL:
       process.env.NODE_ENV === "production"
-        ? "https://multishop-ecommerce.vercel.app"
+        ? "https://etickets-bd.vercel.app"
         : "http://localhost:3000",
   },
   auth: {

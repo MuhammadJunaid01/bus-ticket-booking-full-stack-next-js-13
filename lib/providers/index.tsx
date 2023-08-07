@@ -35,22 +35,19 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
 
   React.useEffect(() => {
     const user = getUser();
+    console.log("user", user);
     if (typeof window !== "undefined") {
-      if (!user) {
-      } else {
-        const accessToken = localStorage.getItem("accessToken") ?? "";
-        const refreshToken = localStorage.getItem("refreshToken") ?? "";
-        const isVaildAccess = isTokenExpired(accessToken);
-        if (!isTokenExpired(accessToken)) {
-          if (isTokenExpired(refreshToken)) {
-            const parsRefresh = JSON.parse(refreshToken);
-            getReshToken(parsRefresh);
-          } else {
-            push("/auth");
-          }
+      const accessToken = localStorage.getItem("accessToken") ?? "";
+      const refreshToken = localStorage.getItem("refreshToken") ?? "";
+      const isVaildAccess = isTokenExpired(accessToken);
+      if (!isTokenExpired(accessToken)) {
+        if (isTokenExpired(refreshToken)) {
+          const parsRefresh = JSON.parse(refreshToken);
+          getReshToken(parsRefresh);
+        } else {
+          push("/auth");
         }
       }
-
       // console.log(isVaildAccess);
     }
   }, [push]);

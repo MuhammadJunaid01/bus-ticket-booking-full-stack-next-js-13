@@ -103,7 +103,10 @@ export const getToken = () => {
 };
 export const getUser = () => {
   if (typeof window !== "undefined") {
-    return JSON.parse(localStorage.getItem("user") ?? "");
+    return (
+      localStorage.getItem("user") &&
+      JSON.parse(localStorage.getItem("user") ?? "")
+    );
   } else {
     return undefined;
   }

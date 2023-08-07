@@ -23,6 +23,8 @@ import Footer from "./Footer";
 import FAQ from "./FAQ";
 import Bus from "./Bus";
 import EditUserProfile from "@/ui/EditProfile";
+import AboutUs from "./About";
+import ContactUs from "./Contactus";
 export {
   Navbar,
   HomePage,
@@ -48,4 +50,6 @@ export {
   FAQ,
   Bus,
   EditUserProfile,
+  AboutUs,
+  ContactUs,
 };

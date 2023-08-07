@@ -1,9 +1,9 @@
 "use client";
-import { Loader } from "@mantine/core";
-
+import React from "react";
+import { Box, Loader } from "@mantine/core";
 const loading = () => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div>
       <Loader
         style={{ fontSize: "250px", height: "400px", textAlign: "center" }}
         size="xl"

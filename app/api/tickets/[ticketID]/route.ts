@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { connectDB } from "@/lib/db";
 import Ticket from "@/lib/models/ticket.models";
-export function verifyToken(token: string) {
+function verifyToken(token: string) {
   try {
     const decodedToken = jwt.verify(token, process.env.AUTH_SECRET);
     return decodedToken;

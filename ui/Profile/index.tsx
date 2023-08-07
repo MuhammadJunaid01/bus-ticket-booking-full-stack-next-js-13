@@ -1,12 +1,9 @@
 import { Avatar, Button, Indicator, Menu, Text } from "@mantine/core";
 import {
-  IconArrowsLeftRight,
-  IconMessageCircle,
-  IconPhoto,
   IconLayoutDashboard,
-  IconSettings,
   IconTrash,
   IconCircleLetterP,
+  IconRegistered,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
@@ -36,6 +33,10 @@ const Profile = () => {
         </Menu.Target>
 
         <Menu.Dropdown>
+          <Menu.Label>SignUp</Menu.Label>
+          <Link style={{ textDecoration: "none", color: "unset" }} href="/auth">
+            <Menu.Item icon={<IconRegistered size={14} />}>SignUp</Menu.Item>
+          </Link>
           <Menu.Label>Profile</Menu.Label>
           <Link
             style={{ textDecoration: "none", color: "unset" }}

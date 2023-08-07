@@ -57,7 +57,13 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
         <Group position="apart" sx={{ height: "100%" }}>
           {isDarkMode && isHomePage === false ? (
             <Box style={{ cursor: "pointer" }} onClick={() => router.push("/")}>
-              <Text size={26} fw={900} color="white">
+              <Text
+                size={26}
+                fw={900}
+                sx={(theme) => ({
+                  color: theme.colorScheme === "dark" ? "white" : "black",
+                })}
+              >
                 AR Poribohon
               </Text>
               <Box
@@ -70,7 +76,9 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
                   style={{ marginTop: "3px", letterSpacing: "2px" }}
                   ff={"cursive"}
                   size={12}
-                  color="white"
+                  sx={(theme) => ({
+                    color: theme.colorScheme === "dark" ? "white" : "black",
+                  })}
                 >
                   SAFE JOURNY
                 </Text>
@@ -85,7 +93,13 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
             </Box>
           ) : (
             <Box style={{ cursor: "pointer" }} onClick={() => router.push("/")}>
-              <Text size={26} fw={900} color="white">
+              <Text
+                size={26}
+                fw={900}
+                sx={(theme) => ({
+                  color: theme.colorScheme === "dark" ? "white" : "black",
+                })}
+              >
                 AR Poribohon
               </Text>
               <Box
@@ -98,7 +112,9 @@ const Navbar: React.FC<NavbarProps> = ({ isHomePage }) => {
                   style={{ marginTop: "3px", letterSpacing: "2px" }}
                   ff={"cursive"}
                   size={12}
-                  color="white"
+                  sx={(theme) => ({
+                    color: theme.colorScheme === "dark" ? "white" : "black",
+                  })}
                 >
                   SAFE JOURNY
                 </Text>

@@ -112,5 +112,10 @@ export const userProfileStyles = createStyles(
       color: theme.colorScheme === "dark" ? "white" : "black",
       fontWeight: 500,
     },
+    ticketInfoBox: {
+      display: "flex",
+      justifyContent: "space-between",
+      marginBottom: 13,
+    },
   })
 );

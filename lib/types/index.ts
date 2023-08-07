@@ -163,3 +163,15 @@ export type User = {
   updatedAt: string;
   __v: number;
 };
+export type MyTicket = {
+  boardingPlace: string;
+  busNumber: number;
+  date: string;
+  destination: string;
+  isPayment: boolean;
+  purchaseDate: string;
+  seatNumber: number[];
+  user: string;
+  __v: number;
+  _id: string;
+};

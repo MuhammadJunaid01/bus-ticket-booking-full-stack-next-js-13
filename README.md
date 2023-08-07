@@ -169,7 +169,7 @@ Install my-project with yarn
 #### Get all bus
 
 ```http
-  GET /api/busses
+  GET /api/buses
 ```
 
 | Parameter     | Type     | Description                |
@@ -179,17 +179,18 @@ Install my-project with yarn
 #### check ticket
 
 ```http
-  GET /api/checkTicket
+  POST /api/checkTicket
 ```
 
 | Parameter     | Type     | Description                |
 | :------------ | :------- | :------------------------- |
 | `AccessToken` | `string` | **Required**. Access Token |
+| `ticketId`    | `string` | **Required**.ticketId      |
 
 #### Get Bus
 
 ```http
-  GET /api/busses/${id}
+  GET /api/buses/${id}
 ```
 
 | Parameter     | Type     | Description                       |

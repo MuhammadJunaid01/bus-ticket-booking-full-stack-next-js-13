@@ -16,6 +16,7 @@ import { ProvidersProps } from "../interfaces";
 import { isTokenExpired } from "../utils/isTokenExpired";
 import { domain } from "../api";
 import { getReshToken } from "../utils/getRefreshToken";
+import { getUser } from "../utils";
 
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   // const dispatch = useAppDispatch();
@@ -33,18 +34,23 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
   const isSlashHomePage = "/home" === path ? true : false;
 
   React.useEffect(() => {
+    const user = getUser();
     if (typeof window !== "undefined") {
-      const accessToken = localStorage.getItem("accessToken") ?? "";
-      const refreshToken = localStorage.getItem("refreshToken") ?? "";
-      const isVaildAccess = isTokenExpired(accessToken);
-      if (!isTokenExpired(accessToken)) {
-        if (isTokenExpired(refreshToken)) {
-          const parsRefresh = JSON.parse(refreshToken);
-          getReshToken(parsRefresh);
-        } else {
-          push("/auth");
+      if (!user) {
+      } else {
+        const accessToken = localStorage.getItem("accessToken") ?? "";
+        const refreshToken = localStorage.getItem("refreshToken") ?? "";
+        const isVaildAccess = isTokenExpired(accessToken);
+        if (!isTokenExpired(accessToken)) {
+          if (isTokenExpired(refreshToken)) {
+            const parsRefresh = JSON.parse(refreshToken);
+            getReshToken(parsRefresh);
+          } else {
+            push("/auth");
+          }
         }
       }
+
       // console.log(isVaildAccess);
     }
   }, [push]);

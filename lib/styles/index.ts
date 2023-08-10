@@ -1,3 +1,4 @@
+import { addBusStyles } from "./addbus.styles";
 import { busRoutesStyles } from "./busRoutes.styles";
 import { dashboardCardStyle } from "./dashboard.card.style";
 import { factsStyles } from "./factsStyle";
@@ -21,4 +22,5 @@ export {
   dashboardCardStyle,
   footerStyles,
   userProfileStyles,
+  addBusStyles,
 };

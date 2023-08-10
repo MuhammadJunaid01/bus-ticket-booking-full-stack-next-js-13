@@ -35,7 +35,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
 
   React.useEffect(() => {
     const user = getUser();
-    console.log("user", user);
+
     if (typeof window !== "undefined") {
       const accessToken = localStorage.getItem("accessToken") ?? "";
       const refreshToken = localStorage.getItem("refreshToken") ?? "";

@@ -10,7 +10,6 @@ const AddBuss = () => {
     <Box className={classes.container}>
       <Text>Add Bus</Text>
       <Card>
-        {/* <Input/> */}
         <Box className={classes.logoBox}>
           <Image
             className={classes.logo}

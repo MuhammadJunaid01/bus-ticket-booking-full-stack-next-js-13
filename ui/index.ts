@@ -25,6 +25,7 @@ import Bus from "./Bus";
 import EditUserProfile from "@/ui/EditProfile";
 import AboutUs from "./About";
 import ContactUs from "./Contactus";
+import Input from "./Input";
 export {
   Navbar,
   HomePage,
@@ -52,4 +53,5 @@ export {
   EditUserProfile,
   AboutUs,
   ContactUs,
+  Input,
 };

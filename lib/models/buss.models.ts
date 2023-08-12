@@ -1,6 +1,11 @@
 import mongoose, { Schema, Document } from "mongoose";
 import { IUser } from "./user.models";
-
+const departureTimeValidator = {
+  validator: function (value: string) {
+    return /^(0?[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/i.test(value);
+  },
+  message: "Invalid departure time format. Expected format: HH:MM AM/PM",
+};
 export interface IBus extends Document {
   busNumber: number;
   totalSeats: number;
@@ -15,6 +20,11 @@ export interface IBus extends Document {
   roadName?: string;
   busType: "AC" | "Non-AC" | "Coach-Bus";
   seatPrice: number;
+  departureTime: {
+    type: string;
+    required: boolean;
+  };
+
   // Add other relevant bus information here
 }
 
@@ -28,7 +38,7 @@ const busSchema: Schema<IBus> = new mongoose.Schema(
     totalSeats: {
       type: Number,
       required: true,
-      default: 70,
+      default: 52,
     },
     availableSeats: {
       type: Number,
@@ -70,6 +80,10 @@ const busSchema: Schema<IBus> = new mongoose.Schema(
     },
     seatPrice: {
       type: Number, // You can change this to `String` if you want to store seat prices as strings (e.g., "$50")
+      required: true,
+    },
+    departureTime: {
+      type: String,
       required: true,
     },
   },

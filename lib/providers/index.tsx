@@ -45,7 +45,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
           const parsRefresh = JSON.parse(refreshToken);
           getReshToken(parsRefresh);
         } else {
-          push("/auth");
+          // push("/auth");
         }
       }
       // console.log(isVaildAccess);

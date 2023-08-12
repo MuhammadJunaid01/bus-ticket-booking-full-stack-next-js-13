@@ -22,4 +22,15 @@ export const addBusStyles = createStyles((theme) => ({
     height: "100%",
     width: "100%",
   },
+  busInput: {
+    width: "100%",
+    display: "grid",
+    gridTemplateColumns: "repeat(1,1fr)",
+    [theme.fn.largerThan("sm")]: {
+      gridTemplateColumns: "repeat(3,1fr)",
+      // gridGap: 11,
+      gridColumnGap: 11,
+      gridRowGap: 22,
+    },
+  },
 }));

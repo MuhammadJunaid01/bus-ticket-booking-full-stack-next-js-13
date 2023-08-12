@@ -9,7 +9,6 @@ import {
   FileInput,
 } from "@mantine/core";
 import React from "react";
-import Input from "./Input";
 import axios from "axios";
 import {
   IconPhoneCall,
@@ -17,6 +16,7 @@ import {
   IconBrandMailgun,
   IconCloudUpload,
 } from "@tabler/icons-react";
+import { Input } from "@/ui";
 import Image from "next/image";
 import { getToken, getUser } from "@/lib/utils";
 import { fetchDataWithBearerToken } from "@/lib/api";

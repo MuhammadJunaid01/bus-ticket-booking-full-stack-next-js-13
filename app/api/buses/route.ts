@@ -1,53 +1,10 @@
+import { busRouteData } from "@/lib/data";
 import { connectDB } from "@/lib/db";
 import { default as Bus } from "@/lib/models/buss.models";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (request: NextRequest) => {
   connectDB();
-  // function getRandomNumber(min: number, max: number) {
-  //   return Math.floor(Math.random() * (max - min + 1) + min);
-  // }
-
-  // const busTypes = ["AC", "Non-AC", "Coach-Bus"];
-  // const minSeatPrice = 50;
-  // const maxSeatPrice = 100;
-
-  // const busRoutesSet = new Set(busRouteData);
-  // const totalBuses = 32;
-  // const buses = [];
-
-  // for (let i = 0; i < totalBuses; i++) {
-  //   // Ensure that we create buses for unique roads
-  //   if (busRoutesSet.size === 0) {
-  //     break; // Exit the loop if we have created buses for all unique roads
-  //   }
-
-  //   // Randomly choose a road from the remaining unique roads
-  //   const randomRoadIndex = getRandomNumber(0, busRoutesSet.size - 1);
-  //   const randomRoute = Array.from(busRoutesSet)[randomRoadIndex];
-  //   busRoutesSet.delete(randomRoute); // Remove the chosen road from the set
-
-  //   // Randomly choose other properties as before
-  //   const randomBusType = busTypes[getRandomNumber(0, busTypes.length - 1)];
-  //   const randomSeatPrice = getRandomNumber(minSeatPrice, maxSeatPrice);
-
-  //   const busData = {
-  //     busNumber: getRandomNumber(10000, 99999),
-  //     totalSeats: 70,
-  //     availableSeats: 70,
-  //     roadName: randomRoute,
-  //     busType: randomBusType,
-  //     seatPrice: randomSeatPrice,
-  //     // Add other relevant bus information here
-  //   };
-
-  //   buses.push(busData);
-  // }
-
-  // // Logging the buses data to the console
-  // // console.table(buses.length);
-  // await Bus.insertMany(buses);
-  // Logging the buses data to the console
 
   try {
     const res = await Bus.find({});

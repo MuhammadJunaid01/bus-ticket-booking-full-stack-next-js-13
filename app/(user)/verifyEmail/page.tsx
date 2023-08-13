@@ -37,6 +37,7 @@ const VerifyEmailPage = () => {
     verify().then((user) => {
       if (user) {
         console.log(user);
+        localStorage.setItem("user", JSON.stringify(user.user));
         // redirect("/home");
         router.push("/");
       }

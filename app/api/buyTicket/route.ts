@@ -145,7 +145,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
     // Send the email with the PDF buffer as an attachment
     sendVerificationEmail({
-      email: "m.junaidbkh2020@gmail.com",
+      email: email,
       pdfBuffer: pdfBuffer,
       emailType: "sendPdf",
     });

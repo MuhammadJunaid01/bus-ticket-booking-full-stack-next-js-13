@@ -37,7 +37,7 @@ export const factsStyles = createStyles((theme) => ({
     width: "30%",
     margin: "0 auto",
     position: "relative",
-    cursor: "pointer",
+    // cursor: "pointer",
     backgroundColor: theme.colorScheme === "dark" ? "#A37CF0" : "",
     [theme.fn.largerThan("sm")]: {
       borderRadius: theme.radius.sm,

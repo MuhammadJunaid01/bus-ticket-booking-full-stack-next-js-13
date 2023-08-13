@@ -30,7 +30,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   parsed before assigning it to the `body` variable. */
   const body: IUser = await req.json();
 
-  const { name, email, password } = body;
+  const { name, email, password: pass } = body;
   try {
     /* `const existingUser = await User.findOne({ email });` is querying the database to check if there
    is already a user with the specified email address. */
@@ -52,7 +52,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
     /* The line `const hashedPassword = await bcrypt.hash(password, 10);` is using the `bcrypt` library
   to hash the user's password. */
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(pass, 10);
 
     /* The code is creating a new instance of the `User` model with the provided user data. The `User`
    model represents a user in the database and has properties such as `name`, `email`, `password`,
@@ -75,11 +75,12 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         verificationToken: user.verificationToken,
         emailType: "verifyEmail",
       });
-
+      const { password, ...info } = user.toObject(); // Exclude password from info
+      console.log("user", user);
       /* The code `return new NextResponse(...)` is creating a new response object to be returned by the
      server. */
       return new NextResponse(
-        JSON.stringify({ message: "Registration successful", user }),
+        JSON.stringify({ message: "Registration successful", user: info }),
         {
           status: 200,
           headers: {

@@ -173,7 +173,7 @@ const SignIn: React.FC<{
                 "refreshToken",
                 JSON.stringify(data.refreshToken)
               );
-              localStorage.setItem("userInfo", JSON.stringify(data.userInfo));
+              localStorage.setItem("user", JSON.stringify(data.user));
               setLoading(false);
             }
           })}

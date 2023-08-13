@@ -22,7 +22,7 @@ export const POST = async (req: NextRequest) => {
 
     const { email, password: pass } = body;
     // Find the user in the database
-    const user: IUser | null = await User.findOne({ email });
+    const user = await User.findOne({ email });
     if (user) {
       // Verify the password
       const isPasswordValid = await bcrypt.compare(pass, user.password);
@@ -33,7 +33,7 @@ export const POST = async (req: NextRequest) => {
           { status: 410 }
         );
       }
-      const { password, ...userInfo } = user;
+      const { password, ...info } = user.toObject(); // Exclude password from info
       // Generate tokens
       const { accessToken, refreshToken } = generateTokens(user._id);
       const refreshTokenTokenWithInfo = {
@@ -45,7 +45,7 @@ export const POST = async (req: NextRequest) => {
           message: "login success",
           accessToken,
           refreshToken,
-          userInfo,
+          user: info,
         },
         { status: 200 }
       );

@@ -158,7 +158,7 @@ const BusModal: React.FC<BusPropsTypes> = ({
               <Box
                 sx={(theme) => ({
                   display: "grid",
-                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gridTemplateColumns: "repeat(6, 1fr)",
                   gap: theme.spacing.lg,
                   height: "200px",
                   overflowY: "scroll",

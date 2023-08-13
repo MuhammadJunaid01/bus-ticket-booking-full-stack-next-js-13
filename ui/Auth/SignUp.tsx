@@ -108,6 +108,7 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
                 endPoint: "signUp",
               });
               const data = await response;
+              console.log("data", data);
               if (data.user) {
                 notifications.show({
                   title: "successfully signUp",
@@ -115,6 +116,7 @@ const SignUp: React.FC<SignUpProps> = ({ onClick, state }) => {
                 });
                 setLoading(false);
                 setUser(data.user);
+                // localStorage.setItem("user", JSON.stringify(data.user));
                 router.push(`/auth?email=${email}&password=${password}`);
               }
             } catch (error: any) {

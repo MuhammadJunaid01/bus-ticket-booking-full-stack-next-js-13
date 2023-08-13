@@ -6,6 +6,8 @@ import Image from "next/image";
 import Input from "@/ui/Input";
 import { IconChevronDown } from "@tabler/icons-react";
 import { domain } from "@/lib/api";
+import { notifications } from "@mantine/notifications";
+import { getUser } from "@/lib/utils";
 const AddBuss = () => {
   const [busNumber, setBusNumber] = React.useState<string>("");
   const [totalSeats, setTotalSeats] = React.useState<string>("");
@@ -13,6 +15,8 @@ const AddBuss = () => {
   const { classes: input } = userProfileStyles({ Icon: null });
 
   const { classes } = addBusStyles();
+  const user = getUser();
+  console.log("user", user);
   const handleSaveBus = () => {
     const data = {};
     try {
@@ -35,6 +39,10 @@ const AddBuss = () => {
           console.log("data");
         })
         .catch((error: any) => {
+          notifications.show({
+            title: error.message,
+            message: error.message,
+          });
           console.log("error", error.message);
         });
     } catch (error) {}

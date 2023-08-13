@@ -24,7 +24,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   const { email, token } = body;
 
   try {
-    const user: IUser | null = await User.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       { email, verificationToken: token },
       { $set: { isVerified: true }, $unset: { verificationToken: 1 } },
       { new: true }
@@ -34,16 +34,16 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     if (user) {
       // const { password, ...userWithoutPassword } = user;
 
-      const { password, ...userInfo } = user;
+      const { password, ...info } = user.toObject();
       const response = NextResponse.json(
         {
-          userInfo,
+          user: info,
         },
         { status: 200 }
       );
 
       // console.log("USER INFO", userInfo);
-      const userInfoString = JSON.stringify(userInfo);
+      const userInfoString = JSON.stringify(info);
 
       response.cookies.set({
         name: "jwt",

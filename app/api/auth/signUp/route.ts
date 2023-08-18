@@ -76,7 +76,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         emailType: "verifyEmail",
       });
       const { password, ...info } = user.toObject(); // Exclude password from info
-      console.log("user", user);
       /* The code `return new NextResponse(...)` is creating a new response object to be returned by the
      server. */
       return new NextResponse(

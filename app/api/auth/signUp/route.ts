@@ -82,10 +82,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         JSON.stringify({ message: "Registration successful", user: info }),
         {
           status: 200,
-          headers: {
-            "Access-Control-Allow-Origin": origin || "*",
-            "Content-Type": "application/json",
-          },
         }
       );
     }

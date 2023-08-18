@@ -10,7 +10,7 @@ const domain =
     : process.env.BASE_URL;
 const allowedOrign =
   process.env.NODE_ENV === "production"
-    ? [`${process.env.PRODUCTION_URL}`]
+    ? [`https://etickets-bd.vercel.app`]
     : [`${process.env.BASE_URL}`];
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
